@@ -22,6 +22,11 @@ package
       _lifetime = LIFETIME;
       
       loadGraphic(punchGraphic, false, true);
+      width = 16;
+      height = 16;
+      offset.x = 0;
+      offset.y = 40;
+
     }
     
     override public function update():void

@@ -23,9 +23,14 @@ package
       
       _attackGroup = attackGroup;
       _attackCooldown = 0;
-      
+
       loadGraphic(heroGraphic, true, true, 32, 48);
-      addAnimation("idle", [0, 1], 120, true);
+      addAnimation("idle", [0, 1], 120, true);      
+      width = 28;
+      height = 16;
+      offset.x = 2;
+      offset.y = 32;
+
     }
     
     override public function update():void
@@ -64,11 +69,11 @@ package
         
         if (facing == LEFT)
         {
-          punchSprite = new AtkPunch(x - 8, y + 16, LEFT);
+          punchSprite = new AtkPunch(x - 8, y, LEFT);
         }
         else
         {
-          punchSprite = new AtkPunch(x + 24, y + 16, RIGHT);
+          punchSprite = new AtkPunch(x + 24, y, RIGHT);
         }
         
         _attackGroup.add(punchSprite);
