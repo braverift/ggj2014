@@ -20,7 +20,6 @@ package
     
     private var _attackGroup:FlxGroup;
     private var _downedGroup:FlxGroup;
-    private var _dialogueGroup:FlxGroup;
     
     private var _attackCooldown:Number;
     private var _recoilTime:Number;
@@ -32,13 +31,12 @@ package
     private var _HP:Number;
     private var _frozen:Boolean;
 
-    public function Enemy(X:Number, Y:Number, attackGroup:FlxGroup, downedGroup:FlxGroup, dialogueGroup:FlxGroup) 
+    public function Enemy(X:Number, Y:Number, attackGroup:FlxGroup, downedGroup:FlxGroup) 
     {
       super(X, Y);
       
       _attackGroup = attackGroup;
       _downedGroup = downedGroup;
-      _dialogueGroup = dialogueGroup;
       _attackCooldown = 0;
       _HP = MAX_HP;
       _state = FRIENDLY;

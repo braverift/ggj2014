@@ -15,7 +15,6 @@ package
     private var _enemies:FlxGroup;
     private var _enemyAttackGroup:FlxGroup;
     private var _downedEnemyGroup:FlxGroup;
-    private var _dialogueGroup:FlxGroup;
     private var _queuedDialogue:Array;
     private var _dialogueText:FlxText;
     private var _diagTime:Number;
@@ -41,7 +40,6 @@ package
       _enemies = new FlxGroup;
       _enemyAttackGroup = new FlxGroup;
       _downedEnemyGroup = new FlxGroup;
-      _dialogueGroup = new FlxGroup;
       
       /*
       _enemies.add(new Enemy(160, 180, _enemyAttackGroup, _downedEnemyGroup));
@@ -49,7 +47,7 @@ package
       _enemies.add(new Enemy(50, 120, _enemyAttackGroup, _downedEnemyGroup));
       */
       
-      var talkingEnemy:Enemy = new Enemy(160, 180, _enemyAttackGroup, _downedEnemyGroup, _dialogueGroup);
+      var talkingEnemy:Enemy = new Enemy(160, 180, _enemyAttackGroup, _downedEnemyGroup);
       talkingEnemy.addDialogue(new Array(new Dialogue("Hello"), new Dialogue("Hiii.........")));
       _enemies.add(talkingEnemy);
       
