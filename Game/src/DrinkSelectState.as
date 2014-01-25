@@ -16,10 +16,15 @@ package
       new FlxSprite(DRINK_BUFFER*3 + DRINK_SIZE*2, DRINK_TOP)
     );
 
+    private static var drinkTitles:Array = new Array(
+      "Whiskey, Neat",
+      "Tom Collins",
+      "Cosmopolitan"
+    );
     private static var drinkDescs:Array = new Array(
-      "Whiskey, neat: Because you're a progressive woman",
-      "Tom Collins: Because you're a down-to-earth woman",
-      "Cosmopolitan: Because you're a woman"
+      "Because you're a progressive woman",
+      "Because you're a down-to-earth woman",
+      "Because you're a woman"
     );
 
     private static var highlightSprite:FlxSprite = new FlxSprite(); 
@@ -43,9 +48,11 @@ package
       }
 
       for(i=0;i < drinkDescs.length;i++) {
+        drinkTitles[i] = new FlxText(0, 140, 320, drinkTitles[i]);
         drinkDescs[i] = new FlxText(0, 160, 320, drinkDescs[i]);
-        drinkDescs[i].alignment = "center";
-        drinkDescs[i].exists = false;
+        drinkTitles[i].alignment = drinkDescs[i].alignment = "center";
+        drinkTitles[i].exists = drinkDescs[i].exists = false;
+        add(drinkTitles[i]);
         add(drinkDescs[i]);
       }
     }
@@ -63,7 +70,7 @@ package
       }
 
       for(var i:Number=0;i < drinkDescs.length;i++) {
-        drinkDescs[i].exists = curDrink == i;
+        drinkTitles[i].exists = drinkDescs[i].exists = curDrink == i;
       }
 
       super.update();      
