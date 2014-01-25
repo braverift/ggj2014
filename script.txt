@@ -1,7 +1,13 @@
 SCENES:
+- The Bar
 - The Party
 - Back Alley
 - Apartment 13
+- Park
+- Train Top
+- Skyscraper
+- Sausage Factory
+- Outside the Bar
 
 ===========================================================
 
