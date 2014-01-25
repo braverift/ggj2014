@@ -3,9 +3,10 @@ package
   import org.flixel.*;
   public class Registry 
   {
-    public static var mood:Number; // Current mood, in the range [-1, 1]
+    public static var mood:Number;      // Current mood, in the range [-1, 1]
     public static var intensity:Number; // Current intensity, in the range [0, 1]
-    public static var barScene:uint; // ID of the current bar scene
+    public static var barScene:uint;    // ID of the current bar scene
+    public static var gameScene:uint;   // ID of the current game scene
     
     public static function initialize(): void
     {
@@ -14,6 +15,15 @@ package
       FlxG.watch(Registry, "mood");
       FlxG.watch(Registry, "intensity");
     }
+
+    /*
+     * SCENE TRANSITIONS
+     *
+     * Order is Talk, Walk, Win, Lose
+     */
+    public static const gameToBarTransArray:Array = new Array(
+      new GameToBarTransition(4, 8, 12, 16) // Scene 0 - Party
+    );
 
     /*
      * BAR DIALOGUE
