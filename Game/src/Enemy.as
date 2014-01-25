@@ -20,6 +20,7 @@ package
     
     private var _attackGroup:FlxGroup;
     private var _downedGroup:FlxGroup;
+    private var _dialogueGroup:FlxGroup;
     
     private var _attackCooldown:Number;
     private var _recoilTime:Number;
@@ -27,18 +28,20 @@ package
     private var _state:uint;
     private var _destination:FlxPoint;
     private var _target:FlxSprite;
-    
+    private var _dialogue:Array;
     private var _HP:Number;
 
-    public function Enemy(X:Number, Y:Number, attackGroup:FlxGroup, downedGroup:FlxGroup) 
+    public function Enemy(X:Number, Y:Number, attackGroup:FlxGroup, downedGroup:FlxGroup, dialogueGroup:FlxGroup) 
     {
       super(X, Y);
       
       _attackGroup = attackGroup;
       _downedGroup = downedGroup;
+      _dialogueGroup = dialogueGroup;
       _attackCooldown = 0;
       _HP = MAX_HP;
       _state = FRIENDLY;
+      _dialogue = new Array;
       
       loadGraphic(enemyGraphic, true, true, 32, 48);
       addAnimation("idle", [0, 1], 120, true);      
@@ -50,7 +53,6 @@ package
     
     override public function update():void
     {
-      super.update();
       super.update();
       
       // Recoil from being punched
@@ -103,6 +105,10 @@ package
         }
         
         // Punch the target if in range
+        if (_attackCooldown > 0)
+        {
+          _attackCooldown -= FlxG.elapsed;
+        }
         if (!moved && _attackCooldown <= 0)
         {
           var punchSprite:AtkPunch;
@@ -142,6 +148,14 @@ package
       _state = ANGRY;
       _target = target;
     }
+    
+    public function addDialogue(dialogue:Array): void
+    {
+      _dialogue.push(dialogue);
+    }
+    
+    
+    
   }
 
 }

@@ -14,6 +14,7 @@ package
     private var _enemies:FlxGroup;
     private var _enemyAttackGroup:FlxGroup;
     private var _downedEnemyGroup:FlxGroup;
+    private var _dialogueGroup:FlxGroup;
     
     public function CombatState() 
     {
@@ -31,11 +32,18 @@ package
       _enemies = new FlxGroup;
       _enemyAttackGroup = new FlxGroup;
       _downedEnemyGroup = new FlxGroup;
+      _dialogueGroup = new FlxGroup;
       
+      /*
       _enemies.add(new Enemy(160, 180, _enemyAttackGroup, _downedEnemyGroup));
       _enemies.add(new Enemy(30, 190, _enemyAttackGroup, _downedEnemyGroup));
       _enemies.add(new Enemy(50, 120, _enemyAttackGroup, _downedEnemyGroup));
-   
+      */
+      
+      var talkingEnemy:Enemy = new Enemy(160, 180, _enemyAttackGroup, _downedEnemyGroup, _dialogueGroup);
+      talkingEnemy.addDialogue(new Array(new Dialogue("Hello"), new Dialogue("Hiii.........")));
+      _enemies.add(talkingEnemy);
+      
       add(new FlxSprite(0, 0, background));
       add(_downedEnemyGroup);
       add(_player);
@@ -52,6 +60,7 @@ package
       _playerAttackGroup.update();
       
       FlxG.overlap(_enemies, _playerAttackGroup, punchEnemy);
+      FlxG.overlap(_player, _enemyAttackGroup, punchPlayer);
     }
     
     public function punchEnemy(enemy:Enemy, punch:AtkPunch): void
@@ -63,6 +72,13 @@ package
       {
         en.aggro(_player);
       }
+    }    
+    
+    public function punchPlayer(player:Player, punch:AtkPunch): void
+    {
+      player.punched(punch.facing);
+      punch.kill();
+
     }
     
     
