@@ -9,14 +9,14 @@ package
 	 * @author Doug Macdonald
 	 */
 	
-	[SWF(width = "550", height = "450", backgroundColor = "#FFFFFF")]
+	[SWF(width = "640", height = "480", backgroundColor = "#FFFFFF")]
 	[Frame(factoryClass = "Preloader")]
 	
 	public class GGJ2K4 extends FlxGame
 	{
     public function GGJ2K4(): void
     {
-      super(550, 450, TitleState, 1);
+      super(320, 240, TitleState, 2);
     }    
 	}
 }

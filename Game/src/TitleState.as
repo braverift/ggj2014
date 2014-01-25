@@ -21,6 +21,12 @@ package
     override public function update():void
     {
       super.update();
+      
+      if (FlxG.keys.SPACE)
+      {
+        Registry.initialize();
+        FlxG.switchState(new BarState());
+      }
     }
   }
 }
