@@ -24,6 +24,15 @@ package
     public static const gameToBarTransArray:Array = new Array(
       new GameToBarTransition(4, 8, 12, 16) // Scene 0 - Party
     );
+    
+    public static const TALK:uint = 0;
+    public static const WALK:uint = 1;
+    public static const WIN:uint = 2;
+    public static const LOSE:uint = 3;
+    public static function EndScene(outcome:uint)
+    {
+
+    }
 
     /*
      * BAR DIALOGUE
