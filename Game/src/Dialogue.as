@@ -12,7 +12,7 @@ package
 
     public function Dialogue(
       text:String = "UNITIALIZED", 
-      color:uint = 0xFFFFFF, 
+      color:uint = Registry.SP_PLAYER, 
       minMood:Number = 0, 
       maxMood:Number = 1
     ){

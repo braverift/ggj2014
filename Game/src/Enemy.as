@@ -30,8 +30,9 @@ package
     private var _state:uint;
     private var _destination:FlxPoint;
     private var _target:FlxSprite;
-    
+    private var _dialogue:Array;
     private var _HP:Number;
+    private var _frozen:Boolean;
 
     public function Enemy(X:Number, Y:Number, attackGroup:FlxGroup, downedGroup:FlxGroup) 
     {
@@ -42,6 +43,8 @@ package
       _attackCooldown = 0;
       _HP = MAX_HP;
       _state = FRIENDLY;
+      _dialogue = new Array;
+      _frozen = false;
       
       loadGraphic(enemyGraphic, true, true, FRAME_WIDTH, FRAME_HEIGHT);
       addAnimation("idle", [0, 1, 2, 1, 0], 5, true);
@@ -55,73 +58,79 @@ package
     override public function update():void
     {
       super.update();
-      super.update();
       
-      // Recoil from being punched
-      if (_recoilDirection)
+      if (!_frozen)
       {
-        if (_recoilDirection == LEFT)
+        // Recoil from being punched
+        if (_recoilDirection)
         {
-          x -= RECOIL_SPEED * FlxG.elapsed;
-        }
-        else
-        {
-          x += RECOIL_SPEED * FlxG.elapsed;
-        }
-        
-        _recoilTime -= FlxG.elapsed;
-        if (_recoilTime < 0)
-        {
-          _recoilDirection = 0;
-        }
-      }
-      
-      if (_state == ANGRY)
-      {  
-        // Chase after the target
-        var moved:Boolean = false;
-        if (!overlaps(_target))
-        {
-          if (x < _target.x - 8)
+          if (_recoilDirection == LEFT)
           {
-            x += MOVE_SPEED_X * FlxG.elapsed;
-            facing = RIGHT;
-            moved = true;
-          }
-          else if (x > _target.x + 24)
-          {
-            x -= MOVE_SPEED_X * FlxG.elapsed;
-            facing = LEFT;
-            moved = true;
-          }
-          if (y < _target.y)
-          {
-            y += MOVE_SPEED_Y * FlxG.elapsed;
-            moved = true;
-          }
-          else if (y > _target.y + 4)
-          {
-            y -= MOVE_SPEED_Y * FlxG.elapsed;
-            moved = true;
-          }
-        }
-        
-        // Punch the target if in range
-        if (!moved && _attackCooldown <= 0)
-        {
-          var punchSprite:AtkPunch;
-          _attackCooldown = ATTACK_TIME;
-          
-          if (facing == LEFT)
-          {
-            punchSprite = new AtkPunch(x - 8, y, LEFT);
+            x -= RECOIL_SPEED * FlxG.elapsed;
           }
           else
           {
-            punchSprite = new AtkPunch(x + 24, y, RIGHT);
+            x += RECOIL_SPEED * FlxG.elapsed;
           }
           
-          _attackGroup.add(punchSprite);
+          _recoilTime -= FlxG.elapsed;
+          if (_recoilTime < 0)
+          {
+            _recoilDirection = 0;
+          }
+        }
+        
+        if (_state == ANGRY)
+        {  
+          // Chase after the target
+          var moved:Boolean = false;
+          if (!overlaps(_target))
+          {
+            if (x < _target.x - 8)
+            {
+              x += MOVE_SPEED_X * FlxG.elapsed;
+              facing = RIGHT;
+              moved = true;
+            }
+            else if (x > _target.x + 24)
+            {
+              x -= MOVE_SPEED_X * FlxG.elapsed;
+              facing = LEFT;
+              moved = true;
+            }
+            if (y < _target.y)
+            {
+              y += MOVE_SPEED_Y * FlxG.elapsed;
+              moved = true;
+            }
+            else if (y > _target.y + 4)
+            {
+              y -= MOVE_SPEED_Y * FlxG.elapsed;
+              moved = true;
+            }
+          }
+          
+          // Punch the target if in range
+          if (_attackCooldown > 0)
+          {
+            _attackCooldown -= FlxG.elapsed;
+          }
+          if (!moved && _attackCooldown <= 0)
+          {
+            var punchSprite:AtkPunch;
+            _attackCooldown = ATTACK_TIME;
+            
+            if (facing == LEFT)
+            {
+              punchSprite = new AtkPunch(x - 8, y, LEFT);
+            }
+            else
+            {
+              punchSprite = new AtkPunch(x + 24, y, RIGHT);
+            }
+            
+            _attackGroup.add(punchSprite);
+          }
         }
       }
       
@@ -146,6 +155,32 @@ package
       _state = ANGRY;
       _target = target;
     }
+    
+    public function addDialogue(dialogue:Array): void
+    {
+      _dialogue.push(dialogue);
+    }    
+    
+    public function getDialogue(): Array
+    {
+      var response:Array;
+      if (_dialogue.length > 0)
+      {
+        response = _dialogue[0];
+        _dialogue.splice(0, 1);
+      }
+      else
+      {
+        response = new Array;
+        response.push(new Dialogue(".....", Registry.SP_PLAYER));
+        response.push(new Dialogue(".............", Registry.SP_OTHER));
+      }
+      return response;
+    }
+    
+    public function freeze(frozen:Boolean): void
+    {
+      _frozen = frozen;
+    }
   }
-
 }

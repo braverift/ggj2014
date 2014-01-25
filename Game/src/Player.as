@@ -15,17 +15,25 @@ package
     private const MOVE_SPEED_X:Number = 40;
     private const MOVE_SPEED_Y:Number = 20;
     private const ATTACK_TIME:Number = 0.5;
-    
+    private const RECOIL_TIME:Number = 0.2;
+    private const RECOIL_SPEED:Number = 80;
+
     private var _attackGroup:FlxGroup;
+    private var _speechGroup:FlxGroup;
     
     private var _attackCooldown:Number;
+    private var _recoilTime:Number;
+    private var _recoilDirection:uint;
+    private var _frozen:Boolean;
     
-    public function Player(X:Number, Y:Number, attackGroup:FlxGroup) 
+    public function Player(X:Number, Y:Number, attackGroup:FlxGroup, speechGroup:FlxGroup) 
     {
       super(X, Y);
       
       _attackGroup = attackGroup;
+      _speechGroup = speechGroup;
       _attackCooldown = 0;
+      _frozen = false;
 
       loadGraphic(heroGraphic, true, true, FRAME_WIDTH, FRAME_HEIGHT);
       addAnimation("idle", [0, 1, 2, 1, 0], 5, true);
@@ -40,50 +48,102 @@ package
     {
       super.update();
       
-      // Player movement
-      if (FlxG.keys.LEFT)
+      if (!_frozen)
       {
-        x -= MOVE_SPEED_X * FlxG.elapsed;
-        facing = LEFT;
-      }
-      if (FlxG.keys.RIGHT)
-      {
-        x += MOVE_SPEED_X * FlxG.elapsed;
-        facing = RIGHT;
-      }
-      if (FlxG.keys.UP)
-      {
-        y -= MOVE_SPEED_Y * FlxG.elapsed;
-      }
-      if (FlxG.keys.DOWN)
-      {
-        y += MOVE_SPEED_Y * FlxG.elapsed;
-      }
-      
-      // Attacking
-      if (_attackCooldown > 0)
-      {
-        _attackCooldown -= FlxG.elapsed;
-      }
-      
-      if (FlxG.keys.justPressed("X") && _attackCooldown <= 0)
-      {
-        var punchSprite:AtkPunch;
-        _attackCooldown = ATTACK_TIME;
-        
-        if (facing == LEFT)
+        // Recoil from being punched
+        if (_recoilDirection)
         {
-          punchSprite = new AtkPunch(x - 8, y, LEFT);
+          if (_recoilDirection == LEFT)
+          {
+            x -= RECOIL_SPEED * FlxG.elapsed;
+          }
+          else
+          {
+            x += RECOIL_SPEED * FlxG.elapsed;
+          }
+          
+          _recoilTime -= FlxG.elapsed;
+          if (_recoilTime < 0)
+          {
+            _recoilDirection = 0;
+          }
         }
-        else
+
+        // Player movement
+        if (FlxG.keys.LEFT)
         {
-          punchSprite = new AtkPunch(x + 24, y, RIGHT);
+          x -= MOVE_SPEED_X * FlxG.elapsed;
+          facing = LEFT;
+        }
+        if (FlxG.keys.RIGHT)
+        {
+          x += MOVE_SPEED_X * FlxG.elapsed;
+          facing = RIGHT;
+        }
+        if (FlxG.keys.UP)
+        {
+          y -= MOVE_SPEED_Y * FlxG.elapsed;
+        }
+        if (FlxG.keys.DOWN)
+        {
+          y += MOVE_SPEED_Y * FlxG.elapsed;
         }
         
-        _attackGroup.add(punchSprite);
+        // Attacking
+        if (_attackCooldown > 0)
+        {
+          _attackCooldown -= FlxG.elapsed;
+        }
+        if (_attackCooldown <= 0)
+        {
+          if (FlxG.keys.justPressed("X"))
+          {
+            var punchSprite:AtkPunch;
+            _attackCooldown = ATTACK_TIME;
+            
+            if (facing == LEFT)
+            {
+              punchSprite = new AtkPunch(x - 8, y, LEFT);
+            }
+            else
+            {
+              punchSprite = new AtkPunch(x + 24, y, RIGHT);
+            }
+            
+            _attackGroup.add(punchSprite);
+          }
+          else if (FlxG.keys.justPressed("Z"))
+          {
+            var speechSprite:Speak;
+            _attackCooldown = ATTACK_TIME;
+            
+            if (facing == LEFT)
+            {
+              speechSprite = new Speak(x - 8, y, LEFT);
+            }
+            else
+            {
+              speechSprite = new Speak(x + 24, y, RIGHT);
+            }
+            
+            _speechGroup.add(speechSprite);
+          }
+        }
       }
       
       play("idle");
+    }
+        
+    public function punched(direction:uint): void
+    {
+      _recoilDirection = direction;
+      _recoilTime = RECOIL_TIME;
+
+    }
+    
+    public function freeze(frozen:Boolean): void
+    {
+      _frozen = frozen;
     }
   }
 
