@@ -20,6 +20,7 @@ package
     private static var sceneArray:Array; 
     private static var diagTime:Number; // Time current line of dialogue has been displayed
 
+    private static const DRINK_INTENSITY:Number = 0.02;
     private static const DRINK_DOWN:Number = 0.2;  // Speed at which you consume drink
     private static const DRINK_UP:Number = 0.3;    // Speed at which drink is refilled
     private static const DRINK_X:Number = 20;
@@ -44,6 +45,7 @@ package
 
     override public function create():void
     {      
+      FlxG.watch(Registry, "intensity");
       add(new FlxSprite(0, 0, background));
     
       sceneIdx = 0;
@@ -92,6 +94,7 @@ package
         } else if (drinkLevel < 0) {
           drinkRefilling = true;
           drinkLevel = 0.0;
+          Registry.intensity += DRINK_INTENSITY;
         }
 
         var consumed:int = (1 - drinkLevel) * DRINK_H;
