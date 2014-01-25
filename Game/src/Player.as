@@ -16,17 +16,19 @@ package
     private const RECOIL_SPEED:Number = 80;
 
     private var _attackGroup:FlxGroup;
+    private var _speechGroup:FlxGroup;
     
     private var _attackCooldown:Number;
     private var _recoilTime:Number;
     private var _recoilDirection:uint;
     private var _frozen:Boolean;
     
-    public function Player(X:Number, Y:Number, attackGroup:FlxGroup) 
+    public function Player(X:Number, Y:Number, attackGroup:FlxGroup, speechGroup:FlxGroup) 
     {
       super(X, Y);
       
       _attackGroup = attackGroup;
+      _speechGroup = speechGroup;
       _attackCooldown = 0;
       _frozen = false;
       
@@ -89,21 +91,40 @@ package
         {
           _attackCooldown -= FlxG.elapsed;
         }
-        if (FlxG.keys.justPressed("X") && _attackCooldown <= 0)
+        if (_attackCooldown <= 0)
         {
-          var punchSprite:AtkPunch;
-          _attackCooldown = ATTACK_TIME;
-          
-          if (facing == LEFT)
+          if (FlxG.keys.justPressed("X"))
           {
-            punchSprite = new AtkPunch(x - 8, y, LEFT);
+            var punchSprite:AtkPunch;
+            _attackCooldown = ATTACK_TIME;
+            
+            if (facing == LEFT)
+            {
+              punchSprite = new AtkPunch(x - 8, y, LEFT);
+            }
+            else
+            {
+              punchSprite = new AtkPunch(x + 24, y, RIGHT);
+            }
+            
+            _attackGroup.add(punchSprite);
           }
-          else
+          else if (FlxG.keys.justPressed("Z"))
           {
-            punchSprite = new AtkPunch(x + 24, y, RIGHT);
+            var speechSprite:Speak;
+            _attackCooldown = ATTACK_TIME;
+            
+            if (facing == LEFT)
+            {
+              speechSprite = new Speak(x - 8, y, LEFT);
+            }
+            else
+            {
+              speechSprite = new Speak(x + 24, y, RIGHT);
+            }
+            
+            _speechGroup.add(speechSprite);
           }
-          
-          _attackGroup.add(punchSprite);
         }
       }
       
