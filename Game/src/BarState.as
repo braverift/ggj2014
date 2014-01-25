@@ -8,11 +8,6 @@ package
   public class BarState extends FlxState
   {
     [Embed(source = "../data/art/bg_bar.png" )] private var background:Class;
-
-    public function BarState() 
-    {
-      
-    }
     
     override public function create(): void
     {
@@ -22,6 +17,10 @@ package
     override public function update():void
     {
       super.update();      
+      if (FlxG.keys.SPACE)
+      {
+        FlxG.switchState(new DrinkSelectState());
+      }
     }
   }
 
