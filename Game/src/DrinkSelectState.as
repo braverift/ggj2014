@@ -69,7 +69,7 @@ package
       } else if (FlxG.keys.justPressed("X")) {
         Registry.barScene += curDrink+1;
         Registry.mood += drinks.drinks[curDrink].mood;
-        FlxG.switchState(new BarState());
+        FlxG.switchState(new BarState(true, drinks.drinks[curDrink].color));
       }
 
       nameBox.text = drinks.drinks[curDrink].name;
