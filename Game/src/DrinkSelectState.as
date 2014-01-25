@@ -34,6 +34,8 @@ package
       //add(new FlxSprite(0, 0, background));
       titleBox = new FlxText(0, 10, 320, "What'll it be?");
       titleBox.alignment = "center";
+      titleBox.color = Registry.SP_BART;
+      titleBox.shadow = Utility.darkerize(Registry.SP_BART);
       add(titleBox);
 
       var highlightSize:Number = DRINK_SIZE + 2*HIGHLIGHT_WIDTH;
@@ -64,8 +66,9 @@ package
         curDrink = (curDrink+1) % drinkSprites.length;
       } else if (FlxG.keys.justPressed("LEFT")) {
         curDrink = (curDrink-1+drinkSprites.length) % drinkSprites.length;
-      } else if (FlxG.keys.justPressed("SPACE")) {
+      } else if (FlxG.keys.justPressed("X")) {
         Registry.barScene += curDrink+1;
+        Registry.mood += drinks.drinks[curDrink].mood;
         FlxG.switchState(new BarState());
       }
 

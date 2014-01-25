@@ -24,7 +24,6 @@ package
 
       sceneArray = Registry.barScenes[Registry.barScene];
       diagTime = 0;
-      FlxG.watch(BarState, "diagTime");
     }
     
     override public function update():void
@@ -35,8 +34,13 @@ package
       var curDiag:Dialogue = sceneArray[sceneIdx];
       diagBox.text = curDiag.text.substr(0, charsToShow);
       diagBox.color = curDiag.color;
+      diagBox.shadow = Utility.darkerize(curDiag.color)
 
       super.update();
+
+      if (FlxG.keys.justPressed("X")) {
+        diagTime = Math.max(diagTime, curDiag.text.length*TIME_PER_CHAR);
+      }
 
       // Auto advance text
       if (diagTime > curDiag.text.length*TIME_PER_CHAR + TIME_AT_END)
@@ -49,5 +53,4 @@ package
       }
     }
   }
-
 }
