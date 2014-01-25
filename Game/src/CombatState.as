@@ -67,10 +67,7 @@ package
     override public function update():void
     {
       super.update();
-      
-      _player.update();
-      _playerAttackGroup.update();
-      
+            
       FlxG.overlap(_enemies, _playerAttackGroup, punchEnemy);
       FlxG.overlap(_player, _enemyAttackGroup, punchPlayer);
       FlxG.overlap(_enemies, _playerSpeechGroup, talkToEnemy);

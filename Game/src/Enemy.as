@@ -12,11 +12,11 @@ package
     public const FRAME_WIDTH:int = 64;
     public const FRAME_HEIGHT:int = 80;
     
-    private const MOVE_SPEED_X:Number = 40;
-    private const MOVE_SPEED_Y:Number = 20;
+    private const MOVE_SPEED_X:Number = 120;
+    private const MOVE_SPEED_Y:Number = 40;
     private const ATTACK_TIME:Number = 0.5;
     private const RECOIL_TIME:Number = 0.2;
-    private const RECOIL_SPEED:Number = 80;
+    private const RECOIL_SPEED:Number = 200;
     private const MAX_HP:Number = 5;
     private const FRIENDLY:uint = 0;
     private const ANGRY:uint = 1;
@@ -47,8 +47,8 @@ package
       _frozen = false;
       
       loadGraphic(enemyGraphic, true, true, FRAME_WIDTH, FRAME_HEIGHT);
-      addAnimation("idle", [0, 1, 2, 1, 0], 5, true);
-      addAnimation("punch", [1, 3, 4, 3, 1], 8, false);
+      addAnimation("idle", [0, 1, 2, 1, 0], 10, true);
+      addAnimation("punch", [3, 4, 3, 1], 20, false);
       width = 28;
       height = 16;
       offset.x = 18;
@@ -134,7 +134,13 @@ package
         }
       }
       
-      play("idle");
+      if (_attackCooldown > 0)
+      {
+        play("punch");
+      }
+      else {
+        play("idle");
+      }
     }
     
     public function punched(direction:uint): void
@@ -163,19 +169,22 @@ package
     
     public function getDialogue(): Array
     {
-      var response:Array;
-      if (_dialogue.length > 0)
+      if (_state != ANGRY)
       {
-        response = _dialogue[0];
-        _dialogue.splice(0, 1);
+        var response:Array;
+        if (_dialogue.length > 0)
+        {
+          response = _dialogue[0];
+          _dialogue.splice(0, 1);
+        }
+        else
+        {
+          response = new Array;
+          response.push(new Dialogue(".....", Registry.SP_PLAYER));
+          response.push(new Dialogue(".............", Registry.SP_OTHER));
+        }
+        return response;
       }
-      else
-      {
-        response = new Array;
-        response.push(new Dialogue(".....", Registry.SP_PLAYER));
-        response.push(new Dialogue(".............", Registry.SP_OTHER));
-      }
-      return response;
     }
     
     public function freeze(frozen:Boolean): void

@@ -12,11 +12,11 @@ package
     public const FRAME_WIDTH:int = 64;
     public const FRAME_HEIGHT:int = 80;
     
-    private const MOVE_SPEED_X:Number = 40;
-    private const MOVE_SPEED_Y:Number = 20;
-    private const ATTACK_TIME:Number = 0.5;
+    private const MOVE_SPEED_X:Number = 120;
+    private const MOVE_SPEED_Y:Number = 40;
+    private const ATTACK_TIME:Number = 0.2;
     private const RECOIL_TIME:Number = 0.2;
-    private const RECOIL_SPEED:Number = 80;
+    private const RECOIL_SPEED:Number = 200;
 
     private var _attackGroup:FlxGroup;
     private var _speechGroup:FlxGroup;
@@ -36,8 +36,8 @@ package
       _frozen = false;
 
       loadGraphic(heroGraphic, true, true, FRAME_WIDTH, FRAME_HEIGHT);
-      addAnimation("idle", [0, 1, 2, 1, 0], 5, true);
-      addAnimation("punch", [1, 3, 4, 3, 1], 60, false);
+      addAnimation("idle", [0, 1, 2, 1, 0], 10, true);
+      addAnimation("punch", [3, 4, 3, 1], 20, false);
       width = 28;
       height = 16;
       offset.x = 18;
@@ -70,23 +70,26 @@ package
         }
 
         // Player movement
-        if (FlxG.keys.LEFT)
+        if (_attackCooldown <= 0)
         {
-          x -= MOVE_SPEED_X * FlxG.elapsed;
-          facing = LEFT;
-        }
-        if (FlxG.keys.RIGHT)
-        {
-          x += MOVE_SPEED_X * FlxG.elapsed;
-          facing = RIGHT;
-        }
-        if (FlxG.keys.UP)
-        {
-          y -= MOVE_SPEED_Y * FlxG.elapsed;
-        }
-        if (FlxG.keys.DOWN)
-        {
-          y += MOVE_SPEED_Y * FlxG.elapsed;
+          if (FlxG.keys.LEFT)
+          {
+            x -= MOVE_SPEED_X * FlxG.elapsed;
+            facing = LEFT;
+          }
+          if (FlxG.keys.RIGHT)
+          {
+            x += MOVE_SPEED_X * FlxG.elapsed;
+            facing = RIGHT;
+          }
+          if (FlxG.keys.UP)
+          {
+            y -= MOVE_SPEED_Y * FlxG.elapsed;
+          }
+          if (FlxG.keys.DOWN)
+          {
+            y += MOVE_SPEED_Y * FlxG.elapsed;
+          }
         }
         
         // Attacking
@@ -114,9 +117,7 @@ package
           }
           else if (FlxG.keys.justPressed("Z"))
           {
-            var speechSprite:Speak;
-            _attackCooldown = ATTACK_TIME;
-            
+            var speechSprite:Speak;            
             if (facing == LEFT)
             {
               speechSprite = new Speak(x - 8, y, LEFT);
@@ -131,7 +132,14 @@ package
         }
       }
       
-      play("idle");
+      if (_attackCooldown > 0)
+      {
+        play("punch");
+      }
+      else
+      {
+        play("idle");
+      }
     }
         
     public function punched(direction:uint): void
