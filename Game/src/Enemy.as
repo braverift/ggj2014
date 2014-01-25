@@ -7,7 +7,10 @@ package
    */
   public class Enemy extends FlxSprite
   {
-    [Embed(source = "../data/art/char_enemy.png")] private var enemyGraphic:Class;
+    [Embed(source = "../data/art/char_hero.png")] private var enemyGraphic:Class;
+
+    public const FRAME_WIDTH:int = 64;
+    public const FRAME_HEIGHT:int = 80;
     
     private const MOVE_SPEED_X:Number = 40;
     private const MOVE_SPEED_Y:Number = 20;
@@ -40,12 +43,13 @@ package
       _HP = MAX_HP;
       _state = FRIENDLY;
       
-      loadGraphic(enemyGraphic, true, true, 32, 48);
-      addAnimation("idle", [0, 1], 120, true);      
+      loadGraphic(enemyGraphic, true, true, FRAME_WIDTH, FRAME_HEIGHT);
+      addAnimation("idle", [0, 1, 2, 1, 0], 5, true);
+      addAnimation("punch", [1, 3, 4, 3, 1], 8, false);
       width = 28;
       height = 16;
-      offset.x = 2;
-      offset.y = 32;
+      offset.x = 18;
+      offset.y = FRAME_HEIGHT - height;
     }
     
     override public function update():void
