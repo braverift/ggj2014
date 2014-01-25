@@ -1,0 +1,225 @@
+SCENES:
+- The Party
+- Back Alley
+- Apartment 13
+
+===========================================================
+
+MEETING WITH THE BROTHER
+
+Scene: The Party
++ Some form of gathering. There's a MYSTERY FIGURE standing in a spotlight on the right side of the screen. Behind them are various other people.
+
+Choices:
+- (1A) Exit the scene. "My brother wasn't there when he said he would be."
+- (1B) Talk to the MYSTERY FIGURE. "He told me my brother wasn't coming. He said to meet him at the warehouse. Alone."
+- (1C) Beat up the MYSTERY FIGURE. "My brother was in danger."
+- (1D) Get beat up. "I was overpowered. They took me hostage."
+
+===========================================================
+
+LOCATION OF BROTHER DISCOVERED
+
+[1A] Escaped the party.
+
+You didn't gain any new information at the party. You decide to try your brother's apartment instead.
+
+Scene: Brother's Apartment
++ Apartment 13. Door is locked. There's someone inside. They are holding a knife. It's the brother's GIRLFRIEND.
+
+Choices:
+- (1A-2A) Leave. "He wasn't home. Strange."
+- (1A-2B) Talk. "I talked her down. She told me where they took him."
+- (1A-2C) Fight and win. "Someone was already there. He must be in trouble. An address was written on a note. I'll go there next."
+- (1A-2D) Fight and lose.
+
+~~~~~~~~~~~~~~~~~~~~~
+
+[1B] Talked to the MYSTERY FIGURE.
+
+The MYSTERY FIGURE told you to come to the warehouse alone. You do.
+
+Scene: Warehouse
+
+Choices:
+- (1B-2A) Leave.
+- (1B-2B) Talk.
+- (1B-2C) Fight and lose.
+- (1B-2D) Fight and win.
+
+~~~~~~~~~~~~~~~~~~~~~
+
+[1C] Beat up the MYSTERY FIGURE.
+
+You defeated the MYSTERY FIGURE and the thugs. You run to your brother's apartment to find the door broken in and a dead body inside. Some thugs accost you as you leave.
+
+Scene: Brother's Apartment
+
+Choices:
+- (1C-2A) Escape.
+- (1C-2B) Talk.
+- (1C-2C) Fight and lose.
+- (1C-2D) Fight and win.
+
+~~~~~~~~~~~~~~~~~~~~~
+
+[1D] Beat up by the MYSTERY FIGURE.
+
+Scene: Warehouse
+
+You picked a fight you couldn't win. You awaken in a warehouse. You escape your bindings. There are dudes all around.
+
+Choices:
+- (1D-2A) Talk.
+- (1D-2B) Fight and lose.
+- (1D-2C) Fight and win.
+- (1D-2D) Run away.
+
+===========================================================
+
+THE CONFRONTATION
+
+Park
+
+(1A-2A) Escaped party. Left apartment.
++ You were nonviolent. Only the MYSTERY FIGURE is here.
+- Leave: BROTHER IS LOST. "I wonder where he is."
+- Talk:  BROTHER IS LOST. "This is his favorite bar."
+- Win:   BROTHER IS DEAD. "I was too late to stop them."
+- Lose:  BROTHER IS LOST. "She got away from me."
+
+(1B-2A) Talked to MYSTERY FIGURE. Left warehouse.
++ You backed out of the deal. The MYSTERY FIGURE and a bunch of dudes are here.
+- Leave: BROTHER IS LOST. "I couldn't stand up to them."
+- Talk:  BROTHER IS DEAD. "My cowardice caused his death."
+- Win:   BROTHER IS DEAD. "The deed was already done."
+- Lose:  YOU ARE DEAD. "I was hoping he'd be here."
+
+(1C-2B) Won the party fight. Talked to MYSTERY FIGURE.
++ Aggressive, then back down. BROTHER and MYSTERY FIGURE are here.
+- Leave: BROTHER IS LOST.
+- Talk:  BROTHER IS SAFE. "I see it's what he wanted."
+- Win:   BROTHER IS DEAD. "It was for his own good."
+- Lose:  YOU ARE DEAD.
+
+(1D-2B) Lost the party fight. Talked to WAREHOUSE GUARDS.
++ Your BROTHER is here.
+- Leave: 
+- Talk:  
+- Win:   
+- Lose:  
+
+~~~~~~~~~~~~~~~~~~~~~
+
+Train Top
+
+(1A-2B) Escaped party. Talked to GIRLFRIEND.
+- Leave: 
+- Talk:  
+- Win:   
+- Lose:  
+
+(1B-2C) Talked to MYSTERY FIGURE. Won warehouse fight.
+- Leave: 
+- Talk:  
+- Win:   
+- Lose:  
+
+(1C-2A) Won the party fight. Left apartment.
+- Leave: 
+- Talk:  
+- Win:   
+- Lose:  
+
+(1D-2D) Lost the party fight. Lost warehouse fight.
+- Leave: 
+- Talk:  
+- Win:   
+- Lose:  
+
+~~~~~~~~~~~~~~~~~~~~~
+
+Skyscraper
+
+(1A-2C) Escaped party. Won the apartment fight.
+- Leave: 
+- Talk:  
+- Win:   
+- Lose:  
+
+(1B-2B) Talked to MYSTERY FIGURE. Talked to MYSTERY FIGURE.
+- Leave: 
+- Talk:  
+- Win:   
+- Lose:  
+
+(1C-2C) Won the party fight. Won apartment fight.
+- Leave: 
+- Talk:  
+- Win:   
+- Lose:  
+
+(1D-2C) Lost the party fight. Won warehouse fight.
+- Leave: 
+- Talk:  
+- Win:   
+- Lose:  
+
+~~~~~~~~~~~~~~~~~~~~~
+
+Sausage Factory
+
+(1A-2D) Escaped party. Lost the apartment fight.
+- Leave: 
+- Talk:  
+- Win:   
+- Lose:  
+
+(1B-2D) Talked to MYSTERY FIGURE. Lost warehouse fight.
+- Leave: 
+- Talk:  
+- Win:   
+- Lose:  
+
+(1C-2D) Won the party fight. Lost apartment fight.
+- Leave: 
+- Talk:  
+- Win:   
+- Lose:  
+
+(1D-2A) Lost the party fight. Escaped warehouse.
+- Leave: 
+- Talk:  
+- Win:   
+- Lose:  
+
+===========================================================
+
+The Ending
+
+YOU ARE DEAD
+- THE LAST CALL
+
+"And that's how I ended up here."
+
+~~~~~~~~~~~~~~~~~~~~~
+
+BROTHER IS DEAD
+- FALLEN SOLDIER
+
+"I couldn't save him."
+
+~~~~~~~~~~~~~~~~~~~~~
+
+BROTHER IS LOST
+- CHUB PUG
+
+"I thought maybe he'd end up here. It's his favorite bar, after all."
+
+~~~~~~~~~~~~~~~~~~~~~
+
+BROTHER IS SAFE
+- RISKY SOURS
+
+"Ready to go?"
+"Sure."
