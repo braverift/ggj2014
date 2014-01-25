@@ -15,13 +15,13 @@ package
     }
     
     override public function create(): void
-    {
+    {      
       add(new FlxSprite(0, 0, background));
     }
     
     override public function update():void
     {
-      super.update();      
+      super.update();
     }
   }
 
