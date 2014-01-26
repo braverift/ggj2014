@@ -8,9 +8,7 @@ package
     public var minMood:Number;
     public var maxMood:Number;
     public var isPlotPoint:Boolean;
-    //TODO: I assume that intensity doesn't affect dialogue currently
-    //TODO: Does mood matter?
-
+    
     public function Dialogue(
       text:String = "UNITIALIZED", 
       color:uint = Registry.SP_PLAYER, 

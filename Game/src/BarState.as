@@ -190,7 +190,7 @@ package
         } else if (sceneArray[sceneIdx] == null) { // End of scene
           fading = true;
           FlxG.fade(0xFF000000, 2.0, function():void {
-            FlxG.switchState(new CombatState()); 
+            Registry.getNextCombatState(); 
           });
         }
       }
