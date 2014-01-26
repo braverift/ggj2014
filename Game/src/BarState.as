@@ -7,7 +7,7 @@ package
     [Embed(source = "../data/art/bg_bar.png" )] private var background:Class;
     
     private static const TIME_PER_CHAR:Number = 0.08; // Time per character of text in seconds
-    private static const TIME_AT_END:Number = 2.0; // Length of pause after each line in seconds
+    private static const TIME_AT_END:Number = 0.0; // Length of pause after each line in seconds
     private static const DIAG_X:Number = 40;
     private static const DIAG_Y:Number = 186;
     private static const DIAG_W:Number = 260;
