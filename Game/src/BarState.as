@@ -75,8 +75,12 @@ package
       sceneArray = Registry.barScenes[Registry.barScene];
       diagTime = 0;
 
-      fadingIn = true;
-      FlxG.flash(0xFF000000, 2, function():void {fadingIn=false;});
+      if (hasDrink) {
+        fadingIn = false;
+      } else {
+        fadingIn = true;
+        FlxG.flash(0xFF000000, 2, function():void {fadingIn=false;});
+      }
     }
     
     override public function update():void
