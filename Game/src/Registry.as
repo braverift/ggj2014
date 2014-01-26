@@ -105,9 +105,9 @@ package
         if (barScene >= 24 && outcomes[2] == LOSE) endSceneType = BRO_LOST;
         
         if (barScene >= 28 && outcomes[2] == TALK) endSceneType = YOU_DEAD;
-        if (barScene >= 28 && outcomes[2] == WALK) endSceneType = YOU_DEAD;
-        if (barScene >= 28 && outcomes[2] == WIN) endSceneType = YOU_DEAD;
-        if (barScene >= 28 && outcomes[2] == LOSE) endSceneType = YOU_DEAD;
+        if (barScene >= 28 && outcomes[2] == WALK) endSceneType = BRO_LOST;
+        if (barScene >= 28 && outcomes[2] == WIN) endSceneType = BRO_SAFE;
+        if (barScene >= 28 && outcomes[2] == LOSE) endSceneType = BRO_DEAD;
         
         if (barScene >= 32 && outcomes[2] == TALK) endSceneType = BRO_SAFE;
         if (barScene >= 32 && outcomes[2] == WALK) endSceneType = BRO_LOST;
