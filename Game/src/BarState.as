@@ -19,6 +19,7 @@ package
     private static var sceneIdx:uint;
     private static var sceneArray:Array; 
     private static var diagTime:Number; // Time current line of dialogue has been displayed
+    private static var bartenderDiag:FlxText;
 
     private static const DRINK_INTENSITY:Number = 0.02;
     private static const DRINK_DOWN:Number = 0.2;  // Speed at which you consume drink
@@ -61,15 +62,25 @@ package
       if(hasDrink) {
         drinkLevel = 0.0;
         drinkRefilling = true;
+        var darkColor:uint = Utility.darkerize(drinkColor);
+        var darkerColor:uint = Utility.darkerize(darkColor);
         drinkLevelSprite = new FlxSprite(DRINK_X, DRINK_Y);
         drinkLevelSprite.makeGraphic(DRINK_W, DRINK_H, drinkColor);
         drinkBackSprite = new FlxSprite(DRINK_X, DRINK_Y);
-        drinkBackSprite.makeGraphic(DRINK_W, DRINK_H, Utility.darkerize(drinkColor));
+        drinkBackSprite.makeGraphic(DRINK_W, DRINK_H, darkerColor);
         drinkBarSprite = new FlxSprite(DRINK_X-DRINK_B, DRINK_Y-DRINK_B);
-        drinkBarSprite.makeGraphic(DRINK_W + 2*DRINK_B, DRINK_H + 2*DRINK_B, 0xFFCCCCCC);
+        drinkBarSprite.makeGraphic(DRINK_W + 2*DRINK_B, DRINK_H + 2*DRINK_B, darkColor);
+
+        bartenderDiag = new FlxText(180, 80, 100);
+        bartenderDiag.text = "Here you go.";
+        bartenderDiag.color = Registry.SP_BART;
+        bartenderDiag.shadow = Utility.darkerize(Registry.SP_BART);
+        bartenderDiag.visible = false;
+
         add(drinkBarSprite);
         add(drinkBackSprite);
         add(drinkLevelSprite);
+        add(bartenderDiag);
       }
 
       sceneArray = Registry.barScenes[Registry.barScene];
@@ -112,6 +123,8 @@ package
           drinkLevel = 0.0;
           Registry.intensity += DRINK_INTENSITY;
         }
+
+        bartenderDiag.visible = drinkRefilling;
 
         var consumed:int = (1 - drinkLevel) * DRINK_H;
         drinkLevelSprite.y = DRINK_Y + consumed;
