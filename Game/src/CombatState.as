@@ -20,7 +20,8 @@ package
     private var _diagTime:Number;
     private var _currentDialogueString:String;
     private var _canEscape:Boolean;
-    
+    private var _controlsText:FlxText;
+
     public static const TIME_PER_CHAR:Number = 0.08; // Time per character of text in seconds
     public static const TIME_AT_END:Number = 1.0; // Length of pause after each line in seconds
     private const HORIZON:Number = 100;
@@ -38,7 +39,7 @@ package
       
       _playerAttackGroup = new FlxGroup;
       _playerSpeechGroup = new FlxGroup;
-      _player = new Player(150, 150, _playerAttackGroup, _playerSpeechGroup, true);
+      _player = new Player(150, 150, _playerAttackGroup, _playerSpeechGroup, onShoot);
       
       _enemies = new FlxGroup;
       _enemyAttackGroup = new FlxGroup;
@@ -52,9 +53,11 @@ package
       talkingEnemy.addDialogue(new Array(new Dialogue("Hello"), new Dialogue("Hiii.........",Registry.SP_OTHER, 0, 1, true)));
       _enemies.add(talkingEnemy);
       
-      _dialogueText = new FlxText(20, 180, 280);
+      _dialogueText = new FlxText(20, 16, 280);
       _diagTime = 0;
       _queuedDialogue = new Array;
+      
+      _controlsText = new FlxText(20, FlxG.height - 20, 280, controlsString());
       
       add(new FlxSprite(0, 0, background));
       add(_downedEnemyGroup);
@@ -63,6 +66,7 @@ package
       add(_enemies);
       add(_enemyAttackGroup);
       add(_dialogueText);
+      add(_controlsText);
     }
     
     override public function update():void
@@ -81,14 +85,18 @@ package
     {
       enemy.punched(punch.facing, punch.isBullet());
       punch.kill();
-      
+      aggro();
+    }
+    
+    public function aggro(): void
+    {
       _canEscape = false;
       for each (var en:Enemy in _enemies.members)
       {
         en.aggro(_player);
       }
       _player.aggro();
-    }    
+    }
     
     public function punchPlayer(player:Player, punch:AtkPunch): void
     {
@@ -183,6 +191,46 @@ package
         {
           Registry.endScene(Registry.WIN);
         }
+      }
+    }
+    
+    public function onShoot(): void
+    {
+      _controlsText.text = controlsString();
+      aggro();
+    }
+    
+    public function controlsString(): String
+    {
+      if (Registry.hasGun)
+      {
+        var controls:String;
+        if (Registry.bullets > 0)
+        {
+          controls = "[Z] Talk   [X] Shoot (";
+          for (var i:Number = 0; i < 6; ++i)
+          {
+            if (i < Registry.bullets)
+            {
+              controls += "o";
+            }
+            else
+            {
+              controls += "-";
+            }
+          }
+          controls += ")"
+        }
+        else
+        {
+          controls = "[Z] Talk   [X] Pistol Whip";
+        }
+        
+        return controls;
+      }
+      else
+      {
+        return "[Z] Talk   [X] Punch";
       }
     }
   }

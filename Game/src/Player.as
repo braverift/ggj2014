@@ -28,9 +28,9 @@ package
     private var _HP:Number;
     private var _frozen:Boolean;
     private var _aggro:Boolean;
-    private var _hasGun:Boolean;
+    private var _shootCallback:Function;
     
-    public function Player(X:Number, Y:Number, attackGroup:FlxGroup, speechGroup:FlxGroup, hasGun:Boolean) 
+    public function Player(X:Number, Y:Number, attackGroup:FlxGroup, speechGroup:FlxGroup, shootCallback:Function) 
     {
       super(X, Y);
       
@@ -40,7 +40,7 @@ package
       _frozen = false;
       _aggro = false;
       _HP = MAX_HP;
-      _hasGun = hasGun;
+      _shootCallback = shootCallback;
       
       loadGraphic(heroGraphic, true, true, FRAME_WIDTH, FRAME_HEIGHT);
       addAnimation("idle", [0, 1, 2, 1, 0], 10, true);
@@ -124,7 +124,7 @@ package
             
             if (facing == LEFT)
             {
-              if (_hasGun)
+              if (canShoot())
               {
                 punchSprite = new AtkBullet(x - 8, y, LEFT);
               }
@@ -135,7 +135,7 @@ package
             }
             else
             {
-              if (_hasGun)
+              if (canShoot())
               {
                 punchSprite = new AtkBullet(x + 24, y, RIGHT);
               }
@@ -145,10 +145,12 @@ package
               }
             }
             
-            if (_hasGun)
+            if (canShoot())
             {
               FlxG.shake(0.05, 0.1, null, true, 0);
               FlxG.flash(0xffffffff, 0.1, null, true);
+              --Registry.bullets;
+              _shootCallback();
             }
             
             _attackGroup.add(punchSprite);
@@ -172,7 +174,7 @@ package
       
       if (_attackCooldown > 0)
       {
-        play(_hasGun ? "shoot" : "punch");
+        play(Registry.hasGun ? "shoot" : "punch");
       }
       else if (moved)
       {
@@ -180,7 +182,7 @@ package
       }
       else 
       {
-        if (_hasGun)
+        if (Registry.hasGun)
         {
           play("idle_gun");
         }
@@ -214,6 +216,11 @@ package
     public function aggro(): void
     {
       _aggro = true;
+    }
+    
+    public function canShoot():Boolean
+    {
+      return Registry.hasGun && Registry.bullets > 0;
     }
   }
 

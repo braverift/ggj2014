@@ -7,6 +7,8 @@ package
     public static var intensity:Number; // Current intensity, in the range [0, 1]
     public static var barScene:uint;    // ID of the current bar scene
     public static var gameScene:uint;   // ID of the current game scene
+    public static var hasGun:Boolean;
+    public static var bullets:Number;
     
     public static function initialize(): void
     {
@@ -14,6 +16,9 @@ package
       barScene = 0;
       FlxG.watch(Registry, "mood");
       FlxG.watch(Registry, "intensity");
+      
+      hasGun = true;
+      bullets = 6;
     }
 
     /*
