@@ -212,7 +212,7 @@ package
           {
             if (i < Registry.bullets)
             {
-              controls += "o";
+              controls += "*";
             }
             else
             {

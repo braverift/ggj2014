@@ -163,7 +163,7 @@ package
       }
       if (_HP <= 0)
       {
-        _downedGroup.add(new EnemyKOed(x - offset.x, y - offset.y, color, isBullet));
+        _downedGroup.add(new EnemyKOed(x - offset.x, y - offset.y, color, isBullet, facing));
         kill();
       }
     }

@@ -49,6 +49,7 @@ package
       addAnimation("punch", [3, 4, 3, 1], 20, false);
       addAnimation("idle_gun", [10, 11, 12, 11, 10], 10, true);
       addAnimation("shoot", [13, 14, 13], 20, false);
+      addAnimation("walk_gun", [15, 16], 7, true);
 
       width = 28;
       height = 16;
@@ -178,7 +179,7 @@ package
       }
       else if (moved)
       {
-        play("walk");
+        play(Registry.hasGun ? "walk_gun" : "walk");
       }
       else 
       {
