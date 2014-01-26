@@ -8,7 +8,7 @@ package
   {
     public static const BG_BAR:Number = 0;
     public static const BG_PARTY:Number = 1;
-    public static const BG_ALLEY:Number = 2;
+    public static const BG_WAREHOUSE:Number = 2;
     public static const BG_APARTMENT:Number = 3;
     public static const BG_PARK:Number = 4;
     public static const BG_TRAIN:Number = 5;

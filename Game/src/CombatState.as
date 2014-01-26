@@ -12,6 +12,10 @@ package
     [Embed(source = "../data/art/bg_cave.png" )] private var bgCave:Class;
     [Embed(source = "../data/art/bg_train.png" )] private var bgTrain:Class;
     [Embed(source = "../data/art/bg_park.png" )] private var bgPark:Class;
+    [Embed(source = "../data/art/bg_bar_exterior.png" )] private var bgOutsideBar:Class;
+    [Embed(source = "../data/art/bg_party.png" )] private var bgParty:Class;
+    [Embed(source = "../data/art/bg_party.png" )] private var bgWarehouse:Class;
+    [Embed(source = "../data/art/bg_party.png" )] private var bgApartment:Class;
 
     private var _player:Player;
     private var _playerAndEnemies:FlxGroup;
@@ -64,6 +68,22 @@ package
       else if (scene._background == CombatScene.BG_PARK)
       {
         add(new FlxSprite(0, 0, bgPark));
+      }
+      else if (scene._background == CombatScene.BG_WAREHOUSE)
+      {
+        add(new FlxSprite(0, 0, bgWarehouse));
+      }
+      else if (scene._background == CombatScene.BG_OUTSIDE_BAR)
+      {
+        add(new FlxSprite(0, 0, bgOutsideBar));
+      }      
+      else if (scene._background == CombatScene.BG_PARTY)
+      {
+        add(new FlxSprite(0, 0, bgParty));
+      }     
+      else if (scene._background == CombatScene.BG_APARTMENT)
+      {
+        add(new FlxSprite(0, 0, bgApartment));
       }
       else
       {

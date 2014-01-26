@@ -214,7 +214,7 @@ package
     {
       if (scene == 0)
       {
-        var info:CombatScene = new CombatScene(CombatScene.BG_PARK, 30, 50);
+        var info:CombatScene = new CombatScene(CombatScene.BG_PARTY, 30, 50);
         info.addEnemy(EnemyInfo.WEAK, 100, 60, 0, new Array(
           new Array(
           new Dialogue("Have you seen Logan?", SP_PLAYER),
@@ -238,10 +238,25 @@ package
 
         return info;
       }
-      else
+      else if (scene == 1)
       {
-        return new CombatScene(CombatScene.BG_BAR, 0, 0);
+        if (variant == 0)
+        {
+          var info:CombatScene = new CombatScene(CombatScene.BG_APARTMENT, 0, 80);
+          info.addEnemy(EnemyInfo.NORMAL, 260, 50, 0, new Array( new Array(
+          new Dialogue("What the hell are you doing here?", Registry.SP_OTHER),
+          new Dialogue("I could ask you the same question.", Registry.SP_PLAYER)
+          ), new Array(
+          new Dialogue("Get the hell out or I'm calling the cops.", Registry.SP_PLAYER),
+          new Dialogue("Relax, I was just on my way out. I've already finished going through Logan's things.", Registry.SP_OTHER)
+          ), new Array(
+          new Dialogue("What did you find?", Registry.SP_PLAYER),
+          new Dialogue("He bought a train ticket. Looks like my Logan decided to skip town.", Registry.SP_OTHER, 0, 1, true))));
+          return info;
+        }
       }
+      
+      return new CombatScene(CombatScene.BG_BAR, 0, 0);
     }
   }
 }
