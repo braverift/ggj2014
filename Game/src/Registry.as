@@ -11,6 +11,13 @@ package
     public static var hasGun:Boolean;
     public static var bullets:Number;
     public static var drinksDrunk:uint;
+    public static var outcomes:Array;
+    
+    public static const SP_PLAYER:uint = 0xFFDD0000;  // Player's speech color
+    public static const SP_BART:uint = 0xFFEE7942;    // Bartender's speech color
+    public static const SP_OTHER:uint = 0xFF859C27;   // Other's speech color
+    public static const SP_BRO:uint = 0xFF6666CC;     // Bro's speech color
+    public static const SP_GEN:uint = 0xFFCCCCCC;     // Generic character's speech color
     
     public static function initialize(): void
     {
@@ -24,18 +31,15 @@ package
       
       hasGun = false;
       bullets = 0;
+
+      outcomes = new Array();
     }
 
     /*
      * COMBAT TO BAR TRANSITIONS
      *
-     * A transition specifies the possible bar scene IDs to transition to. 
-     * The order is Talk, Walk, Win, Lose.
      * As per the bar dialogue format, these will only ever be multiples of 4.
      */
-    public static const combatToBarTransArray:Array = new Array(
-      new CombatToBarTransition(4, 8, 12, 16) // Scene 0 - Party
-    );
     
     public static const TALK:uint = 0;
     public static const WALK:uint = 1;
@@ -43,32 +47,57 @@ package
     public static const LOSE:uint = 3;
     public static function endScene(outcome:uint): void
     {
-      switch (outcome) {
-        case TALK:
-          barScene = combatToBarTransArray[combatScene].talk;
-          break;
-        case WALK:
-          barScene = combatToBarTransArray[combatScene].walk;
-          break;
-        case WIN:
-          barScene = combatToBarTransArray[combatScene].win;
-          break;
-        case LOSE:
-          barScene = combatToBarTransArray[combatScene].lose;
-          break;
+      outcomes[outcomes.length] = outcome;
+      
+      if (outcomes.length == 1) {
+        if (outcomes[0] == TALK) barScene = 4;
+        if (outcomes[0] == WALK) barScene = 8;
+        if (outcomes[0] == WIN) barScene = 12;
+        if (outcomes[0] == LOSE) barScene = 16;
       }
+
+      if (outcomes.length == 2) {
+        if (outcomes[0] == TALK && outcomes[1] == TALK) barScene = 20;
+        if (outcomes[0] == TALK && outcomes[1] == WALK) barScene = 20;
+        if (outcomes[0] == TALK && outcomes[1] == WIN) barScene = 20;
+        if (outcomes[0] == TALK && outcomes[1] == LOSE) barScene = 20;
+        if (outcomes[0] == WALK && outcomes[1] == TALK) barScene = 20;
+        if (outcomes[0] == WALK && outcomes[1] == WALK) barScene = 20;
+        if (outcomes[0] == WALK && outcomes[1] == WIN) barScene = 20;
+        if (outcomes[0] == WALK && outcomes[1] == LOSE) barScene = 20;
+        if (outcomes[0] == WIN && outcomes[1] == TALK) barScene = 20;
+        if (outcomes[0] == WIN && outcomes[1] == WALK) barScene = 20;
+        if (outcomes[0] == WIN && outcomes[1] == WIN) barScene = 20;
+        if (outcomes[0] == WIN && outcomes[1] == LOSE) barScene = 20;
+        if (outcomes[0] == LOSE && outcomes[1] == TALK) barScene = 20;
+        if (outcomes[0] == LOSE && outcomes[1] == WALK) barScene = 20;
+        if (outcomes[0] == LOSE && outcomes[1] == WIN) barScene = 20;
+        if (outcomes[0] == LOSE && outcomes[1] == LOSE) barScene = 20;
+      }
+      
       FlxG.fade(0xFF000000, 1, function():void {FlxG.switchState(new BarState());});
     }
 
     /*
      * BAR TO COMBAT TRANSITIONS
      *
-     * These are always one-to-one, so you can simply specify a game scene ID
-     * for each bar scene ID. 
+     * These are always one-to-one, so you can simply specify a combat (scene, variant)
+     * for each bar ID. 
      */
     public static const barToCombatTransArray:Array = new Array(
-      0 // Before the Party
+      new Array(0, 0), // Party
+      new Array(1, 0), // Warehouse (Party TALK)
+      new Array(1, 1), // Apartment (Party WALK)
+      new Array(1, 1), // Apartment (Party WIN)
+      new Array(1, 0), // Warehouse (Party LOSE)
+      new Array(2, 0)  // ALL CONFRONTATIONS ARE THE SAME 'CAUSE I'M LAZY :)
     );
+
+    public static function getNextCombatState():void {
+      combatScene = barToCombatTransArray[barScene/4][0];
+      combatSceneVariant = barToCombatTransArray[barScene/4][1];
+      FlxG.switchState(new CombatState());
+    }
 
     /*
      * BAR DIALOGUE
@@ -76,11 +105,6 @@ package
      * Every 4th entry (0, 4, 8, ...) must end with a DrinkSet.
      * The next 3 entries are the dialogue sets for the respective drinks.
      */
-    public static const SP_PLAYER:uint = 0xFFDD0000;  // Player's speech color
-    public static const SP_BART:uint = 0xFFEE7942;    // Bartender's speech color
-    public static const SP_OTHER:uint = 0xFF859C27;   // Other's speech color
-    public static const SP_BRO:uint = 0xFF6666CC;     // Bro's speech color
-    public static const SP_GEN:uint = 0xFFCCCCCC;     // Generic character's speech color
     public static var barScenes:Array = new Array(
       new Array( // Scene 0 - Intro
         new Dialogue("Hey.          "),
@@ -123,6 +147,7 @@ package
       ),
       new Array( // Scene 4 - Talked to OTHER at the party
         new Dialogue("Did you recognize him?", SP_BART),
+        new Dialogue("No, not at all."),
         new DrinkSet(
          new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.25),
          new Drink("Bloody Mary", "Vodka, tomato juice, Worcestershire, Tabasco", 0xFFBB0000, 0.0),
@@ -138,9 +163,9 @@ package
       new Array( // Scene 4c
         new Dialogue("Sure thing. Here you go.", SP_BART)
       ),
-      new Array( // Scene 8 - WIN TEST
-        new Dialogue("Huh.", SP_BART),
-        new Dialogue("I guess you really gave them what for.", SP_BART),
+      new Array( // Scene 8 - Walked away from the party
+        new Dialogue("You just left?", SP_BART),
+        new Dialogue("Yeah. I was really only there to see Logan."),
         new DrinkSet(
          new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.1),
          new Drink("Bloody Mary", "Vodka, tomato juice, Worcestershire, Tabasco", 0xFFBB0000, 0.0),
@@ -156,9 +181,9 @@ package
       new Array( // Scene 8c
         new Dialogue("Sure thing. Here you go.", SP_BART)
       ),
-      new Array( // Scene 12 - LOSE TEST
+      new Array( // Scene 12 - Won a fight at the party
         new Dialogue("Huh.", SP_BART),
-        new Dialogue("I can see why you came in here.", SP_BART),
+        new Dialogue("That sure escalated quickly.", SP_BART),
         new DrinkSet(
          new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.1),
          new Drink("Bloody Mary", "Vodka, tomato juice, Worcestershire, Tabasco", 0xFFBB0000, 0.0),
@@ -174,9 +199,8 @@ package
       new Array( // Scene 12c
         new Dialogue("Sure thing. Here you go.", SP_BART)
       ),
-      new Array( // Scene 16 - WALK TEST
-        new Dialogue("Huh.", SP_BART),
-        new Dialogue("Sounds like that could've gone worse.", SP_BART),
+      new Array( // Scene 16 - Lost a fight at the party
+        new Dialogue("Sounds like you picked a pretty bad fight.", SP_BART),
         new DrinkSet(
          new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.1),
          new Drink("Bloody Mary", "Vodka, tomato juice, Worcestershire, Tabasco", 0xFFBB0000, 0.0),
@@ -190,6 +214,23 @@ package
         new Dialogue("Sure thing. Here you go.", SP_BART)
       ),
       new Array( // Scene 16c
+        new Dialogue("Sure thing. Here you go.", SP_BART)
+      ),
+      new Array( // Scene 20 - IN WHICH THE BARTENDER HAS HAD ENOUGH
+        new Dialogue("Yeah, there's no more game after this point. Have another drink though.", SP_BART),
+        new DrinkSet(
+         new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.1),
+         new Drink("Bloody Mary", "Vodka, tomato juice, Worcestershire, Tabasco", 0xFFBB0000, 0.0),
+         new Drink("Margarita", "Tequila, Cointreau, lime juice, blended", 0xFF96E643, 0.1)
+        )
+      ),
+      new Array( // Scene 20a
+        new Dialogue("Sure thing. Here you go.", SP_BART)
+      ),
+      new Array( // Scene 20b
+        new Dialogue("Sure thing. Here you go.", SP_BART)
+      ),
+      new Array( // Scene 20c
         new Dialogue("Sure thing. Here you go.", SP_BART)
       )
     );
@@ -210,7 +251,7 @@ package
 
     */
 
-    public static function GetSceneInfo(scene:Number, variant:Number):CombatScene
+    public static function getSceneInfo(scene:Number, variant:Number):CombatScene
     {
       if (scene == 0)
       {

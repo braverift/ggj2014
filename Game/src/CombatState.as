@@ -1,10 +1,6 @@
 package  
 {
   import org.flixel.*;
-	/**
-   * ...
-   * @author ...
-   */
   public class CombatState extends FlxState
   {
     [Embed(source = "../data/art/bg_bar.png" )] private var bgBar:Class;
@@ -47,7 +43,7 @@ package
       
       _canEscape = true;
       
-      var scene:CombatScene = Registry.GetSceneInfo(Registry.combatScene, Registry.combatSceneVariant);
+      var scene:CombatScene = Registry.getSceneInfo(Registry.combatScene, Registry.combatSceneVariant);
       
       if (scene._background == CombatScene.BG_SKYSCRAPER)
       {
