@@ -163,13 +163,28 @@ package
         )
       ),
       new Array( // Scene 4a
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("What an asshole."),
+        new Dialogue("But looking at him, I knew he wasn't lying."),
+        new Dialogue("Did you call the police?", SP_BART),
+        new Dialogue("No. I don't trust the police."),
+        new Dialogue("That's a whole different story."),
+        new Dialogue("I went down to the warehouse alone.")
       ),
       new Array( // Scene 4b
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("At first I assumed it was just a practical joke. " +
+                     "Probably one of Logan's idiot friends."),
+        new Dialogue("But looking at him, I knew he wasn't lying."),
+        new Dialogue("Did you call the police?", SP_BART),
+        new Dialogue("No. In retrospect I should have, of course."),
+        new Dialogue("I guess I just wanted to act quickly."),
+        new Dialogue("I went down to the warehouse alone.")
       ),
       new Array( // Scene 4c
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("I was pretty freaked out."),
+        new Dialogue("Did you call the police?", SP_BART),
+        new Dialogue("No. Maybe Logan had gotten himself mixed up in something."),
+        new Dialogue("I didn't want to make any trouble for him."),
+        new Dialogue("I went down to the warehouse alone.")
       ),
       new Array( // Scene 8 - Walked away from the party
         new Dialogue("You just left?", SP_BART),
@@ -181,13 +196,13 @@ package
         )
       ),
       new Array( // Scene 8a
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("I went to his apartment to look for him.")
       ),
       new Array( // Scene 8b
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("I went to his apartment to look for him.")
       ),
       new Array( // Scene 8c
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("I went to his apartment to look for him.")
       ),
       new Array( // Scene 12 - Won a fight at the party
         new Dialogue("Huh.", SP_BART),
@@ -199,13 +214,13 @@ package
         )
       ),
       new Array( // Scene 12a
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("I went to his apartment to see if he was OK.")
       ),
       new Array( // Scene 12b
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("I went to his apartment to see if he was OK.")
       ),
       new Array( // Scene 12c
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("I went to his apartment to see if he was OK.")
       ),
       new Array( // Scene 16 - Lost a fight at the party
         new Dialogue("Sounds like you picked a pretty bad fight.", SP_BART),
@@ -216,13 +231,18 @@ package
         )
       ),
       new Array( // Scene 16a
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("I don't remember what happened right afterwards, "+
+                     "but I woke up in a warehouse.")
       ),
       new Array( // Scene 16b
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("I don't remember what happened right afterwards, "+
+                     "but I woke up in a warehouse.")
       ),
       new Array( // Scene 16c
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("Ha, it was nothing."),
+        new Dialogue("I know those guys. It was all in good fun."),
+        new Dialogue("I don't remember what happened right afterwards, "+
+                     "but I woke up in a warehouse.")
       ),
       new Array( // Scene 20 - IN WHICH THE BARTENDER HAS HAD ENOUGH
         new Dialogue("Yeah, there's no more game after this point. Have another drink though.", SP_BART),
