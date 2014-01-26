@@ -533,6 +533,67 @@ package
           return info;
         } else if (variant == 2) { // Skyscraper
           info = new CombatScene(CombatScene.BG_SKYSCRAPER, 0, 80);
+          info.addEnemy(EnemyInfo.BRO, 180, 50, 0, new Array(
+
+            // NOIR
+            new Array(
+              new Dialogue("So, Logan... It's come to this.", SP_PLAYER, -0.1, 0.1),
+              new Dialogue("Pretty sneaky, sis. I didn't think you'd find me here.", SP_BRO, -0.1, 0.1),
+            ),
+            new Array(
+              new Dialogue("What did they do to you? Are you alright?", SP_PLAYER, -0.1, 0.1),
+              new Dialogue("I'm more than alright. I'm their boss now.", SP_BRO, -0.1, 0.1),
+              new Dialogue("You're what?", SP_PLAYER, -0.1, 0.1),
+              new Dialogue("Look, I had no choice, alright?", SP_BRO, -0.1, 0.1),
+              new Dialogue("It's certainly better than becoming a splatter on the train tracks.", SP_BRO, -0.1, 0.1),
+            ),
+            new Array(
+              new Dialogue("Come on! Let's get out of here.", SP_PLAYER, -0.1, 0.1),
+              new Dialogue("Not a chance. I'm in too deep.", SP_BRO, -0.1, 0.1),
+              new Dialogue("No matter where we go, they'd be able to find us.", SP_BRO, -0.1, 0.1),
+              new Dialogue("Besides... I think I like this life.", SP_BRO, -0.1, 0.1),
+            ),
+            new Array(
+              new Dialogue("You've changed.", SP_PLAYER, -0.1, 0.1),
+              new Dialogue("So have you.", SP_BRO, -0.1, 0.1),
+            ),
+            new Array(
+              new Dialogue("Just... Get out of here. This life isn't for you.", SP_BRO, -0.1, 0.1),
+              new Dialogue("...", SP_PLAYER, -0.1, 0.1),
+            ),
+
+
+            // INTENSE
+            new Array(
+              new Dialogue("Logan. This madness has fucking stop.", SP_PLAYER, -1, -0.1),
+              new Dialogue("Fuck off. This is my town now.", SP_BRO, -1, -0.1),
+            ),
+            new Array(
+              new Dialogue("I thought you were better than this.", SP_PLAYER, -1, -0.1),
+              new Dialogue("Well, you thought wrong.", SP_BRO, -1, -0.1),
+            ),
+            new Array(
+              new Dialogue("Look, I...", SP_PLAYER, -1, -0.1),
+              new Dialogue("It's not worth wasting my breath on you.", SP_BRO, -1, -0.1),
+              new Dialogue("This city is mine now. You can't stop me.", SP_BRO, -0.1, 0.1),
+            ),
+            new Array(
+              new Dialogue("This city is mine. You can't stop me now, sis.", SP_BRO, -1, -0.1),
+            ),
+
+
+            // WHIMSICAL
+            new Array(
+              new Dialogue("Logan! You're here!", SP_PLAYER, 0.1, 1),
+              new Dialogue("Oh, hey sis! What's up?", SP_BRO, 0.1, 1),
+              new Dialogue("I've been looking all over for you!", SP_PLAYER, 0.1, 1),
+              new Dialogue("Really? Why didn't you just call? I've been running errands all day.", SP_BRO, 0.1, 1),
+              new Dialogue("Oh. Duh! I guess it didn't occur to me.", SP_PLAYER, 0.1, 1),
+              new Dialogue("Well, I was just wrapping up here. Wanna' go grab a drink?", SP_BRO, 0.1, 1),
+              new Dialogue("Sure! There's a cool place I wanted to check out...               ", SP_PLAYER, 0.1, 1, true),
+            )
+          )));
+
           return info;
         } else if (variant == 3) { // Cave
           info = new CombatScene(CombatScene.BG_CAVE, 0, 80);
