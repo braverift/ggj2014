@@ -8,6 +8,7 @@ package
     public static var barScene:uint;    // ID of the current bar scene
     public static var combatScene:uint; // ID of the current combat scene
     public static var combatSceneVariant:uint; // ID of the current combat scene
+    public static var endSceneType:int;
     public static var hasGun:Boolean;
     public static var bullets:Number;
     public static var drinksDrunk:uint;
@@ -29,9 +30,8 @@ package
       combatScene = 0;
       combatSceneVariant = 0;
       drinksDrunk = 0;
+      endSceneType = -1;
       fading = false;
-      FlxG.watch(Registry, "mood");
-      FlxG.watch(Registry, "intensity");
       
       hasGun = false;
       bullets = 0;
@@ -39,8 +39,8 @@ package
       outcomes = new Array();
 
       // DEBUG FOR TESTING
-      barScene = 36;
-      intensity = 20;
+      //barScene = 36;
+      //endSceneType = 1;
     }
     
     public static function isIntense(): Boolean
@@ -52,16 +52,21 @@ package
     {
       return mood >= .1;
     }
+    
     /*
      * COMBAT TO BAR TRANSITIONS
      *
      * As per the bar dialogue format, these will only ever be multiples of 4.
      */
-    
     public static const TALK:uint = 0;
     public static const WALK:uint = 1;
     public static const WIN:uint = 2;
     public static const LOSE:uint = 3;
+    public static const YOU_DEAD:uint = 0;
+    public static const BRO_DEAD:uint = 1;
+    public static const BRO_LOST:uint = 2;
+    public static const BRO_SAFE:uint = 3;
+
     public static function endScene(outcome:uint): void
     {
       if (fading) return;
@@ -94,14 +99,32 @@ package
         if (outcomes[0] == LOSE && outcomes[1] == LOSE) barScene = 28;  // Train D
       }
       
-      if (outcomes.length > 2) {
-        barScene = 20;
+      if (outcomes.length == 3) {
+        if (barScene == 24 && outcomes[2] == TALK) endSceneType = YOU_DEAD;
+        if (barScene == 24 && outcomes[2] == WALK) endSceneType = YOU_DEAD;
+        if (barScene == 24 && outcomes[2] == WIN) endSceneType = YOU_DEAD;
+        if (barScene == 24 && outcomes[2] == LOSE) endSceneType = YOU_DEAD;
+        
+        if (barScene == 28 && outcomes[2] == TALK) endSceneType = YOU_DEAD;
+        if (barScene == 28 && outcomes[2] == WALK) endSceneType = YOU_DEAD;
+        if (barScene == 28 && outcomes[2] == WIN) endSceneType = YOU_DEAD;
+        if (barScene == 28 && outcomes[2] == LOSE) endSceneType = YOU_DEAD;
+        
+        if (barScene == 32 && outcomes[2] == TALK) endSceneType = YOU_DEAD;
+        if (barScene == 32 && outcomes[2] == WALK) endSceneType = YOU_DEAD;
+        if (barScene == 32 && outcomes[2] == WIN) endSceneType = YOU_DEAD;
+        if (barScene == 32 && outcomes[2] == LOSE) endSceneType = YOU_DEAD;
+
+        if (barScene == 36 && outcomes[2] == TALK) endSceneType = YOU_DEAD;
+        if (barScene == 36 && outcomes[2] == WALK) endSceneType = BRO_LOST;
+        if (barScene == 36 && outcomes[2] == WIN) endSceneType = BRO_SAFE;
+        if (barScene == 36 && outcomes[2] == LOSE) endSceneType = BRO_DEAD;
       }
 
       fading = true;
       FlxG.fade(0xFF000000, 1, function():void {
         fading = false;
-        FlxG.switchState(new BarState());
+        endSceneType >= 0 ? FlxG.switchState(new EndState()) : FlxG.switchState(new BarState());
       });
     }
 
