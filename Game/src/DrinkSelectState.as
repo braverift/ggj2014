@@ -51,7 +51,7 @@ package
         new FlxSprite(DRINK_BUFFER*3 + DRINK_SIZE*2, DRINK_TOP)
       );
       for(var i:Number=0;i < drinkSprites.length;i++) {
-        drinkSprites[i].loadGraphic(martini, false, false, DRINK_SIZE, DRINK_SIZE);
+        drinkSprites[i].makeGraphic(DRINK_SIZE, DRINK_SIZE, drinks.drinks[i].color);
         add(drinkSprites[i]);
       }
 

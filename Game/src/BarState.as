@@ -149,6 +149,11 @@ package
           }
         } else if (drinkLevel < 0) {
           Registry.drinksDrunk++;
+          if (Registry.drinksDrunk >= 2 && !Registry.hasGun) {
+            Registry.hasGun = true;
+            Registry.bullets = 6;
+          }
+
           addGlass();
           drinkRefilling = true;
           drinkLevel = 0.0;

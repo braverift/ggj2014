@@ -13,7 +13,7 @@ package
       fading = false;
 
       var txt:FlxText
-      txt = new FlxText(0, 20, FlxG.width, "what'll it be");
+      txt = new FlxText(0, 20, FlxG.width, "what'll it be?");
       txt.setFormat(null, 24, 0xFFFFFFFF, "center");
       txt.shadow = 0xFF777777;
       this.add(txt);
