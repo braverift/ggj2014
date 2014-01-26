@@ -11,7 +11,8 @@ package
     public static var hasGun:Boolean;
     public static var bullets:Number;
     public static var drinksDrunk:uint;
-    public static var outcomes:Array;
+    private static var outcomes:Array;
+    private static var fading:Boolean;
     
     public static const SP_PLAYER:uint = 0xFFDD0000;  // Player's speech color
     public static const SP_BART:uint = 0xFFEE7942;    // Bartender's speech color
@@ -26,6 +27,7 @@ package
       combatScene = 0;
       combatSceneVariant = 0;
       drinksDrunk = 0;
+      fading = false;
       FlxG.watch(Registry, "mood");
       FlxG.watch(Registry, "intensity");
       
@@ -47,8 +49,10 @@ package
     public static const LOSE:uint = 3;
     public static function endScene(outcome:uint): void
     {
+      if (fading) return;
       outcomes[outcomes.length] = outcome;
-      
+     
+      FlxG.log(outcomes);
       if (outcomes.length == 1) {
         if (outcomes[0] == TALK) barScene = 4;
         if (outcomes[0] == WALK) barScene = 8;
@@ -75,7 +79,11 @@ package
         if (outcomes[0] == LOSE && outcomes[1] == LOSE) barScene = 20;
       }
       
-      FlxG.fade(0xFF000000, 1, function():void {FlxG.switchState(new BarState());});
+      fading = true;
+      FlxG.fade(0xFF000000, 1, function():void {
+        fading = false;
+        FlxG.switchState(new BarState());
+      });
     }
 
     /*
@@ -94,8 +102,8 @@ package
     );
 
     public static function getNextCombatState():void {
-      combatScene = barToCombatTransArray[barScene/4][0];
-      combatSceneVariant = barToCombatTransArray[barScene/4][1];
+      combatScene = barToCombatTransArray[Math.floor(barScene/4)][0];
+      combatSceneVariant = barToCombatTransArray[Math.floor(barScene/4)][1];
       FlxG.switchState(new CombatState());
     }
 
@@ -155,13 +163,28 @@ package
         )
       ),
       new Array( // Scene 4a
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("What an asshole."),
+        new Dialogue("But looking at him, I knew he wasn't lying."),
+        new Dialogue("Did you call the police?", SP_BART),
+        new Dialogue("No. I don't trust the police."),
+        new Dialogue("That's a whole different story."),
+        new Dialogue("I went down to the warehouse alone.")
       ),
       new Array( // Scene 4b
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("At first I assumed it was just a practical joke. " +
+                     "Probably one of Logan's idiot friends."),
+        new Dialogue("But looking at him, I knew he wasn't lying."),
+        new Dialogue("Did you call the police?", SP_BART),
+        new Dialogue("No. In retrospect I should have, of course."),
+        new Dialogue("I guess I just wanted to act quickly."),
+        new Dialogue("I went down to the warehouse alone.")
       ),
       new Array( // Scene 4c
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("I was pretty freaked out."),
+        new Dialogue("Did you call the police?", SP_BART),
+        new Dialogue("No. Maybe Logan had gotten himself mixed up in something."),
+        new Dialogue("I didn't want to make any trouble for him."),
+        new Dialogue("I went down to the warehouse alone.")
       ),
       new Array( // Scene 8 - Walked away from the party
         new Dialogue("You just left?", SP_BART),
@@ -173,13 +196,13 @@ package
         )
       ),
       new Array( // Scene 8a
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("I went to his apartment to look for him.")
       ),
       new Array( // Scene 8b
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("I went to his apartment to look for him.")
       ),
       new Array( // Scene 8c
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("I went to his apartment to look for him.")
       ),
       new Array( // Scene 12 - Won a fight at the party
         new Dialogue("Huh.", SP_BART),
@@ -191,13 +214,13 @@ package
         )
       ),
       new Array( // Scene 12a
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("I went to his apartment to see if he was OK.")
       ),
       new Array( // Scene 12b
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("I went to his apartment to see if he was OK.")
       ),
       new Array( // Scene 12c
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("I went to his apartment to see if he was OK.")
       ),
       new Array( // Scene 16 - Lost a fight at the party
         new Dialogue("Sounds like you picked a pretty bad fight.", SP_BART),
@@ -208,13 +231,18 @@ package
         )
       ),
       new Array( // Scene 16a
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("I don't remember what happened right afterwards, "+
+                     "but I woke up in a warehouse.")
       ),
       new Array( // Scene 16b
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("I don't remember what happened right afterwards, "+
+                     "but I woke up in a warehouse.")
       ),
       new Array( // Scene 16c
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("Ha, it was nothing."),
+        new Dialogue("I know those guys. It was all in good fun."),
+        new Dialogue("I don't remember what happened right afterwards, "+
+                     "but I woke up in a warehouse.")
       ),
       new Array( // Scene 20 - IN WHICH THE BARTENDER HAS HAD ENOUGH
         new Dialogue("Yeah, there's no more game after this point. Have another drink though.", SP_BART),
@@ -253,9 +281,10 @@ package
 
     public static function getSceneInfo(scene:Number, variant:Number):CombatScene
     {
+      var info:CombatScene;
       if (scene == 0)
       {
-        var info:CombatScene = new CombatScene(CombatScene.BG_PARTY, 30, 50);
+        info = new CombatScene(CombatScene.BG_PARTY, 30, 50);
         info.addEnemy(EnemyInfo.WEAK, 100, 60, 0, new Array(
           new Array(
           new Dialogue("Have you seen Logan?", SP_PLAYER),
