@@ -38,7 +38,7 @@ package
       
       _playerAttackGroup = new FlxGroup;
       _playerSpeechGroup = new FlxGroup;
-      _player = new Player(150, 150, _playerAttackGroup, _playerSpeechGroup);
+      _player = new Player(150, 150, _playerAttackGroup, _playerSpeechGroup, true);
       
       _enemies = new FlxGroup;
       _enemyAttackGroup = new FlxGroup;
@@ -79,7 +79,7 @@ package
     
     public function punchEnemy(enemy:Enemy, punch:AtkPunch): void
     {
-      enemy.punched(punch.facing);
+      enemy.punched(punch.facing, punch.isBullet());
       punch.kill();
       
       _canEscape = false;
@@ -87,6 +87,7 @@ package
       {
         en.aggro(_player);
       }
+      _player.aggro();
     }    
     
     public function punchPlayer(player:Player, punch:AtkPunch): void

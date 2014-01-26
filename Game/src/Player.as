@@ -27,8 +27,10 @@ package
     private var _recoilDirection:uint;
     private var _HP:Number;
     private var _frozen:Boolean;
+    private var _aggro:Boolean;
+    private var _hasGun:Boolean;
     
-    public function Player(X:Number, Y:Number, attackGroup:FlxGroup, speechGroup:FlxGroup) 
+    public function Player(X:Number, Y:Number, attackGroup:FlxGroup, speechGroup:FlxGroup, hasGun:Boolean) 
     {
       super(X, Y);
       
@@ -36,13 +38,18 @@ package
       _speechGroup = speechGroup;
       _attackCooldown = 0;
       _frozen = false;
+      _aggro = false;
       _HP = MAX_HP;
+      _hasGun = hasGun;
       
       loadGraphic(heroGraphic, true, true, FRAME_WIDTH, FRAME_HEIGHT);
       addAnimation("idle", [0, 1, 2, 1, 0], 10, true);
       addAnimation("idle_aggro", [7, 8, 9, 8, 7], 10, true);
       addAnimation("walk", [6, 5], 7, true);
       addAnimation("punch", [3, 4, 3, 1], 20, false);
+      addAnimation("idle_gun", [10, 11, 12, 11, 10], 10, true);
+      addAnimation("shoot", [13, 14, 13], 20, false);
+
       width = 28;
       height = 16;
       offset.x = 18;
@@ -117,11 +124,31 @@ package
             
             if (facing == LEFT)
             {
-              punchSprite = new AtkPunch(x - 8, y, LEFT);
+              if (_hasGun)
+              {
+                punchSprite = new AtkBullet(x - 8, y, LEFT);
+              }
+              else
+              {
+                punchSprite = new AtkPunch(x - 8, y, LEFT);
+              }
             }
             else
             {
-              punchSprite = new AtkPunch(x + 24, y, RIGHT);
+              if (_hasGun)
+              {
+                punchSprite = new AtkBullet(x + 24, y, RIGHT);
+              }
+              else
+              {
+                punchSprite = new AtkPunch(x + 24, y, RIGHT);
+              }
+            }
+            
+            if (_hasGun)
+            {
+              FlxG.shake(0.05, 0.1, null, true, 0);
+              FlxG.flash(0xffffffff, 0.1, null, true);
             }
             
             _attackGroup.add(punchSprite);
@@ -145,7 +172,7 @@ package
       
       if (_attackCooldown > 0)
       {
-        play("punch");
+        play(_hasGun ? "shoot" : "punch");
       }
       else if (moved)
       {
@@ -153,7 +180,18 @@ package
       }
       else 
       {
-        play("idle");
+        if (_hasGun)
+        {
+          play("idle_gun");
+        }
+        else if (_aggro)
+        {
+          play("idle_aggro");
+        }
+        else
+        {
+          play("idle");
+        }
       }
     }
         
@@ -171,6 +209,11 @@ package
     public function freeze(frozen:Boolean): void
     {
       _frozen = frozen;
+    }
+        
+    public function aggro(): void
+    {
+      _aggro = true;
     }
   }
 

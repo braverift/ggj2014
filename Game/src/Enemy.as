@@ -148,15 +148,22 @@ package
       }
     }
     
-    public function punched(direction:uint): void
+    public function punched(direction:uint, isBullet:Boolean): void
     {
       _recoilDirection = direction;
       _recoilTime = RECOIL_TIME;
       
-      --_HP;
-      if (_HP < 0)
+      if (isBullet)
       {
-        _downedGroup.add(new EnemyKOed(x - offset.x, y - offset.y, color));
+        _HP = 0;
+      }
+      else
+      {
+        --_HP;
+      }
+      if (_HP <= 0)
+      {
+        _downedGroup.add(new EnemyKOed(x - offset.x, y - offset.y, color, isBullet));
         kill();
       }
     }

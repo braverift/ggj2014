@@ -9,10 +9,10 @@ package
   {
     [Embed(source = "../data/art/atk_punch.png")] private var punchGraphic:Class;
     
-    private const LIFETIME:Number = 0.2;
-    private const SPEED:Number = 50;
+    protected var LIFETIME:Number = 0.2;
+    protected var SPEED:Number = 50;
     
-    private var _lifetime:Number;
+    protected var _lifetime:Number;
     
     public function AtkPunch(X:Number, Y:Number, FACING:uint) 
     {
@@ -48,6 +48,11 @@ package
       {
         kill();
       }
+    }
+    
+    public function isBullet(): Boolean
+    {
+      return false;
     }
   }
 
