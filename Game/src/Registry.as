@@ -33,7 +33,6 @@ package
     public static const LOSE:uint = 3;
     public static function endScene(outcome:uint): void
     {
-      FlxG.log("Hello");
       switch (outcome) {
         case TALK:
           barScene = combatToBarTransArray[gameScene].talk;
@@ -48,8 +47,7 @@ package
           barScene = combatToBarTransArray[gameScene].lose;
           break;
       }
-      FlxG.log(barScene);      
-      FlxG.switchState(new BarState());
+      FlxG.fade(0xFF000000, 1, function():void {FlxG.switchState(new BarState());});
     }
 
     /*
@@ -114,6 +112,7 @@ package
                      SP_GEN)
       ),
       new Array( // Scene 4 - WALK TEST
+        new Dialogue("Huh.", SP_BART),
         new Dialogue("So you just walked away?", SP_BART),
         new DrinkSet(
          new Drink("Whiskey, Neat", "Whiskey in highball", 0xFFB46A2F, -0.1),

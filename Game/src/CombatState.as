@@ -32,7 +32,7 @@ package
     override public function create(): void
     {
       FlxG.debug = true;
-			FlxG.visualDebug = true;
+      FlxG.visualDebug = true;
       
       _canEscape = true;
       

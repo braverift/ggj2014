@@ -37,6 +37,8 @@ package
     private static var drinkBarSprite:FlxSprite;
     private static var drinkBackSprite:FlxSprite;
 
+    private static var fadingIn:Boolean;
+
     public function BarState(hd:Boolean = false, dc:uint = 0):void
     {
       hasDrink = hd;
@@ -44,7 +46,8 @@ package
     }
 
     override public function create():void
-    {      
+    {     
+      FlxG.visualDebug = false;
       FlxG.watch(Registry, "intensity");
       add(new FlxSprite(0, 0, background));
     
@@ -71,17 +74,26 @@ package
 
       sceneArray = Registry.barScenes[Registry.barScene];
       diagTime = 0;
+
+      fadingIn = true;
+      FlxG.flash(0xFF000000, 2, function():void {fadingIn=false;});
     }
     
     override public function update():void
     {
       // Dialogue
-      diagTime += FlxG.elapsed;
-      var charsToShow:Number = diagTime / TIME_PER_CHAR;
       var curDiag:Dialogue = sceneArray[sceneIdx];
-      diagBox.text = curDiag.text.substr(0, charsToShow);
-      diagBox.color = curDiag.color;
-      diagBox.shadow = Utility.darkerize(curDiag.color)
+
+      if (fadingIn) {
+        diagBackSprite.visible = false;
+      } else {
+        diagTime += FlxG.elapsed;
+        var charsToShow:Number = diagTime / TIME_PER_CHAR;
+        diagBackSprite.visible = true;
+        diagBox.text = curDiag.text.substr(0, charsToShow);
+        diagBox.color = curDiag.color;
+        diagBox.shadow = Utility.darkerize(curDiag.color);
+      }
 
       // Drink
       if (hasDrink) {
