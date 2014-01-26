@@ -81,13 +81,9 @@ package
     public static const SP_GEN:uint = 0xFFCCCCCC;     // Generic character's speech color
     public static var barScenes:Array = new Array(
       new Array( // Scene 0 - Intro
-        new Dialogue("I am the main character. I talk like this. " +
-                     "Sometimes I talk so much it wraps around the screen. " +
-                     "But I never speak more than three lines at once."),
-        new Dialogue("And now the bartender talks.", SP_BART),
-        new Dialogue("And now the Other talks.", SP_OTHER),
-        new Dialogue("And now Bro talks.", SP_BRO),
-        new Dialogue("And now a generic NPC talks.", SP_GEN),
+        new Dialogue("Hey.                 "),
+        new Dialogue("Hey.                 ", SP_BART),
+        new Dialogue("What'll it be?       ", SP_BART),
         new DrinkSet(
          new Drink("Scotch on the Rocks", "Cool and classic", 0xFFBB7136, -0.25),
          new Drink("Tom Collins", "Gin, lemon juice, simple syrup, soda", 0xFFDDEEDD, 0.0),
@@ -95,13 +91,12 @@ package
         )
       ),
       new Array( // Scene 0a
-        new Dialogue("Sure thing. Here you go.", SP_BART),
+        new Dialogue("Sure thing.", SP_BART),
         new Dialogue("(Hold Z to drink your drink.)" +
                      "                             ", SP_GEN),
-        new Dialogue("Rough day?", SP_BART),
-        new Dialogue("This is a bunch of idle chatter that will take a while " +
-                     "to finish. Use this time to test out drinking your drink.",
-                     SP_GEN)
+        new Dialogue("Something on your mind?", SP_BART),
+        new Dialogue("...       "),
+        new Dialogue("I was at a party.")
       ),
       new Array( // Scene 0b
         new Dialogue("Sure thing. Here you go.", SP_BART),

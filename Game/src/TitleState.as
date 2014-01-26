@@ -5,7 +5,9 @@ package
   import org.flixel.FlxText;
   
   public class TitleState extends FlxState
-  {  
+  { 
+    private static var fading:Boolean;
+
     public function TitleState(): void
     {
       var txt:FlxText
@@ -34,16 +36,21 @@ package
     override public function update():void
     {
       super.update();
-      
-      if (FlxG.keys.SPACE)
-      {
-        Registry.initialize();
-        FlxG.switchState(new BarState());
-      }
-      else if (FlxG.keys.ENTER)
-      {
-        Registry.initialize();
-        FlxG.switchState(new CombatState());
+     
+      if (!fading) {
+        if (FlxG.keys.SPACE)
+        {
+          Registry.initialize();
+          fading = true;
+          FlxG.fade(0xFF000000, 1, function():void {
+            FlxG.switchState(new BarState());
+          });
+        }
+        else if (FlxG.keys.ENTER)
+        {
+          Registry.initialize();
+          FlxG.switchState(new CombatState());
+        }
       }
     }
   }

@@ -27,6 +27,8 @@ package
     private static var nameBox:FlxText;
     private static var descBox:FlxText;
 
+    private static var fading:Boolean;
+
     public function DrinkSelectState(d:DrinkSet)
     {
       drinks = d;
@@ -62,6 +64,9 @@ package
       descBox.shadow = Utility.darkerize(DESC_COLOR);
       descBox.size = 16;
       add(descBox);
+
+      fading = true;
+      FlxG.flash(0xFF000000, 0.5, function():void {fading=false;});
     }
     
     override public function update():void
@@ -70,14 +75,19 @@ package
       highlightSprite.x = DRINK_BUFFER*(curDrink+1) + DRINK_SIZE*curDrink - HIGHLIGHT_WIDTH;
       highlightSprite.y = DRINK_TOP - HIGHLIGHT_WIDTH;
 
-      if (FlxG.keys.justPressed("RIGHT")) {
-        curDrink = (curDrink+1) % drinkSprites.length;
-      } else if (FlxG.keys.justPressed("LEFT")) {
-        curDrink = (curDrink-1+drinkSprites.length) % drinkSprites.length;
-      } else if (FlxG.keys.justPressed("X")) {
-        Registry.barScene += curDrink+1;
-        Registry.mood += drinks.drinks[curDrink].mood;
-        FlxG.switchState(new BarState(true, drinks.drinks[curDrink].color));
+      if (!fading) {
+        if (FlxG.keys.justPressed("RIGHT")) {
+          curDrink = (curDrink+1) % drinkSprites.length;
+        } else if (FlxG.keys.justPressed("LEFT")) {
+          curDrink = (curDrink-1+drinkSprites.length) % drinkSprites.length;
+        } else if (FlxG.keys.justPressed("X")) {
+          Registry.barScene += curDrink+1;
+          Registry.mood += drinks.drinks[curDrink].mood;
+          fading = true;
+          FlxG.fade(0xFF000000, 0.5, function():void {
+            FlxG.switchState(new BarState(true, drinks.drinks[curDrink].color));
+          });
+        }
       }
 
       var drink:Drink = drinks.drinks[curDrink];
