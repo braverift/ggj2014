@@ -210,8 +210,22 @@ package
       {
         var info:CombatScene = new CombatScene(CombatScene.BG_SKYSCRAPER, 30, 50);
         info.addEnemy(EnemyInfo.NORMAL, 100, 60, 0, new Array(
+          new Array(
           new Dialogue("Have you seen Logan?", SP_PLAYER),
-          new Dialogue("Who?", SP_GEN)));
+          new Dialogue("Who?", SP_GEN))));
+        info.addEnemy(EnemyInfo.NORMAL, 130, 20, 0, new Array(
+          new Array(
+          new Dialogue("Is Logan here?", SP_PLAYER),
+          new Dialogue("Logan? Never met him.", SP_GEN))));
+        info.addEnemy(EnemyInfo.NORMAL, 180, 25, 0, new Array(
+          new Array(
+          new Dialogue("No, Logan's not here.", SP_GEN),
+          new Dialogue("But I didn't ask you yet.", SP_PLAYER),
+          new Dialogue("Well, then ask me again.", SP_GEN)),
+          new Array(
+          new Dialogue("...have you seen Logan?", SP_PLAYER),
+          new Dialogue("Logan? I've never even heard that name before!", SP_GEN))));
+
         return info;
       }
       else

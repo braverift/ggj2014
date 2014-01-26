@@ -176,7 +176,7 @@ package
     
     public function addDialogue(dialogue:Array): void
     {
-      _dialogue.push(dialogue);
+      _dialogue = dialogue;
     }    
     
     public function getDialogue(): Array

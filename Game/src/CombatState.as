@@ -9,6 +9,9 @@ package
   {
     [Embed(source = "../data/art/bg_bar.png" )] private var bgBar:Class;
     [Embed(source = "../data/art/bg_skyscraper.png" )] private var bgSkyscraper:Class;
+    [Embed(source = "../data/art/bg_cave.png" )] private var bgCave:Class;
+    [Embed(source = "../data/art/bg_train.png" )] private var bgTrain:Class;
+    [Embed(source = "../data/art/bg_park.png" )] private var bgPark:Class;
 
     private var _player:Player;
     private var _playerAttackGroup:FlxGroup;
@@ -47,7 +50,19 @@ package
       else if (scene._background == CombatScene.BG_BAR)
       {
         add(new FlxSprite(0, 0, bgBar));
+      }
+      else if (scene._background == CombatScene.BG_CAVE)
+      {
+        add(new FlxSprite(0, 0, bgCave));
+      }
+      else if (scene._background == CombatScene.BG_TRAIN)
+      {
+        add(new FlxSprite(0, 0, bgTrain));
       }      
+      else if (scene._background == CombatScene.BG_PARK)
+      {
+        add(new FlxSprite(0, 0, bgPark));
+      }
       else
       {
         add(new FlxSprite(0, 0, bgBar));
