@@ -81,9 +81,9 @@ package
       for each (var enInfo:EnemyInfo in scene._enemies)
       {
         var en:Enemy;
-        if (enInfo.type == EnemyInfo.OTHER)
+        if (enInfo.type == EnemyInfo.WEAK)
         {
-          
+          en = new EnemyWeak(enInfo.x, enInfo.y + 140, _enemyAttackGroup, _downedEnemyGroup);
         }
         else
         {

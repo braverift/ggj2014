@@ -9,6 +9,7 @@ package
     public static const NORMAL:uint = 0;
     public static const OTHER:uint = 1;
     public static const BRO:uint = 2;
+    public static const WEAK:uint = 3;
     
     public var type:uint;
     public var x:Number;

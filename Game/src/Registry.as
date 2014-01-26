@@ -212,16 +212,16 @@ package
     {
       if (scene == 0)
       {
-        var info:CombatScene = new CombatScene(CombatScene.BG_SKYSCRAPER, 30, 50);
-        info.addEnemy(EnemyInfo.NORMAL, 100, 60, 0, new Array(
+        var info:CombatScene = new CombatScene(CombatScene.BG_PARK, 30, 50);
+        info.addEnemy(EnemyInfo.WEAK, 100, 60, 0, new Array(
           new Array(
           new Dialogue("Have you seen Logan?", SP_PLAYER),
           new Dialogue("Who?", SP_GEN))));
-        info.addEnemy(EnemyInfo.NORMAL, 130, 20, 0, new Array(
+        info.addEnemy(EnemyInfo.WEAK, 130, 20, 0, new Array(
           new Array(
           new Dialogue("Is Logan here?", SP_PLAYER),
           new Dialogue("Logan? Never met him.", SP_GEN))));
-        info.addEnemy(EnemyInfo.NORMAL, 180, 25, 0, new Array(
+        info.addEnemy(EnemyInfo.WEAK, 180, 25, 0, new Array(
           new Array(
           new Dialogue("No, Logan's not here.", SP_GEN),
           new Dialogue("But I didn't ask you yet.", SP_PLAYER),
@@ -229,7 +229,7 @@ package
           new Array(
           new Dialogue("...have you seen Logan?", SP_PLAYER),
           new Dialogue("Logan? I've never even heard that name before!", SP_GEN))));
-        info.addEnemy(EnemyInfo.NORMAL, 210, 80, 0, new Array(
+        info.addEnemy(EnemyInfo.WEAK, 210, 80, 0, new Array(
           new Array(
           new Dialogue("Have you seen my brother?", SP_PLAYER),
           new Dialogue("Hey man, I ain't Logan's keeper.", SP_GEN))));

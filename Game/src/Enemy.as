@@ -12,12 +12,13 @@ package
     public const FRAME_WIDTH:int = 64;
     public const FRAME_HEIGHT:int = 80;
     
-    private const MOVE_SPEED_X:Number = 120;
-    private const MOVE_SPEED_Y:Number = 40;
-    private const ATTACK_TIME:Number = 0.5;
+    protected var MOVE_SPEED_X:Number = 120;
+    protected var MOVE_SPEED_Y:Number = 40;
+    protected var ATTACK_TIME:Number = 0.5;
+    protected var MAX_HP:Number = 5;
+
     private const RECOIL_TIME:Number = 0.2;
     private const RECOIL_SPEED:Number = 200;
-    private const MAX_HP:Number = 5;
     
     private const FRIENDLY:uint = 0;
     private const ANGRY:uint = 1;
@@ -31,7 +32,7 @@ package
     private var _state:uint;
     private var _target:FlxSprite;
     private var _dialogue:Array;
-    private var _HP:Number;
+    protected var _HP:Number;
     private var _frozen:Boolean;
 
     public function Enemy(X:Number, Y:Number, attackGroup:FlxGroup, downedGroup:FlxGroup) 
