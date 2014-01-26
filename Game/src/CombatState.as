@@ -14,6 +14,7 @@ package
     [Embed(source = "../data/art/bg_park.png" )] private var bgPark:Class;
 
     private var _player:Player;
+    private var _playerAndEnemies:FlxGroup;
     private var _playerAttackGroup:FlxGroup;
     private var _playerSpeechGroup:FlxGroup;
     private var _enemies:FlxGroup;
@@ -69,10 +70,11 @@ package
         add(new FlxSprite(0, 0, bgBar));
       }
 
-            
+      _playerAndEnemies = new FlxGroup;
       _playerAttackGroup = new FlxGroup;
       _playerSpeechGroup = new FlxGroup;
       _player = new Player(scene._x, scene._y + 140, _playerAttackGroup, _playerSpeechGroup, onShoot);
+      _playerAndEnemies.add(_player);
       
       _enemies = new FlxGroup;
       _enemyAttackGroup = new FlxGroup;
@@ -91,6 +93,7 @@ package
         }
         en.addDialogue(enInfo.dialogue);
         _enemies.add(en);
+        _playerAndEnemies.add(en);
       }
 
       _dialogueText = new FlxText(20, 16, 280);
@@ -103,9 +106,8 @@ package
       _controlsText = new FlxText(20, FlxG.height - 20, 280, controlsString());
       
       add(_downedEnemyGroup);
-      add(_enemies);
+      add(_playerAndEnemies);
       add(_enemyAttackGroup);
-      add(_player);
       add(_playerAttackGroup);
       add(_diagBackSprite);
       add(_dialogueText);
@@ -115,7 +117,9 @@ package
     override public function update():void
     {
       super.update();
-            
+      
+      _playerAndEnemies.members.sort(heightSort);
+      
       FlxG.overlap(_enemies, _playerAttackGroup, punchEnemy);
       FlxG.overlap(_player, _enemyAttackGroup, punchPlayer);
       FlxG.overlap(_enemies, _playerSpeechGroup, talkToEnemy);
@@ -272,6 +276,25 @@ package
       }
       
       return "[Z] Talk   [X] Punch";
+    }
+    
+    // Lifted from http://forums.flixel.org/index.php?topic=363.0
+    public function heightSort(a_thing:FlxSprite, b_thing:FlxSprite):Number
+    {
+      var a_height:Number = a_thing.y;
+      var b_height:Number = b_thing.y;
+      if (a_height > b_height) 
+      {
+        return 1;
+      } 
+      else if (a_height < b_height) 
+      {
+        return -1;
+      } 
+      else 
+      {
+        return 0;
+      }
     }
   }
 
