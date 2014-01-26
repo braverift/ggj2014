@@ -19,10 +19,11 @@ package
     private var _dialogueText:FlxText;
     private var _diagTime:Number;
     private var _currentDialogueString:String;
+    private var _canEscape:Boolean;
     
     public static const TIME_PER_CHAR:Number = 0.08; // Time per character of text in seconds
     public static const TIME_AT_END:Number = 1.0; // Length of pause after each line in seconds
-
+    private const HORIZON:Number = 100;
     public function CombatState() 
     {
       
@@ -32,6 +33,8 @@ package
     {
       FlxG.debug = true;
 			FlxG.visualDebug = true;
+      
+      _canEscape = true;
       
       _playerAttackGroup = new FlxGroup;
       _playerSpeechGroup = new FlxGroup;
@@ -73,6 +76,7 @@ package
       FlxG.overlap(_enemies, _playerSpeechGroup, talkToEnemy);
       
       handleDialogue();
+      boundsCheck();
     }
     
     public function punchEnemy(enemy:Enemy, punch:AtkPunch): void
@@ -80,6 +84,7 @@ package
       enemy.punched(punch.facing);
       punch.kill();
       
+      _canEscape = false;
       for each (var en:Enemy in _enemies.members)
       {
         en.aggro(_player);
@@ -103,7 +108,10 @@ package
         _queuedDialogue.push(line);
       }
       
-      freezeAll(true);
+      if (_queuedDialogue.length > 0)
+      {
+        freezeAll(true);
+      }
     } 
     
     public function freezeAll(frozen:Boolean): void
@@ -136,6 +144,36 @@ package
           {
             freezeAll(false);
           }
+        }
+      }
+    }
+    
+    private function boundsCheck(): void
+    {
+      if (_player.y < HORIZON)
+      {
+        _player.y = HORIZON;
+      }
+      if (_canEscape)
+      {
+        if (_player.y > FlxG.height + 42 || _player.x < -32 || _player.x > FlxG.width)
+        {
+          Registry.EndScene(Registry.WALK);
+        }
+      }
+      else
+      {
+        if (_player.y > FlxG.height - 16)
+        {
+          _player.y = FlxG.height - 16;
+        }
+        if (_player.x < 0)
+        {
+          _player.x = 0;
+        }
+        else if (_player.x > FlxG.width - 32)
+        {
+          _player.x = FlxG.width - 32;
         }
       }
     }
