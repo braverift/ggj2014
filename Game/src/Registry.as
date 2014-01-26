@@ -37,16 +37,19 @@ package
       bullets = 0;
 
       outcomes = new Array();
+
+      // DEBUG FOR TESTING
+      barScene = 28;
     }
     
     public static function isIntense(): Boolean
     {
-      return mood <= -.25;
+      return mood <= -.1;
     }
 
     public static function isWhimisical(): Boolean
     {
-      return mood >= .25;
+      return mood >= .1;
     }
     /*
      * COMBAT TO BAR TRANSITIONS
@@ -267,7 +270,7 @@ package
       new Array( // Scene 20 - IN WHICH THE BARTENDER HAS HAD ENOUGH
         new Dialogue("Yeah, there's no more game after this point. Have another drink though.", SP_BART),
         new DrinkSet(
-         new Drink("Absinthe", "No ambiguity", 0xFF3DFB07, -0.25),
+         new Drink("Absinthe", "Out of this world", 0xFF3DFB07, -0.25),
          new Drink("Gin and Tonic", "Gin, tonic water, twist of lime", 0xFFFFDDEEEE, 0.0),
          new Drink("Bellini", "Sparkling wine, peach puree", 0xFFFF9955, 0.25)
         )
@@ -352,6 +355,16 @@ package
     );
   
     /* TEMP DRINKSET STORAGE
+         
+         new Drink("Scotch on the Rocks", "Cool and classic", 0xFFBB7136, -0.25),
+         new Drink("Tom Collins", "Gin, lemon juice, simple syrup, soda", 0xFFDDEEDD, 0.0),
+         new Drink("Cosmopolitan", "Citron, Cointreau, lime juice, cranberry juice", 0xFFEE0053, 0.25)
+        
+        new DrinkSet(
+         new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.25),
+         new Drink("Bloody Mary", "Vodka, tomato juice, Worcestershire, Tabasco", 0xFFBB0000, 0.0),
+         new Drink("Margarita", "Tequila, Cointreau, lime juice, blended", 0xFF96E643, 0.25)
+        )
 
         new DrinkSet(
          new Drink("Everclear", "No ambiguity", 0x77FFFFFF, -0.25),
@@ -453,15 +466,52 @@ package
         if (variant == 0) // Park
         {
           info = new CombatScene(CombatScene.BG_PARK, 0, 80);
-          info.addEnemy(EnemyInfo.NORMAL, 260, 50, 0, new Array( new Array(
-          new Dialogue("What the hell are you doing here?", Registry.SP_OTHER),
-          new Dialogue("I could ask you the same question.", Registry.SP_PLAYER)
+          
+          info.addEnemy(EnemyInfo.NORMAL, 120, 50, 0, new Array( new Array(
+          new Dialogue("Tell me what the fuck is going on.", SP_PLAYER, -1, -0.1),
+          new Dialogue("Well I'm here. What's going on?", SP_PLAYER, -0.1, 0.1),
+          new Dialogue("Hey there. What's happening?", SP_PLAYER, 0.1, 1),
+          new Dialogue("You should talk to Logan.", SP_OTHER)
           ), new Array(
-          new Dialogue("Get the hell out or I'm calling the cops.", Registry.SP_PLAYER),
-          new Dialogue("Relax, I was just on my way out. I've already finished going through Logan's things.", Registry.SP_OTHER)
-          ), new Array(
-          new Dialogue("What did you find?", Registry.SP_PLAYER),
-          new Dialogue("He bought a train ticket. Looks like my Logan decided to skip town.", Registry.SP_OTHER, -1, 1, true))));
+          new Dialogue("I'm talking to YOU.", SP_PLAYER, -1, -0.1),
+          new Dialogue("And you'd better start talking too.", SP_PLAYER, -1, -0.1),
+          new Dialogue("I don't have anything to say to you.", SP_OTHER, -1, -0.1)
+          )));
+
+          info.addEnemy(EnemyInfo.NORMAL, 180, 50, 0, new Array( new Array(
+          new Dialogue("Logan! Where have you been?", SP_PLAYER, -1, -0.1),
+          new Dialogue("...       ", SP_BRO, -1, -0.1),
+          new Dialogue("Logan!", SP_PLAYER, -1, -0.1),
+          new Dialogue("I'm in a lot of trouble, sis.", SP_BRO, -1, -0.1),
+          new Dialogue("No shit. Let's get out of here and figure this out.", SP_PLAYER, -1, -0.1, true),
+          
+          new Dialogue("Logan!", SP_PLAYER, -0.1, 0.1),
+          new Dialogue("Hey, sis.", SP_BRO, -0.1, 0.1),
+          new Dialogue("This is my partner, Dan. We've been working a case together.", SP_BRO, -0.1, 0.1),
+          new Dialogue("Sorry for all the trouble. I'll explain at the bar.", SP_BRO, -0.1, 0.1),
+          new Dialogue("I'm just glad you're safe.", SP_PLAYER, -0.1, 0.1),
+          new Dialogue("But you're definitely buying me a drink.", SP_PLAYER, -0.1, 0.1),
+          new Dialogue("A lot of drinks.", SP_PLAYER, -0.1, 0.1, true),
+          
+          new Dialogue("Hey, Logan!", SP_PLAYER, 0.1, 1),
+          new Dialogue("Hey, sis.", SP_BRO, 0.1, 1),
+          new Dialogue("There's somebody I want you to meet.", SP_BRO, 0.1, 1),
+          new Dialogue("This is Dan. He's my glover.", SP_BRO, 0.1, 1),
+          new Dialogue("Glover?", SP_PLAYER, 0.1, 1),
+          new Dialogue("Yeah, you know. Gay lover?", SP_BRO, 0.1, 1),
+          new Dialogue("*sigh*", SP_PLAYER, 0.1, 1),
+          new Dialogue("You're impossible, Logan.", SP_PLAYER, 0.1, 1, true)
+          )));
+
+          return info;
+        } else if (variant == 1) { // Train
+          info = new CombatScene(CombatScene.BG_TRAIN, 0, 80);
+          return info;
+        } else if (variant == 2) { // Skyscraper
+          info = new CombatScene(CombatScene.BG_SKYSCRAPER, 0, 80);
+          return info;
+        } else if (variant == 3) { // Cave
+          info = new CombatScene(CombatScene.BG_CAVE, 0, 80);
           return info;
         }
       }

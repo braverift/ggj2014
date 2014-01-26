@@ -72,7 +72,7 @@ package
       }
       else if (scene._background == CombatScene.BG_TRAIN)
       {
-        bg = Registry.isIntense() ? bgTrainIntense : (Registry.isWhimisical() ? bgCaveWhimsical : bgCaveNoir);
+        bg = Registry.isIntense() ? bgTrainIntense : (Registry.isWhimisical() ? bgTrainWhimsical : bgTrainNoir);
       }      
       else if (scene._background == CombatScene.BG_PARK)
       {
