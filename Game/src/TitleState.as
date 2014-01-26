@@ -48,11 +48,6 @@ package
             FlxG.switchState(new BarState());
           });
         }
-        else if (FlxG.keys.ENTER)
-        {
-          Registry.initialize();
-          FlxG.switchState(new CombatState());
-        }
       }
     }
   }
