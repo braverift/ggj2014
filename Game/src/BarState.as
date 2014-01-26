@@ -7,7 +7,7 @@ package
     [Embed(source = "../data/art/bg_bar.png" )] private var background:Class;
     
     private static const TIME_PER_CHAR:Number = 0.08; // Time per character of text in seconds
-    private static const TIME_AT_END:Number = 1.0; // Length of pause after each line in seconds
+    private static const TIME_AT_END:Number = 2.0; // Length of pause after each line in seconds
     private static const DIAG_X:Number = 40;
     private static const DIAG_Y:Number = 186;
     private static const DIAG_W:Number = 260;
@@ -38,7 +38,7 @@ package
     private static var drinkBarSprite:FlxSprite;
     private static var drinkBackSprite:FlxSprite;
 
-    private static var fadingIn:Boolean;
+    private static var fading:Boolean;
 
     private static const PLAYER_X:Number = 118;
     private static const PLAYER_Y:Number = 104;
@@ -86,7 +86,8 @@ package
         var darkColor:uint = Utility.darkerize(drinkColor);
         var darkerColor:uint = Utility.darkerize(darkColor);
         drinkLevelSprite = new FlxSprite(DRINK_X, DRINK_Y);
-        drinkLevelSprite.makeGraphic(DRINK_W, 1, drinkColor);
+        drinkLevelSprite.makeGraphic(DRINK_W, DRINK_H, drinkColor);
+        drinkLevelSprite.visible = false;
         drinkBackSprite = new FlxSprite(DRINK_X, DRINK_Y);
         drinkBackSprite.makeGraphic(DRINK_W, DRINK_H, darkerColor);
         drinkBarSprite = new FlxSprite(DRINK_X-DRINK_B, DRINK_Y-DRINK_B);
@@ -111,11 +112,11 @@ package
       sceneArray = Registry.barScenes[Registry.barScene];
       diagTime = 0;
 
-      fadingIn = true;
+      fading = true;
       if (hasDrink) {
-        FlxG.flash(0xFF000000, 1, function():void {fadingIn=false;});
+        FlxG.flash(0xFF000000, 1, function():void {fading=false;});
       } else {
-        FlxG.flash(0xFF000000, 2, function():void {fadingIn=false;});
+        FlxG.flash(0xFF000000, 2, function():void {fading=false;});
       }
     }
     
@@ -125,8 +126,9 @@ package
       var curDiag:Dialogue = null;
       if (sceneArray[sceneIdx] is Dialogue) {
         curDiag = sceneArray[sceneIdx];
-        if (fadingIn) {
+        if (fading) {
           diagBackSprite.visible = false;
+          diagBox.text = "";
         } else {
           diagTime += FlxG.elapsed;
           var charsToShow:Number = diagTime / TIME_PER_CHAR;
@@ -138,7 +140,7 @@ package
       }
 
       // Drink
-      if (hasDrink && !fadingIn) {
+      if (hasDrink && !fading) {
         if (drinkRefilling) {
           drinkLevel += FlxG.elapsed * DRINK_UP;
           if(drinkLevel >= 1.0) {
@@ -160,6 +162,7 @@ package
         var size:int = Math.max(1, DRINK_H-consumed);
         drinkLevelSprite.y = DRINK_Y + consumed;
         drinkLevelSprite.makeGraphic(DRINK_W, size, drinkColor);
+        drinkLevelSprite.visible = true;
       }
 
       super.update();
@@ -167,7 +170,7 @@ package
       if (FlxG.keys.justPressed("X")) {
         diagTime = Math.max(diagTime, curDiag.text.length*TIME_PER_CHAR);
       }
-      if (FlxG.keys.Z && hasDrink && !drinkRefilling) {
+      if (FlxG.keys.Z && hasDrink && !drinkRefilling && !fading) {
         drinkLevel -= FlxG.elapsed * DRINK_DOWN;
         playerSprite.play("drinking");
       } else {
@@ -181,7 +184,13 @@ package
         diagTime = 0;
         if (sceneArray[sceneIdx] is DrinkSet) {
           FlxG.fade(0xFF000000, 0.5, function():void {
+            FlxG.log(sceneIdx);
             FlxG.switchState(new DrinkSelectState(sceneArray[sceneIdx])); 
+          });
+        } else if (sceneArray[sceneIdx] == null) { // End of scene
+          fading = true;
+          FlxG.fade(0xFF000000, 2.0, function():void {
+            FlxG.switchState(new CombatState()); 
           });
         }
       }

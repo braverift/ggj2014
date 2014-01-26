@@ -32,7 +32,7 @@ package
      * As per the bar dialogue format, these will only ever be multiples of 4.
      */
     public static const combatToBarTransArray:Array = new Array(
-      new CombatToBarTransition(16, 4, 8, 12) // Scene 0 - Party
+      new CombatToBarTransition(4, 8, 12, 16) // Scene 0 - Party
     );
     
     public static const TALK:uint = 0;
@@ -81,9 +81,9 @@ package
     public static const SP_GEN:uint = 0xFFCCCCCC;     // Generic character's speech color
     public static var barScenes:Array = new Array(
       new Array( // Scene 0 - Intro
-        new Dialogue("Hey.                 "),
-        new Dialogue("Hey.                 ", SP_BART),
-        new Dialogue("What'll it be?       ", SP_BART),
+        new Dialogue("Hey.          "),
+        new Dialogue("Hey.          ", SP_BART),
+        new Dialogue("What'll it be?", SP_BART),
         new DrinkSet(
          new Drink("Scotch on the Rocks", "Cool and classic", 0xFFBB7136, -0.25),
          new Drink("Tom Collins", "Gin, lemon juice, simple syrup, soda", 0xFFDDEEDD, 0.0),
@@ -96,27 +96,31 @@ package
                      "                             ", SP_GEN),
         new Dialogue("Something on your mind?", SP_BART),
         new Dialogue("...       "),
+        new Dialogue("Yeah.     "),
         new Dialogue("I was at a party.")
       ),
       new Array( // Scene 0b
-        new Dialogue("Sure thing. Here you go.", SP_BART),
+        new Dialogue("Sure thing.", SP_BART),
         new Dialogue("(Hold Z to drink your drink.)" +
                      "                             ", SP_GEN),
-        new Dialogue("This is a bunch of idle chatter that will take a while " +
-                     "to finish. Use this time to test out drinking your drink.",
-                     SP_GEN)
+        new Dialogue("Here on your own?", SP_BART),
+        new Dialogue("Well.     "),
+        new Dialogue("I was at this party."),
+        new Dialogue("It was a friend of a friend's, you know that kind of thing."),
+        new Dialogue("Not really my scene, but I was going to meet my brother there."),
+        new Dialogue("I hadn't seen him for a while.")
       ),
       new Array( // Scene 0c
-        new Dialogue("Sure thing. Here you go.", SP_BART),
+        new Dialogue("Sure thing.", SP_BART),
         new Dialogue("(Hold Z to drink your drink.)" +
                      "                             ", SP_GEN),
-        new Dialogue("This is a bunch of idle chatter that will take a while " +
-                     "to finish. Use this time to test out drinking your drink.",
-                     SP_GEN)
+        new Dialogue("Wanna hear a crazy story?"),
+        new Dialogue("Sure.     ", SP_BART),
+        new Dialogue("I was at a party with a bunch of friends."),
+        new Dialogue("My brother was going to meet me there. I was waiting for him to show up.")
       ),
-      new Array( // Scene 4 - WALK TEST
-        new Dialogue("Huh.", SP_BART),
-        new Dialogue("So you just walked away?", SP_BART),
+      new Array( // Scene 4 - Talked to OTHER at the party
+        new Dialogue("Did you recognize him?", SP_BART),
         new DrinkSet(
          new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.25),
          new Drink("Bloody Mary", "Vodka, tomato juice, Worcestershire, Tabasco", 0xFFBB0000, 0.0),
