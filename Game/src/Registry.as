@@ -334,7 +334,7 @@ package
         new Dialogue("So I figured I'd go have a stroll in the park."),
         new Dialogue("I mean, it was such a nice day and all."),
         new Dialogue("You wouldn't believe what happens next."),
-        new Dialogue("Now I'm interested...", SP_BART),
+        new Dialogue("Now I'm interested...", SP_BART)
       ),
       new Array( // Scene 28 - Before the Train
         new Dialogue("I wasn't expecting that.", SP_BART),
