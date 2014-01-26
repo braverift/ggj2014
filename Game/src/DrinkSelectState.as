@@ -13,15 +13,11 @@ package
     private static const DESC_TOP:Number = 180;
     private static const DESC_COLOR:uint = 0xFFEEEEEE;
 
-    private static var drinkSprites:Array = new Array(
-      new FlxSprite(DRINK_BUFFER, DRINK_TOP),
-      new FlxSprite(DRINK_BUFFER*2 + DRINK_SIZE, DRINK_TOP),
-      new FlxSprite(DRINK_BUFFER*3 + DRINK_SIZE*2, DRINK_TOP)
-    );
+    private static var drinkSprites:Array;
 
     private static var drinks:DrinkSet;
-    private static var highlightSprite:FlxSprite = new FlxSprite(); 
-    private static var curDrink:Number = 0;
+    private static var highlightSprite:FlxSprite; 
+    private static var curDrink:Number;
 
     private static var titleBox:FlxText;
     private static var nameBox:FlxText;
@@ -45,9 +41,15 @@ package
       add(titleBox);
 
       var highlightSize:Number = DRINK_SIZE + 2*HIGHLIGHT_WIDTH;
+      highlightSprite = new FlxSprite();
       highlightSprite.makeGraphic(highlightSize, highlightSize);
       add(highlightSprite);
 
+      drinkSprites = new Array(
+        new FlxSprite(DRINK_BUFFER, DRINK_TOP),
+        new FlxSprite(DRINK_BUFFER*2 + DRINK_SIZE, DRINK_TOP),
+        new FlxSprite(DRINK_BUFFER*3 + DRINK_SIZE*2, DRINK_TOP)
+      );
       for(var i:Number=0;i < drinkSprites.length;i++) {
         drinkSprites[i].loadGraphic(martini, false, false, DRINK_SIZE, DRINK_SIZE);
         add(drinkSprites[i]);
@@ -65,6 +67,7 @@ package
       descBox.size = 16;
       add(descBox);
 
+      curDrink = 0;
       fading = true;
       FlxG.flash(0xFF000000, 0.5, function():void {fading=false;});
     }

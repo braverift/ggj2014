@@ -247,36 +247,27 @@ package
     
     public function controlsString(): String
     {
-      if (Registry.hasGun)
+      if (Registry.hasGun && Registry.bullets > 0)
       {
         var controls:String;
-        if (Registry.bullets > 0)
+        controls = "[Z] Use Words   [X] Use Violence (";
+        for (var i:Number = 0; i < 6; ++i)
         {
-          controls = "[Z] Talk   [X] Shoot (";
-          for (var i:Number = 0; i < 6; ++i)
+          if (i < Registry.bullets)
           {
-            if (i < Registry.bullets)
-            {
-              controls += "*";
-            }
-            else
-            {
-              controls += "-";
-            }
+            controls += "*";
           }
-          controls += ")"
+          else
+          {
+            controls += "-";
+          }
         }
-        else
-        {
-          controls = "[Z] Talk   [X] Pistol Whip";
-        }
+        controls += ")"
         
         return controls;
       }
-      else
-      {
-        return "[Z] Talk   [X] Punch";
-      }
+      
+      return "[Z] Use Words   [X] Use Violence";
     }
   }
 
