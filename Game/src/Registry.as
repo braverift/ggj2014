@@ -313,7 +313,7 @@ package
         new Dialogue("On the house.", SP_BART)
       ),
       new Array( // Scene 24 - Before the Park
-        new Dialogue("I GUESS YOU WENT TO THE PARK NEXT", SP_BART),
+        new Dialogue("Well, that certainly was strange.", SP_BART),
         new DrinkSet(
          new Drink("Everclear", "No ambiguity", 0xFFF7F7F7, -0.25),
          new Drink("Sidecar", "Cognac, Triple Sec, lemon juice", 0xFFFFAE19, 0.0),
@@ -321,16 +321,23 @@ package
         )
       ),
       new Array( // Scene 24a
-        new Dialogue("YUP")
+        new Dialogue("I went to the park to blow off some steam."),
+        new Dialogue("That's when I saw him. The jerk in blue."),
+        new Dialogue("And standing right next to him was...")
       ),
       new Array( // Scene 24b
-        new Dialogue("YUP")
+        new Dialogue("It took me a while, but I finally managed to track Logan down."),
+        new Dialogue("Someone saw him with the man in blue at the park."),
+        new Dialogue("I had to get there as fast as I could...")
       ),
       new Array( // Scene 24c
-        new Dialogue("YUP")
+        new Dialogue("So I figured I'd go have a stroll in the park."),
+        new Dialogue("I mean, it was such a nice day and all."),
+        new Dialogue("You wouldn't believe what happens next."),
+        new Dialogue("Now I'm interested...", SP_BART),
       ),
       new Array( // Scene 28 - Before the Train
-        new Dialogue("I GUESS YOU RODE A TRAIN NEXT", SP_BART),
+        new Dialogue("I wasn't expecting that.", SP_BART),
         new DrinkSet(
          new Drink("Everclear", "No ambiguity", 0xFFF7F7F7, -0.25),
          new Drink("Sidecar", "Cognac, Triple Sec, lemon juice", 0xFFFFAE19, 0.0),
@@ -338,16 +345,22 @@ package
         )
       ),
       new Array( // Scene 28a
-        new Dialogue("YUP")
+        new Dialogue("It just gets more fucked up from there."),
+        new Dialogue("I tracked the son of a bitch to the station."),
+        new Dialogue("I had to have closure.")
       ),
       new Array( // Scene 28b
-        new Dialogue("YUP")
+        new Dialogue("The train station was my next stop."),
+        new Dialogue("But I didn't find my brother there."),
+        new Dialogue("Just the man in blue....    ")
       ),
       new Array( // Scene 28c
-        new Dialogue("YUP")
+        new Dialogue("Yeah. Weird, right?"),
+        new Dialogue("So anyways, I decided to take the train to the bar."),
+        new Dialogue("That's when something happened that will really surprise you...")
       ),
       new Array( // Scene 32 - Before the Skyscraper
-        new Dialogue("I GUESS YOU SCALED A SKYSCRAPER NEXT", SP_BART),
+        new Dialogue("Sounds pretty rough.", SP_BART),
         new DrinkSet(
          new Drink("Everclear", "No ambiguity", 0xFFF7F7F7, -0.25),
          new Drink("Sidecar", "Cognac, Triple Sec, lemon juice", 0xFFFFAE19, 0.0),
@@ -355,16 +368,25 @@ package
         )
       ),
       new Array( // Scene 32a
-        new Dialogue("YUP")
+        new Dialogue("No kidding."),
+        new Dialogue("But at this point, I wasn't about to give up."),
+        new Dialogue("It took some time, but I finally tracked my brother down."),
+        new Dialogue("We met on the roof of the abandoned skyscraper downtown.")
       ),
       new Array( // Scene 32b
-        new Dialogue("YUP")
+        new Dialogue("I was beginning to fear the worst."),
+        new Dialogue("I wasn't sure I'd be able to save hime."),
+        new Dialogue("That's when I got a call."),
+        new Dialogue("An address. A meeting on a rooftop."),
+        new Dialogue("I had to go.")
       ),
       new Array( // Scene 32c
-        new Dialogue("YUP")
+        new Dialogue("Things get a little fuzzy around that point."),
+        new Dialogue("I eventually found myself checking his old office downtown."),
+        new Dialogue("No luck there either, so I went up to the roof to see the view...")
       ),
       new Array( // Scene 36 - Before the Cave
-        new Dialogue("I GUESS YOU EXPLORED A CAVE NEXT", SP_BART),
+        new Dialogue("That's pretty messed up.", SP_BART),
         new DrinkSet(
          new Drink("Everclear", "No ambiguity", 0xFFF7F7F7, -0.25),
          new Drink("Sidecar", "Cognac, Triple Sec, lemon juice", 0xFFFFAE19, 0.0),
@@ -372,13 +394,21 @@ package
         )
       ),
       new Array( // Scene 36a
-        new Dialogue("YUP")
+        new Dialogue("That wasn't the half of it."),
+        new Dialogue("I eventually tracked down the people who captured him."),
+        new Dialogue("I knew it was dangerous, but I had no choice.")
       ),
       new Array( // Scene 36b
-        new Dialogue("YUP")
+        new Dialogue("That's when I caught wind of a strange cult outside town."),
+        new Dialogue("It wasn't much to go on, but I had to have a look for myself."),
+        new Dialogue("What if my brother was there?"),
+        new Dialogue("What if he was already dead?"),
+        new Dialogue("I had to know...")
       ),
       new Array( // Scene 36c
-        new Dialogue("YUP")
+        new Dialogue("I dunno, it wasn't that bad."),
+        new Dialogue("But the next thing you know, I found myself in a cave!"),
+        new Dialogue("How weird is that?!")
       )
     );
   
