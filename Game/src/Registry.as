@@ -55,29 +55,29 @@ package
      
       FlxG.log(outcomes);
       if (outcomes.length == 1) {
-        if (outcomes[0] == TALK) barScene = 4;
-        if (outcomes[0] == WALK) barScene = 8;
-        if (outcomes[0] == WIN) barScene = 12;
-        if (outcomes[0] == LOSE) barScene = 16;
+        if (outcomes[0] == TALK) barScene = 4; // Warehouse A
+        if (outcomes[0] == WALK) barScene = 8; // Apartment A
+        if (outcomes[0] == WIN) barScene = 12; // Apartment B
+        if (outcomes[0] == LOSE) barScene = 16; // Warehouse B
       }
 
       if (outcomes.length == 2) {
-        if (outcomes[0] == TALK && outcomes[1] == TALK) barScene = 20;
-        if (outcomes[0] == TALK && outcomes[1] == WALK) barScene = 20;
-        if (outcomes[0] == TALK && outcomes[1] == WIN) barScene = 20;
-        if (outcomes[0] == TALK && outcomes[1] == LOSE) barScene = 20;
-        if (outcomes[0] == WALK && outcomes[1] == TALK) barScene = 20;
-        if (outcomes[0] == WALK && outcomes[1] == WALK) barScene = 20;
-        if (outcomes[0] == WALK && outcomes[1] == WIN) barScene = 20;
-        if (outcomes[0] == WALK && outcomes[1] == LOSE) barScene = 20;
-        if (outcomes[0] == WIN && outcomes[1] == TALK) barScene = 20;
-        if (outcomes[0] == WIN && outcomes[1] == WALK) barScene = 20;
-        if (outcomes[0] == WIN && outcomes[1] == WIN) barScene = 20;
-        if (outcomes[0] == WIN && outcomes[1] == LOSE) barScene = 20;
-        if (outcomes[0] == LOSE && outcomes[1] == TALK) barScene = 20;
-        if (outcomes[0] == LOSE && outcomes[1] == WALK) barScene = 20;
-        if (outcomes[0] == LOSE && outcomes[1] == WIN) barScene = 20;
-        if (outcomes[0] == LOSE && outcomes[1] == LOSE) barScene = 20;
+        if (outcomes[0] == TALK && outcomes[1] == TALK) barScene = 32;  // Skyscraper B
+        if (outcomes[0] == TALK && outcomes[1] == WALK) barScene = 24;  // Park B
+        if (outcomes[0] == TALK && outcomes[1] == WIN) barScene = 28;   // Train B
+        if (outcomes[0] == TALK && outcomes[1] == LOSE) barScene = 36;  // Cave B
+        if (outcomes[0] == WALK && outcomes[1] == TALK) barScene = 28;  // Train A
+        if (outcomes[0] == WALK && outcomes[1] == WALK) barScene = 24;  // Park A
+        if (outcomes[0] == WALK && outcomes[1] == WIN) barScene = 32;   // Skyscraper A
+        if (outcomes[0] == WALK && outcomes[1] == LOSE) barScene = 36;  // Cave A
+        if (outcomes[0] == WIN && outcomes[1] == TALK) barScene = 24;   // Park C
+        if (outcomes[0] == WIN && outcomes[1] == WALK) barScene = 28;   // Train C
+        if (outcomes[0] == WIN && outcomes[1] == WIN) barScene = 32;    // Skyscraper C
+        if (outcomes[0] == WIN && outcomes[1] == LOSE) barScene = 36;   // Cave C
+        if (outcomes[0] == LOSE && outcomes[1] == TALK) barScene = 24;  // Park D
+        if (outcomes[0] == LOSE && outcomes[1] == WALK) barScene = 36;  // Cave D
+        if (outcomes[0] == LOSE && outcomes[1] == WIN) barScene = 32;   // Skyscraper D
+        if (outcomes[0] == LOSE && outcomes[1] == LOSE) barScene = 28;  // Train D
       }
       
       fading = true;
@@ -99,7 +99,11 @@ package
       new Array(1, 1), // Apartment (Party WALK)
       new Array(1, 1), // Apartment (Party WIN)
       new Array(1, 0), // Warehouse (Party LOSE)
-      new Array(2, 0)  // ALL CONFRONTATIONS ARE THE SAME 'CAUSE I'M LAZY :)
+      new Array(9, 0), // DEAD FILLER STATE
+      new Array(2, 0), // Park
+      new Array(2, 1), // Train
+      new Array(2, 2), // Skyscraper
+      new Array(2, 3)  // Cave
     );
 
     public static function getNextCombatState():void {
