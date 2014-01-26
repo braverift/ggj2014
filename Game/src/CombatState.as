@@ -99,17 +99,20 @@ package
       for each (var enInfo:EnemyInfo in scene._enemies)
       {
         var en:Enemy;
-        if (enInfo.type == EnemyInfo.WEAK)
+        if (Registry.intensity >= enInfo.minIntensity)
         {
-          en = new EnemyWeak(enInfo.x, enInfo.y + 140, _enemyAttackGroup, _downedEnemyGroup);
+          if (enInfo.type == EnemyInfo.WEAK)
+          {
+            en = new EnemyWeak(enInfo.x, enInfo.y + 140, _enemyAttackGroup, _downedEnemyGroup);
+          }
+          else
+          {
+            en = new Enemy(enInfo.x, enInfo.y + 140, _enemyAttackGroup, _downedEnemyGroup);
+          }
+          en.addDialogue(enInfo.dialogue);
+          _enemies.add(en);
+          _playerAndEnemies.add(en);
         }
-        else
-        {
-          en = new Enemy(enInfo.x, enInfo.y + 140, _enemyAttackGroup, _downedEnemyGroup);
-        }
-        en.addDialogue(enInfo.dialogue);
-        _enemies.add(en);
-        _playerAndEnemies.add(en);
       }
 
       _dialogueText = new FlxText(20, 16, 280);
