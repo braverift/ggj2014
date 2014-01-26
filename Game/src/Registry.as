@@ -13,6 +13,12 @@ package
     public static var drinksDrunk:uint;
     public static var outcomes:Array;
     
+    public static const SP_PLAYER:uint = 0xFFDD0000;  // Player's speech color
+    public static const SP_BART:uint = 0xFFEE7942;    // Bartender's speech color
+    public static const SP_OTHER:uint = 0xFF859C27;   // Other's speech color
+    public static const SP_BRO:uint = 0xFF6666CC;     // Bro's speech color
+    public static const SP_GEN:uint = 0xFFCCCCCC;     // Generic character's speech color
+    
     public static function initialize(): void
     {
       mood = intensity = 0;
@@ -88,9 +94,9 @@ package
     );
 
     public static function getNextCombatState():void {
-      var scene = barToCombatTransArray[barScene/4][0];
-      var variant = barToCombatTransArray[barScene/4][1];
-      FlxG.switchState(new CombatState(scene, variant));
+      combatScene = barToCombatTransArray[barScene/4][0];
+      combatSceneVariant = barToCombatTransArray[barScene/4][1];
+      FlxG.switchState(new CombatState());
     }
 
     /*
@@ -99,11 +105,6 @@ package
      * Every 4th entry (0, 4, 8, ...) must end with a DrinkSet.
      * The next 3 entries are the dialogue sets for the respective drinks.
      */
-    public static const SP_PLAYER:uint = 0xFFDD0000;  // Player's speech color
-    public static const SP_BART:uint = 0xFFEE7942;    // Bartender's speech color
-    public static const SP_OTHER:uint = 0xFF859C27;   // Other's speech color
-    public static const SP_BRO:uint = 0xFF6666CC;     // Bro's speech color
-    public static const SP_GEN:uint = 0xFFCCCCCC;     // Generic character's speech color
     public static var barScenes:Array = new Array(
       new Array( // Scene 0 - Intro
         new Dialogue("Hey.          "),

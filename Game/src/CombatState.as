@@ -39,7 +39,7 @@ package
       
       _canEscape = true;
       
-      var scene:CombatScene = Registry.GetSceneInfo(Registry.combatScene, Registry.combatSceneVariant);
+      var scene:CombatScene = Registry.getSceneInfo(Registry.combatScene, Registry.combatSceneVariant);
       
       if (scene._background == CombatScene.BG_SKYSCRAPER)
       {

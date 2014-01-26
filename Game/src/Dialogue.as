@@ -11,7 +11,7 @@ package
     
     public function Dialogue(
       text:String = "UNITIALIZED", 
-      color:uint = Registry.SP_PLAYER, 
+      color:uint = 0xFFDD0000, // Can't use Registry.SP_PLAYER? Wat. 
       minMood:Number = 0, 
       maxMood:Number = 1,
       plotPoint:Boolean = false
