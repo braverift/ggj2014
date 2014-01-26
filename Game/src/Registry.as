@@ -39,7 +39,8 @@ package
       outcomes = new Array();
 
       // DEBUG FOR TESTING
-      barScene = 28;
+      barScene = 36;
+      intensity = 20;
     }
     
     public static function isIntense(): Boolean
@@ -512,6 +513,50 @@ package
           return info;
         } else if (variant == 3) { // Cave
           info = new CombatScene(CombatScene.BG_CAVE, 0, 80);
+          
+          info.addEnemy(EnemyInfo.NORMAL, 90, 0, 0, new Array( new Array(
+          new Dialogue("What the hell is all this?", SP_PLAYER, -1, -0.1),
+          new Dialogue("What...", SP_PLAYER, -0.1, 0.1),
+          new Dialogue("Hey, what're you guys doing?", SP_PLAYER, 0.1, 1)
+          )));
+          info.addEnemy(EnemyInfo.NORMAL, 120, 50, 0, new Array( new Array(
+          new Dialogue("What the hell is going on?", SP_PLAYER, -1, -0.1),
+          new Dialogue("Is this...", SP_PLAYER, -0.1, 0.1),
+          new Dialogue("This looks like fun.", SP_PLAYER, 0.1, 1)
+          )));
+          info.addEnemy(EnemyInfo.NORMAL, 220, 0, 0, new Array( new Array(
+          new Dialogue("Somebody talk to me!", SP_PLAYER, -1, -0.1),
+          new Dialogue("Who's in charge here?", SP_PLAYER, -0.1, 0.1),
+          new Dialogue("Have you seen my brother?", SP_PLAYER, 0.1, 1)
+          )));
+          info.addEnemy(EnemyInfo.NORMAL, 210, 30, 0, new Array( new Array(
+          new Dialogue("Where's Logan?", SP_PLAYER, -1, -0.1),
+          new Dialogue("This is creeping me out.", SP_PLAYER, -0.1, 0.1),
+          new Dialogue("Hey, what're you guys doing?", SP_PLAYER, 0.1, 1)
+          )));
+          
+          info.addEnemy(EnemyInfo.NORMAL, 150, 10, 10, new Array( new Array(
+          new Dialogue("I swear to god I'll take you all down if you don't start talking", SP_PLAYER, -1, -0.1),
+          new Dialogue("Are you in charge here?", SP_PLAYER, -0.1, 0.1),
+          new Dialogue("Is this some kind of game?", SP_PLAYER, 0.1, 1),
+          new Dialogue("I know why you're here.", SP_GEN),
+          new Dialogue("But you won't find what you're looking for.", SP_GEN)
+          ), new Array(
+          new Dialogue("You should leave this place.", SP_GEN)
+          ), new Array(
+          new Dialogue("There is nothing for you here.", SP_GEN)
+          ), new Array(
+          new Dialogue("You should leave this place.", SP_GEN)
+          ), new Array(
+          new Dialogue("There is nothing for you here.", SP_GEN)
+          ), new Array(
+          new Dialogue("You would do well to leave.", SP_GEN)
+          ), new Array(
+          new Dialogue("I cannot protect you if you choose to stay.", SP_GEN)
+          ), new Array(
+          new Dialogue("Know that you have brought this upon yourself.", SP_GEN, -1, 1, true)
+          )));
+          
           return info;
         }
       }
