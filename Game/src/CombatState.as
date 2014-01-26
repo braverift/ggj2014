@@ -173,6 +173,11 @@ package
         {
           _player.x = FlxG.width - 32;
         }
+        
+        if (_enemies.countLiving() == 0)
+        {
+          Registry.endScene(Registry.WIN);
+        }
       }
     }
   }
