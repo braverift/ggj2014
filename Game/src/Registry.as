@@ -283,8 +283,8 @@ package
       {
         if (variant == 0)
         {
-          var info:CombatScene = new CombatScene(CombatScene.BG_APARTMENT, 0, 80);
-          info.addEnemy(EnemyInfo.NORMAL, 260, 50, 0, new Array( new Array(
+          var info10:CombatScene = new CombatScene(CombatScene.BG_APARTMENT, 0, 80);
+          info10.addEnemy(EnemyInfo.NORMAL, 260, 50, 0, new Array( new Array(
           new Dialogue("What the hell are you doing here?", Registry.SP_OTHER),
           new Dialogue("I could ask you the same question.", Registry.SP_PLAYER)
           ), new Array(
@@ -292,8 +292,8 @@ package
           new Dialogue("Relax, I was just on my way out. I've already finished going through Logan's things.", Registry.SP_OTHER)
           ), new Array(
           new Dialogue("What did you find?", Registry.SP_PLAYER),
-          new Dialogue("He bought a train ticket. Looks like my Logan decided to skip town.", Registry.SP_OTHER, 0, 1, true))));
-          return info;
+          new Dialogue("He bought a train ticket. Looks like my Logan decided to skip town.", Registry.SP_OTHER, -1, 1, true))));
+          return info10;
         }
       }
       

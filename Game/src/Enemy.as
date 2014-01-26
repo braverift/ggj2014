@@ -177,15 +177,30 @@ package
     
     public function addDialogue(dialogue:Array): void
     {
-      _dialogue = dialogue;
+      _dialogue = new Array;
+      for each (var dialogueSection:Array in dialogue)
+      {
+        var newDialogueSection:Array = new Array;
+        for each (var dialogueLine:Dialogue in dialogueSection)
+        {
+          if (Registry.mood <= dialogueLine.maxMood && Registry.mood >= dialogueLine.minMood)
+          {
+            newDialogueSection.push(dialogueLine);
+          }
+        }
+        if (newDialogueSection.length >= 1)
+        {
+          _dialogue.push(newDialogueSection);
+        }
+      }
     }    
     
     public function getDialogue(): Array
     {
-      var response:Array;
+      var response:Array = new Array;
       if (_state != ANGRY)
       {
-        if (_dialogue.length > 0)
+        if (_dialogue.length >= 1)
         {
           response = _dialogue[0];
           _dialogue.splice(0, 1);
