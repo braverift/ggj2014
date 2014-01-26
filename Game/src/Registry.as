@@ -297,7 +297,7 @@ package
           new Array(
           new Dialogue("Logan. Where is he.", SP_PLAYER, -.1, .1),
           new Dialogue("Where the hell is Logan?", SP_PLAYER, -1, -.1),
-          new Dialogue("Is Logan here? Six foot two, kinda dopey looking?", SP_PLAYER, .1, 1),
+          new Dialogue("Did Logan get here yet?", SP_PLAYER, .1, 1),
           new Dialogue("Logan? Never met him.", SP_GEN))));
         info.addEnemy(EnemyInfo.WEAK, 180, 25, 2, new Array(
           new Array(
@@ -319,7 +319,20 @@ package
           new Dialogue("I've seen a lot of things. I've seen a lot of brothers.", SP_GEN, -.1, .1),
           new Dialogue("Hey man, I ain't Logan's keeper.", SP_GEN, .1, 1),
           new Dialogue("Get out of here, lady, this doesn't concern you.", SP_GEN, -1, -.1))));
-
+        info.addEnemy(EnemyInfo.OTHER, 260, 30, 0, new Array(
+          new Array(
+          new Dialogue("Is Logan here?", SP_PLAYER),
+          new Dialogue("He was here. Now he's not. Funny how it works.", SP_OTHER, -.1, .1),
+          new Dialogue("Ha, what a bizzare coincidence! You just missed him.", SP_OTHER, .1, 1),
+          new Dialogue("Not anymore, he's not.", SP_OTHER, -1, -.1)
+          ), new Array(
+          new Dialogue("How about you tell me where he went. Make things nice and easy for the both of us.", SP_PLAYER, -.1, .1),
+          new Dialogue("Maybe I know, maybe I don't. Maybe there's a warehouse -- number 3 -- at the docks. Maybe you should head there alone.", SP_OTHER, -.1, .1, true),
+          new Dialogue("Did he say where he was going?", SP_PLAYER, .1, 1),
+          new Dialogue("Yeah, some party at Warehouse 3. He got you on the list. No plus ones.", SP_OTHER, .1, 1, true),
+          new Dialogue("Tell me where he is, or Lord help me, I will burn this place to the ground.", SP_PLAYER, -1, -.1),
+          new Dialogue("Easy, chief. Head on over to Warehouse 3 over by the docks -- alone -- and everything will be clear.", SP_OTHER, -1, -.1, true))));
+          
         return info;
       }
       else if (scene == 1)
