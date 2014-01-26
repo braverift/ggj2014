@@ -1,10 +1,6 @@
 package  
 {
   import org.flixel.*;
-	/**
-   * ...
-   * @author ...
-   */
   public class Player extends FlxSprite
   {
     [Embed(source = "../data/art/char_hero.png")] private var heroGraphic:Class;

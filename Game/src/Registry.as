@@ -8,6 +8,7 @@ package
     public static var barScene:uint;    // ID of the current bar scene
     public static var combatScene:uint; // ID of the current combat scene
     public static var combatSceneVariant:uint; // ID of the current combat scene
+    public static var endSceneType:int;
     public static var hasGun:Boolean;
     public static var bullets:Number;
     public static var drinksDrunk:uint;
@@ -29,9 +30,8 @@ package
       combatScene = 0;
       combatSceneVariant = 0;
       drinksDrunk = 0;
+      endSceneType = -1;
       fading = false;
-      FlxG.watch(Registry, "mood");
-      FlxG.watch(Registry, "intensity");
       
       hasGun = false;
       bullets = 0;
@@ -39,6 +39,7 @@ package
       outcomes = new Array();
 
       // DEBUG FOR TESTING
+
     }
     
     public static function isIntense(): Boolean
@@ -50,16 +51,21 @@ package
     {
       return mood >= .1;
     }
+    
     /*
      * COMBAT TO BAR TRANSITIONS
      *
      * As per the bar dialogue format, these will only ever be multiples of 4.
      */
-    
     public static const TALK:uint = 0;
     public static const WALK:uint = 1;
     public static const WIN:uint = 2;
     public static const LOSE:uint = 3;
+    public static const YOU_DEAD:uint = 0;
+    public static const BRO_DEAD:uint = 1;
+    public static const BRO_LOST:uint = 2;
+    public static const BRO_SAFE:uint = 3;
+
     public static function endScene(outcome:uint): void
     {
       if (fading) return;
@@ -92,14 +98,32 @@ package
         if (outcomes[0] == LOSE && outcomes[1] == LOSE) barScene = 28;  // Train D
       }
       
-      if (outcomes.length > 2) {
-        barScene = 20;
+      if (outcomes.length == 3) {
+        if (barScene == 24 && outcomes[2] == TALK) endSceneType = YOU_DEAD;
+        if (barScene == 24 && outcomes[2] == WALK) endSceneType = YOU_DEAD;
+        if (barScene == 24 && outcomes[2] == WIN) endSceneType = YOU_DEAD;
+        if (barScene == 24 && outcomes[2] == LOSE) endSceneType = YOU_DEAD;
+        
+        if (barScene == 28 && outcomes[2] == TALK) endSceneType = YOU_DEAD;
+        if (barScene == 28 && outcomes[2] == WALK) endSceneType = YOU_DEAD;
+        if (barScene == 28 && outcomes[2] == WIN) endSceneType = YOU_DEAD;
+        if (barScene == 28 && outcomes[2] == LOSE) endSceneType = YOU_DEAD;
+        
+        if (barScene == 32 && outcomes[2] == TALK) endSceneType = BRO_SAFE;
+        if (barScene == 32 && outcomes[2] == WALK) endSceneType = BRO_LOST;
+        if (barScene == 32 && outcomes[2] == WIN) endSceneType = BRO_DEAD;
+        if (barScene == 32 && outcomes[2] == LOSE) endSceneType = YOU_DEAD;
+
+        if (barScene == 36 && outcomes[2] == TALK) endSceneType = YOU_DEAD;
+        if (barScene == 36 && outcomes[2] == WALK) endSceneType = BRO_LOST;
+        if (barScene == 36 && outcomes[2] == WIN) endSceneType = BRO_SAFE;
+        if (barScene == 36 && outcomes[2] == LOSE) endSceneType = BRO_DEAD;
       }
 
       fading = true;
       FlxG.fade(0xFF000000, 1, function():void {
         fading = false;
-        FlxG.switchState(new BarState());
+        endSceneType >= 0 ? FlxG.switchState(new EndState()) : FlxG.switchState(new BarState());
       });
     }
 
@@ -528,6 +552,67 @@ package
           return info;
         } else if (variant == 2) { // Skyscraper
           info = new CombatScene(CombatScene.BG_SKYSCRAPER, 0, 80);
+          info.addEnemy(EnemyInfo.BRO, 180, 50, 0, new Array(
+
+            // NOIR
+            new Array(
+              new Dialogue("So, Logan... It's come to this.", SP_PLAYER, -0.1, 0.1),
+              new Dialogue("Pretty sneaky, sis. I didn't think you'd find me here.", SP_BRO, -0.1, 0.1)
+            ),
+            new Array(
+              new Dialogue("What did they do to you? Are you alright?", SP_PLAYER, -0.1, 0.1),
+              new Dialogue("I'm more than alright. I'm their boss now.", SP_BRO, -0.1, 0.1),
+              new Dialogue("You're what?", SP_PLAYER, -0.1, 0.1),
+              new Dialogue("Look, I had no choice, alright?", SP_BRO, -0.1, 0.1),
+              new Dialogue("It's certainly better than becoming a splatter on the train tracks.", SP_BRO, -0.1, 0.1)
+            ),
+            new Array(
+              new Dialogue("Come on! Let's get out of here.", SP_PLAYER, -0.1, 0.1),
+              new Dialogue("Not a chance. I'm in too deep.", SP_BRO, -0.1, 0.1),
+              new Dialogue("No matter where we go, they'd be able to find us.", SP_BRO, -0.1, 0.1),
+              new Dialogue("Besides... I think I like this life.", SP_BRO, -0.1, 0.1)
+            ),
+            new Array(
+              new Dialogue("You've changed.", SP_PLAYER, -0.1, 0.1),
+              new Dialogue("So have you.", SP_BRO, -0.1, 0.1)
+            ),
+            new Array(
+              new Dialogue("Just... Get out of here. This life isn't for you.", SP_BRO, -0.1, 0.1),
+              new Dialogue("...", SP_PLAYER, -0.1, 0.1)
+            ),
+
+
+            // INTENSE
+            new Array(
+              new Dialogue("Logan. This madness has to fucking stop.", SP_PLAYER, -1, -0.1),
+              new Dialogue("Fuck off. This is my town now.", SP_BRO, -1, -0.1)
+            ),
+            new Array(
+              new Dialogue("I thought you were better than this.", SP_PLAYER, -1, -0.1),
+              new Dialogue("Well, you thought wrong.", SP_BRO, -1, -0.1)
+            ),
+            new Array(
+              new Dialogue("Look, I...", SP_PLAYER, -1, -0.1),
+              new Dialogue("It's not worth wasting my breath on you.", SP_BRO, -1, -0.1),
+              new Dialogue("This city is mine now. You can't stop me.", SP_BRO, -1, 0.1)
+            ),
+            new Array(
+              new Dialogue("This city is mine. You can't stop me now, sis.", SP_BRO, -1, -0.1)
+            ),
+
+
+            // WHIMSICAL
+            new Array(
+              new Dialogue("Logan! You're here!", SP_PLAYER, 0.1, 1),
+              new Dialogue("Oh, hey sis! What's up?", SP_BRO, 0.1, 1),
+              new Dialogue("I've been looking all over for you!", SP_PLAYER, 0.1, 1),
+              new Dialogue("Really? Why didn't you just call? I've been running errands all day.", SP_BRO, 0.1, 1),
+              new Dialogue("Oh. Duh! I guess it didn't occur to me.", SP_PLAYER, 0.1, 1),
+              new Dialogue("Well, I was just wrapping up here. Wanna' go grab a drink?", SP_BRO, 0.1, 1),
+              new Dialogue("Sure! There's a cool place I wanted to check out...               ", SP_PLAYER, 0.1, 1, true)
+            )
+          ));
+
           return info;
         } else if (variant == 3) { // Cave
           info = new CombatScene(CombatScene.BG_CAVE, 0, 80);
