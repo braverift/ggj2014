@@ -81,7 +81,7 @@ package
         new Dialogue("And now Bro talks.", SP_BRO),
         new Dialogue("And now a generic NPC talks.", SP_GEN),
         new DrinkSet(
-         new Drink("Whiskey, Neat", "Whiskey in highball", 0xFFB46A2F, -0.1),
+         new Drink("Scotch on the Rocks", "Cool and classic", 0xFFBB7136, -0.1),
          new Drink("Tom Collins", "Gin, lemon juice, simple syrup, soda", 0xFFDDEEDD, 0.0),
          new Drink("Cosmopolitan", "Citron, Cointreau, lime juice, cranberry juice", 0xFFEE0053, 0.1)
         )
@@ -115,9 +115,9 @@ package
         new Dialogue("Huh.", SP_BART),
         new Dialogue("So you just walked away?", SP_BART),
         new DrinkSet(
-         new Drink("Whiskey, Neat", "Whiskey in highball", 0xFFB46A2F, -0.1),
-         new Drink("Tom Collins", "Gin, lemon juice, simple syrup, soda", 0xFFDDEEDD, 0.0),
-         new Drink("Cosmopolitan", "Citron, Cointreau, lime juice, cranberry juice", 0xFFEE0053, 0.1)
+         new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.1),
+         new Drink("Bloody Mary", "Vodka, tomato juice, Worcestershire, Tabasco", 0xFFBB0000, 0.0),
+         new Drink("Margarita", "Tequila, Cointreau, lime juice, blended", 0xFF96E643, 0.1)
         )
       ),
       new Array( // Scene 4a
@@ -133,9 +133,9 @@ package
         new Dialogue("Huh.", SP_BART),
         new Dialogue("I guess you really gave them what for.", SP_BART),
         new DrinkSet(
-         new Drink("Whiskey, Neat", "Whiskey in highball", 0xFFB46A2F, -0.1),
-         new Drink("Tom Collins", "Gin, lemon juice, simple syrup, soda", 0xFFDDEEDD, 0.0),
-         new Drink("Cosmopolitan", "Citron, Cointreau, lime juice, cranberry juice", 0xFFEE0053, 0.1)
+         new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.1),
+         new Drink("Bloody Mary", "Vodka, tomato juice, Worcestershire, Tabasco", 0xFFBB0000, 0.0),
+         new Drink("Margarita", "Tequila, Cointreau, lime juice, blended", 0xFF96E643, 0.1)
         )
       ),
       new Array( // Scene 8a
@@ -151,9 +151,9 @@ package
         new Dialogue("Huh.", SP_BART),
         new Dialogue("I can see why you came in here.", SP_BART),
         new DrinkSet(
-         new Drink("Whiskey, Neat", "Whiskey in highball", 0xFFB46A2F, -0.1),
-         new Drink("Tom Collins", "Gin, lemon juice, simple syrup, soda", 0xFFDDEEDD, 0.0),
-         new Drink("Cosmopolitan", "Citron, Cointreau, lime juice, cranberry juice", 0xFFEE0053, 0.1)
+         new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.1),
+         new Drink("Bloody Mary", "Vodka, tomato juice, Worcestershire, Tabasco", 0xFFBB0000, 0.0),
+         new Drink("Margarita", "Tequila, Cointreau, lime juice, blended", 0xFF96E643, 0.1)
         )
       ),
       new Array( // Scene 12a
@@ -169,9 +169,9 @@ package
         new Dialogue("Huh.", SP_BART),
         new Dialogue("Sounds like that could've gone worse.", SP_BART),
         new DrinkSet(
-         new Drink("Whiskey, Neat", "Whiskey in highball", 0xFFB46A2F, -0.1),
-         new Drink("Tom Collins", "Gin, lemon juice, simple syrup, soda", 0xFFDDEEDD, 0.0),
-         new Drink("Cosmopolitan", "Citron, Cointreau, lime juice, cranberry juice", 0xFFEE0053, 0.1)
+         new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.1),
+         new Drink("Bloody Mary", "Vodka, tomato juice, Worcestershire, Tabasco", 0xFFBB0000, 0.0),
+         new Drink("Margarita", "Tequila, Cointreau, lime juice, blended", 0xFF96E643, 0.1)
         )
       ),
       new Array( // Scene 16a
