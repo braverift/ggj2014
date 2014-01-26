@@ -36,8 +36,8 @@ package
       _frozen = false;
 
       loadGraphic(heroGraphic, true, true, FRAME_WIDTH, FRAME_HEIGHT);
-      //addAnimation("idle", [0, 1, 2, 1, 0], 10, true);
-      addAnimation("idle", [5, 6], 7, true);
+      addAnimation("idle", [0, 1, 2, 1, 0], 10, true);
+      addAnimation("walk", [5, 6], 7, true);
       addAnimation("punch", [3, 4, 3, 1], 20, false);
       width = 28;
       height = 16;
@@ -49,6 +49,8 @@ package
     {
       super.update();
       
+      var moved:Boolean = false;
+
       if (!_frozen)
       {
         // Recoil from being punched
@@ -77,19 +79,23 @@ package
           {
             x -= MOVE_SPEED_X * FlxG.elapsed;
             facing = LEFT;
+            moved = true;
           }
           if (FlxG.keys.RIGHT)
           {
             x += MOVE_SPEED_X * FlxG.elapsed;
             facing = RIGHT;
+            moved = true;
           }
           if (FlxG.keys.UP)
           {
             y -= MOVE_SPEED_Y * FlxG.elapsed;
+            moved = true;
           }
           if (FlxG.keys.DOWN)
           {
             y += MOVE_SPEED_Y * FlxG.elapsed;
+            moved = true;
           }
         }
         
@@ -137,7 +143,11 @@ package
       {
         play("punch");
       }
-      else
+      else if (moved)
+      {
+        play("walk");
+      }
+      else 
       {
         play("idle");
       }

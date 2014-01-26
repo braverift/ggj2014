@@ -13,11 +13,11 @@ package
     public const FRAME_WIDTH:int = 58;
     public const FRAME_HEIGHT:int = 80;
 
-    public function EnemyKOed(X:Number, Y:Number) 
+    public function EnemyKOed(X:Number, Y:Number, ownerColor:uint) 
     {
       super(X, Y);
-      
       loadGraphic(enemyGraphic, false, false, FRAME_WIDTH, FRAME_HEIGHT);
+      color = ownerColor;
     }
     
   }

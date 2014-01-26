@@ -44,11 +44,9 @@ package
       _enemyAttackGroup = new FlxGroup;
       _downedEnemyGroup = new FlxGroup;
       
-      /*
-      _enemies.add(new Enemy(160, 180, _enemyAttackGroup, _downedEnemyGroup));
+      
       _enemies.add(new Enemy(30, 190, _enemyAttackGroup, _downedEnemyGroup));
       _enemies.add(new Enemy(50, 120, _enemyAttackGroup, _downedEnemyGroup));
-      */
       
       var talkingEnemy:Enemy = new Enemy(160, 180, _enemyAttackGroup, _downedEnemyGroup);
       talkingEnemy.addDialogue(new Array(new Dialogue("Hello"), new Dialogue("Hiii.........")));

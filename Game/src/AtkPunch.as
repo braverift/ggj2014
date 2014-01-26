@@ -18,6 +18,7 @@ package
     {
       super(X, Y);
       
+      visible = false;
       facing = FACING;
       _lifetime = LIFETIME;
       

@@ -46,6 +46,9 @@ package
       _dialogue = new Array;
       _frozen = false;
       
+      var colorVal:uint = 0x33 + FlxG.random() * 0x99;
+      color = 0xFF000000 | (colorVal << 16) | (colorVal << 8) | colorVal;
+      
       loadGraphic(enemyGraphic, true, true, FRAME_WIDTH, FRAME_HEIGHT);
       addAnimation("idle", [0, 1, 2, 1, 0], 10, true);
       addAnimation("walk", [5, 6], 7, true);
@@ -152,7 +155,7 @@ package
       --_HP;
       if (_HP < 0)
       {
-        _downedGroup.add(new EnemyKOed(x - offset.x, y - offset.y));
+        _downedGroup.add(new EnemyKOed(x - offset.x, y - offset.y, color));
         kill();
       }
     }
