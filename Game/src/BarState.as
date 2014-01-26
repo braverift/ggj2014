@@ -184,7 +184,6 @@ package
         diagTime = 0;
         if (sceneArray[sceneIdx] is DrinkSet) {
           FlxG.fade(0xFF000000, 0.5, function():void {
-            FlxG.log(sceneIdx);
             FlxG.switchState(new DrinkSelectState(sceneArray[sceneIdx])); 
           });
         } else if (sceneArray[sceneIdx] == null) { // End of scene

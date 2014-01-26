@@ -11,7 +11,8 @@ package
     public static var hasGun:Boolean;
     public static var bullets:Number;
     public static var drinksDrunk:uint;
-    public static var outcomes:Array;
+    private static var outcomes:Array;
+    private static var fading:Boolean;
     
     public static const SP_PLAYER:uint = 0xFFDD0000;  // Player's speech color
     public static const SP_BART:uint = 0xFFEE7942;    // Bartender's speech color
@@ -26,6 +27,7 @@ package
       combatScene = 0;
       combatSceneVariant = 0;
       drinksDrunk = 0;
+      fading = false;
       FlxG.watch(Registry, "mood");
       FlxG.watch(Registry, "intensity");
       
@@ -47,8 +49,10 @@ package
     public static const LOSE:uint = 3;
     public static function endScene(outcome:uint): void
     {
+      if (fading) return;
       outcomes[outcomes.length] = outcome;
-      
+     
+      FlxG.log(outcomes);
       if (outcomes.length == 1) {
         if (outcomes[0] == TALK) barScene = 4;
         if (outcomes[0] == WALK) barScene = 8;
@@ -75,7 +79,11 @@ package
         if (outcomes[0] == LOSE && outcomes[1] == LOSE) barScene = 20;
       }
       
-      FlxG.fade(0xFF000000, 1, function():void {FlxG.switchState(new BarState());});
+      fading = true;
+      FlxG.fade(0xFF000000, 1, function():void {
+        fading = false;
+        FlxG.switchState(new BarState());
+      });
     }
 
     /*
@@ -253,9 +261,10 @@ package
 
     public static function getSceneInfo(scene:Number, variant:Number):CombatScene
     {
+      var info:CombatScene;
       if (scene == 0)
       {
-        var info:CombatScene = new CombatScene(CombatScene.BG_PARTY, 30, 50);
+        info = new CombatScene(CombatScene.BG_PARTY, 30, 50);
         info.addEnemy(EnemyInfo.WEAK, 100, 60, 0, new Array(
           new Array(
           new Dialogue("Have you seen Logan?", SP_PLAYER),
@@ -283,7 +292,7 @@ package
       {
         if (variant == 0)
         {
-          var info:CombatScene = new CombatScene(CombatScene.BG_APARTMENT, 0, 80);
+          info = new CombatScene(CombatScene.BG_APARTMENT, 0, 80);
           info.addEnemy(EnemyInfo.NORMAL, 260, 50, 0, new Array( new Array(
           new Dialogue("What the hell are you doing here?", Registry.SP_OTHER),
           new Dialogue("I could ask you the same question.", Registry.SP_PLAYER)
