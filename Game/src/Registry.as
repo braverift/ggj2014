@@ -29,7 +29,7 @@ package
     public static const WALK:uint = 1;
     public static const WIN:uint = 2;
     public static const LOSE:uint = 3;
-    public static function EndScene(outcome:uint)
+    public static function EndScene(outcome:uint): void
     {
 
     }

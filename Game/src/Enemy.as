@@ -169,9 +169,9 @@ package
     
     public function getDialogue(): Array
     {
+      var response:Array;
       if (_state != ANGRY)
       {
-        var response:Array;
         if (_dialogue.length > 0)
         {
           response = _dialogue[0];
@@ -183,6 +183,11 @@ package
           response.push(new Dialogue(".....", Registry.SP_PLAYER));
           response.push(new Dialogue(".............", Registry.SP_OTHER));
         }
+        return response;
+      }
+      else
+      {
+        response = new Array;
         return response;
       }
     }
