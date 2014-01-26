@@ -24,7 +24,7 @@ package
      * As per the bar dialogue format, these will only ever be multiples of 4.
      */
     public static const combatToBarTransArray:Array = new Array(
-      new CombatToBarTransition(8, 4, 12, 16) // Scene 0 - Party
+      new CombatToBarTransition(16, 4, 8, 12) // Scene 0 - Party
     );
     
     public static const TALK:uint = 0;
@@ -86,7 +86,7 @@ package
          new Drink("Cosmopolitan", "Citron, Cointreau, lime juice, cranberry juice", 0xFFEE0053, 0.1)
         )
       ),
-      new Array( // Scene 1
+      new Array( // Scene 0a
         new Dialogue("Sure thing. Here you go.", SP_BART),
         new Dialogue("(Hold Z to drink your drink.)" +
                      "                             ", SP_GEN),
@@ -95,7 +95,7 @@ package
                      "to finish. Use this time to test out drinking your drink.",
                      SP_GEN)
       ),
-      new Array( // Scene 2
+      new Array( // Scene 0b
         new Dialogue("Sure thing. Here you go.", SP_BART),
         new Dialogue("(Hold Z to drink your drink.)" +
                      "                             ", SP_GEN),
@@ -103,7 +103,7 @@ package
                      "to finish. Use this time to test out drinking your drink.",
                      SP_GEN)
       ),
-      new Array( // Scene 3
+      new Array( // Scene 0c
         new Dialogue("Sure thing. Here you go.", SP_BART),
         new Dialogue("(Hold Z to drink your drink.)" +
                      "                             ", SP_GEN),
@@ -119,6 +119,69 @@ package
          new Drink("Tom Collins", "Gin, lemon juice, simple syrup, soda", 0xFFDDEEDD, 0.0),
          new Drink("Cosmopolitan", "Citron, Cointreau, lime juice, cranberry juice", 0xFFEE0053, 0.1)
         )
+      ),
+      new Array( // Scene 4a
+        new Dialogue("Sure thing. Here you go.", SP_BART)
+      ),
+      new Array( // Scene 4b
+        new Dialogue("Sure thing. Here you go.", SP_BART)
+      ),
+      new Array( // Scene 4c
+        new Dialogue("Sure thing. Here you go.", SP_BART)
+      ),
+      new Array( // Scene 8 - WIN TEST
+        new Dialogue("Huh.", SP_BART),
+        new Dialogue("I guess you really gave them what for.", SP_BART),
+        new DrinkSet(
+         new Drink("Whiskey, Neat", "Whiskey in highball", 0xFFB46A2F, -0.1),
+         new Drink("Tom Collins", "Gin, lemon juice, simple syrup, soda", 0xFFDDEEDD, 0.0),
+         new Drink("Cosmopolitan", "Citron, Cointreau, lime juice, cranberry juice", 0xFFEE0053, 0.1)
+        )
+      ),
+      new Array( // Scene 8a
+        new Dialogue("Sure thing. Here you go.", SP_BART)
+      ),
+      new Array( // Scene 8b
+        new Dialogue("Sure thing. Here you go.", SP_BART)
+      ),
+      new Array( // Scene 8c
+        new Dialogue("Sure thing. Here you go.", SP_BART)
+      ),
+      new Array( // Scene 12 - LOSE TEST
+        new Dialogue("Huh.", SP_BART),
+        new Dialogue("I can see why you came in here.", SP_BART),
+        new DrinkSet(
+         new Drink("Whiskey, Neat", "Whiskey in highball", 0xFFB46A2F, -0.1),
+         new Drink("Tom Collins", "Gin, lemon juice, simple syrup, soda", 0xFFDDEEDD, 0.0),
+         new Drink("Cosmopolitan", "Citron, Cointreau, lime juice, cranberry juice", 0xFFEE0053, 0.1)
+        )
+      ),
+      new Array( // Scene 12a
+        new Dialogue("Sure thing. Here you go.", SP_BART)
+      ),
+      new Array( // Scene 12b
+        new Dialogue("Sure thing. Here you go.", SP_BART)
+      ),
+      new Array( // Scene 12c
+        new Dialogue("Sure thing. Here you go.", SP_BART)
+      ),
+      new Array( // Scene 16 - WALK TEST
+        new Dialogue("Huh.", SP_BART),
+        new Dialogue("Sounds like that could've gone worse.", SP_BART),
+        new DrinkSet(
+         new Drink("Whiskey, Neat", "Whiskey in highball", 0xFFB46A2F, -0.1),
+         new Drink("Tom Collins", "Gin, lemon juice, simple syrup, soda", 0xFFDDEEDD, 0.0),
+         new Drink("Cosmopolitan", "Citron, Cointreau, lime juice, cranberry juice", 0xFFEE0053, 0.1)
+        )
+      ),
+      new Array( // Scene 16a
+        new Dialogue("Sure thing. Here you go.", SP_BART)
+      ),
+      new Array( // Scene 16b
+        new Dialogue("Sure thing. Here you go.", SP_BART)
+      ),
+      new Array( // Scene 16c
+        new Dialogue("Sure thing. Here you go.", SP_BART)
       )
     );
       
