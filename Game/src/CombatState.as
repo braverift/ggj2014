@@ -145,7 +145,7 @@ package
 
       _dialogueText = new FlxText(20, 16, 280);
       _diagBackSprite = new FlxSprite(18, 16);
-      _diagBackSprite.makeGraphic(264, 38, 0x55000000);
+      _diagBackSprite.makeGraphic(FlxG.width - 18 * 2, 38, 0x55000000);
       _diagBackSprite.visible = false;
       _diagTime = 0;
       _queuedDialogue = new Array;

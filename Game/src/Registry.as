@@ -17,8 +17,8 @@ package
     
     public static const SP_PLAYER:uint = 0xFFDD0000;  // Player's speech color
     public static const SP_BART:uint = 0xFFEE7942;    // Bartender's speech color
-    public static const SP_OTHER:uint = 0xFF859C27;   // Other's speech color
-    public static const SP_BRO:uint = 0xFF6666CC;     // Bro's speech color
+    public static const SP_OTHER:uint = 0xFF0089ff;   // Other's speech color
+    public static const SP_BRO:uint = 0xFF2dbe00;     // Bro's speech color
     public static const SP_GEN:uint = 0xFFCCCCCC;     // Generic character's speech color
     public static const SP_GIRLFRIEND:uint = 0xfff8ea00;     // Girlfriend's speech color
     

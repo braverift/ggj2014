@@ -24,6 +24,7 @@ package
       height = 16;
       offset.x = 18;
       offset.y = FRAME_HEIGHT - height;
+      color = 0xffffffff;
     }
   }
 
