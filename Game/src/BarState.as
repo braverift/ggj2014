@@ -86,7 +86,7 @@ package
         var darkColor:uint = Utility.darkerize(drinkColor);
         var darkerColor:uint = Utility.darkerize(darkColor);
         drinkLevelSprite = new FlxSprite(DRINK_X, DRINK_Y);
-        drinkLevelSprite.makeGraphic(DRINK_W, DRINK_H, drinkColor);
+        drinkLevelSprite.makeGraphic(DRINK_W, 1, drinkColor);
         drinkBackSprite = new FlxSprite(DRINK_X, DRINK_Y);
         drinkBackSprite.makeGraphic(DRINK_W, DRINK_H, darkerColor);
         drinkBarSprite = new FlxSprite(DRINK_X-DRINK_B, DRINK_Y-DRINK_B);
@@ -98,6 +98,10 @@ package
         bartenderDiag.shadow = Utility.darkerize(Registry.SP_BART);
         bartenderDiag.visible = false;
 
+        if (Registry.barScene >= 4) {
+          addGlass(); // Finish your drink from the previous scene
+        }
+
         add(drinkBarSprite);
         add(drinkBackSprite);
         add(drinkLevelSprite);
@@ -107,10 +111,10 @@ package
       sceneArray = Registry.barScenes[Registry.barScene];
       diagTime = 0;
 
+      fadingIn = true;
       if (hasDrink) {
-        fadingIn = false;
+        FlxG.flash(0xFF000000, 1, function():void {fadingIn=false;});
       } else {
-        fadingIn = true;
         FlxG.flash(0xFF000000, 2, function():void {fadingIn=false;});
       }
     }
@@ -118,21 +122,23 @@ package
     override public function update():void
     {
       // Dialogue
-      var curDiag:Dialogue = sceneArray[sceneIdx];
-
-      if (fadingIn) {
-        diagBackSprite.visible = false;
-      } else {
-        diagTime += FlxG.elapsed;
-        var charsToShow:Number = diagTime / TIME_PER_CHAR;
-        diagBackSprite.visible = true;
-        diagBox.text = curDiag.text.substr(0, charsToShow);
-        diagBox.color = curDiag.color;
-        diagBox.shadow = Utility.darkerize(curDiag.color);
+      var curDiag:Dialogue = null;
+      if (sceneArray[sceneIdx] is Dialogue) {
+        curDiag = sceneArray[sceneIdx];
+        if (fadingIn) {
+          diagBackSprite.visible = false;
+        } else {
+          diagTime += FlxG.elapsed;
+          var charsToShow:Number = diagTime / TIME_PER_CHAR;
+          diagBackSprite.visible = true;
+          diagBox.text = curDiag.text.substr(0, charsToShow);
+          diagBox.color = curDiag.color;
+          diagBox.shadow = Utility.darkerize(curDiag.color);
+        }
       }
 
       // Drink
-      if (hasDrink) {
+      if (hasDrink && !fadingIn) {
         if (drinkRefilling) {
           drinkLevel += FlxG.elapsed * DRINK_UP;
           if(drinkLevel >= 1.0) {
@@ -169,12 +175,14 @@ package
       }
 
       // Auto advance text
-      if (diagTime > curDiag.text.length*TIME_PER_CHAR + TIME_AT_END)
+      if (curDiag != null && diagTime > curDiag.text.length*TIME_PER_CHAR + TIME_AT_END)
       {
         sceneIdx++;
         diagTime = 0;
         if (sceneArray[sceneIdx] is DrinkSet) {
-         FlxG.switchState(new DrinkSelectState(sceneArray[sceneIdx])); 
+          FlxG.fade(0xFF000000, 0.5, function():void {
+            FlxG.switchState(new DrinkSelectState(sceneArray[sceneIdx])); 
+          });
         }
       }
     }
