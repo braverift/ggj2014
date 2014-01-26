@@ -37,10 +37,6 @@ package
       bullets = 0;
 
       outcomes = new Array();
-
-      // DEBUG FOR TESTING
-      barScene = 32;
-      //endSceneType = 1;
     }
     
     public static function isIntense(): Boolean

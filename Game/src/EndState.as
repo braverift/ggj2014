@@ -41,19 +41,21 @@ package
 
       if (Registry.endSceneType == Registry.YOU_DEAD) {
         add(new FlxSprite(0, 0, barLastCall));
-        curDiag = new Dialogue("I hope he'll be OK.                        I'll be watching.");
+        curDiag = new Dialogue("I hope he'll be OK.                                                       "+
+                               "I'll be watching.                        ");
       }
       if (Registry.endSceneType == Registry.BRO_DEAD) {
         add(new FlxSprite(0, 0, barSoldier));
-        curDiag = new Dialogue("I tried my best, but I couldn't save him.                  ");
+        curDiag = new Dialogue("I tried my best, but I couldn't save him.                                 ");
       }
       if (Registry.endSceneType == Registry.BRO_LOST) {
         add(new FlxSprite(0, 0, barChubPug));
-        curDiag = new Dialogue("I still don't know where he is.           I hope he's safe.");
+        curDiag = new Dialogue("I don't know where he is now.                                             "+
+                               "I hope he's safe.                 ");
       }
       if (Registry.endSceneType == Registry.BRO_SAFE) {
         add(new FlxSprite(0, 0, barRiskySours));
-        curDiag = new Dialogue("It was a hell of a ride.                  I'm just glad he's OK.");
+        curDiag = new Dialogue("It was a hell of a ride. I'm just glad he's OK.                           ");
       }
     
       playerSprite = new PlayerStill(PLAYER_X, PLAYER_Y);
@@ -69,16 +71,13 @@ package
       diagTime = 0;
 
       fading = true;
-      FlxG.flash(0xFF000000, 2, function():void {fading=false;});
+      FlxG.flash(0xFF000000, 5, function():void {fading=false;});
     }
     
     override public function update():void
     {
       // Dialogue
-      if (fading) {
-        diagBackSprite.visible = false;
-        diagBox.text = "";
-      } else {
+      if (!fading) {
         diagTime += FlxG.elapsed;
         var charsToShow:Number = diagTime / TIME_PER_CHAR;
         diagBackSprite.visible = true;
@@ -86,7 +85,7 @@ package
         diagBox.color = curDiag.color;
         diagBox.shadow = Utility.darkerize(curDiag.color);
       }
-
+      
       super.update();
 
       // Auto advance text

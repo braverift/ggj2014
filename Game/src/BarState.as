@@ -114,7 +114,7 @@ package
 
       fading = true;
       if (hasDrink) {
-        FlxG.flash(0xFF000000, 1, function():void {fading=false;});
+        FlxG.flash(0xFF000000, 0.5, function():void {fading=false;});
       } else {
         FlxG.flash(0xFF000000, 2, function():void {fading=false;});
       }
