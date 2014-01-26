@@ -51,6 +51,7 @@ package
       
       loadGraphic(enemyGraphic, true, true, FRAME_WIDTH, FRAME_HEIGHT);
       addAnimation("idle", [0, 1, 2, 1, 0], 10, true);
+      addAnimation("idle_aggro", [7, 8, 9, 8, 7], 10, true);
       addAnimation("walk", [5, 6], 7, true);
       addAnimation("punch", [3, 4, 3, 1], 20, false);
       width = 28;
