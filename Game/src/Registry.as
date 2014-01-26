@@ -71,7 +71,6 @@ package
       if (fading) return;
       outcomes[outcomes.length] = outcome;
      
-      FlxG.log(outcomes);
       if (outcomes.length == 1) {
         if (outcomes[0] == TALK) barScene = 4; // Warehouse A
         if (outcomes[0] == WALK) barScene = 8; // Apartment A
@@ -99,25 +98,26 @@ package
       }
       
       if (outcomes.length == 3) {
-        if (barScene == 24 && outcomes[2] == TALK) endSceneType = YOU_DEAD;
-        if (barScene == 24 && outcomes[2] == WALK) endSceneType = YOU_DEAD;
-        if (barScene == 24 && outcomes[2] == WIN) endSceneType = YOU_DEAD;
-        if (barScene == 24 && outcomes[2] == LOSE) endSceneType = YOU_DEAD;
+        // These greater-thans are a bad hack XD
+        if (barScene >= 24 && outcomes[2] == TALK) endSceneType = BRO_SAFE;
+        if (barScene >= 24 && outcomes[2] == WALK) endSceneType = BRO_LOST;
+        if (barScene >= 24 && outcomes[2] == WIN) endSceneType = BRO_DEAD;
+        if (barScene >= 24 && outcomes[2] == LOSE) endSceneType = BRO_LOST;
         
-        if (barScene == 28 && outcomes[2] == TALK) endSceneType = YOU_DEAD;
-        if (barScene == 28 && outcomes[2] == WALK) endSceneType = YOU_DEAD;
-        if (barScene == 28 && outcomes[2] == WIN) endSceneType = YOU_DEAD;
-        if (barScene == 28 && outcomes[2] == LOSE) endSceneType = YOU_DEAD;
+        if (barScene >= 28 && outcomes[2] == TALK) endSceneType = YOU_DEAD;
+        if (barScene >= 28 && outcomes[2] == WALK) endSceneType = YOU_DEAD;
+        if (barScene >= 28 && outcomes[2] == WIN) endSceneType = YOU_DEAD;
+        if (barScene >= 28 && outcomes[2] == LOSE) endSceneType = YOU_DEAD;
         
-        if (barScene == 32 && outcomes[2] == TALK) endSceneType = BRO_SAFE;
-        if (barScene == 32 && outcomes[2] == WALK) endSceneType = BRO_LOST;
-        if (barScene == 32 && outcomes[2] == WIN) endSceneType = BRO_DEAD;
-        if (barScene == 32 && outcomes[2] == LOSE) endSceneType = YOU_DEAD;
+        if (barScene >= 32 && outcomes[2] == TALK) endSceneType = BRO_SAFE;
+        if (barScene >= 32 && outcomes[2] == WALK) endSceneType = BRO_LOST;
+        if (barScene >= 32 && outcomes[2] == WIN) endSceneType = BRO_DEAD;
+        if (barScene >= 32 && outcomes[2] == LOSE) endSceneType = YOU_DEAD;
 
-        if (barScene == 36 && outcomes[2] == TALK) endSceneType = YOU_DEAD;
-        if (barScene == 36 && outcomes[2] == WALK) endSceneType = BRO_LOST;
-        if (barScene == 36 && outcomes[2] == WIN) endSceneType = BRO_SAFE;
-        if (barScene == 36 && outcomes[2] == LOSE) endSceneType = BRO_DEAD;
+        if (barScene >= 36 && outcomes[2] == TALK) endSceneType = YOU_DEAD;
+        if (barScene >= 36 && outcomes[2] == WALK) endSceneType = BRO_LOST;
+        if (barScene >= 36 && outcomes[2] == WIN) endSceneType = BRO_SAFE;
+        if (barScene >= 36 && outcomes[2] == LOSE) endSceneType = BRO_DEAD;
       }
 
       fading = true;
@@ -310,7 +310,7 @@ package
       new Array( // Scene 24 - Before the Park
         new Dialogue("I GUESS YOU WENT TO THE PARK NEXT", SP_BART),
         new DrinkSet(
-         new Drink("Everclear", "No ambiguity", 0x77FFFFFF, -0.25),
+         new Drink("Everclear", "No ambiguity", 0xFFF7F7F7, -0.25),
          new Drink("Sidecar", "Cognac, Triple Sec, lemon juice", 0xFFFFAE19, 0.0),
          new Drink("Aviation", "Gin, lemon juice, maraschino, creme de violette", 0xFFD8BFD8, 0.25)
         )
@@ -327,7 +327,7 @@ package
       new Array( // Scene 28 - Before the Train
         new Dialogue("I GUESS YOU RODE A TRAIN NEXT", SP_BART),
         new DrinkSet(
-         new Drink("Everclear", "No ambiguity", 0x77FFFFFF, -0.25),
+         new Drink("Everclear", "No ambiguity", 0xFFF7F7F7, -0.25),
          new Drink("Sidecar", "Cognac, Triple Sec, lemon juice", 0xFFFFAE19, 0.0),
          new Drink("Aviation", "Gin, lemon juice, maraschino, creme de violette", 0xFFD8BFD8, 0.25)
         )
@@ -344,7 +344,7 @@ package
       new Array( // Scene 32 - Before the Skyscraper
         new Dialogue("I GUESS YOU SCALED A SKYSCRAPER NEXT", SP_BART),
         new DrinkSet(
-         new Drink("Everclear", "No ambiguity", 0x77FFFFFF, -0.25),
+         new Drink("Everclear", "No ambiguity", 0xFFF7F7F7, -0.25),
          new Drink("Sidecar", "Cognac, Triple Sec, lemon juice", 0xFFFFAE19, 0.0),
          new Drink("Aviation", "Gin, lemon juice, maraschino, creme de violette", 0xFFD8BFD8, 0.25)
         )
@@ -361,7 +361,7 @@ package
       new Array( // Scene 36 - Before the Cave
         new Dialogue("I GUESS YOU EXPLORED A CAVE NEXT", SP_BART),
         new DrinkSet(
-         new Drink("Everclear", "No ambiguity", 0x77FFFFFF, -0.25),
+         new Drink("Everclear", "No ambiguity", 0xFFF7F7F7, -0.25),
          new Drink("Sidecar", "Cognac, Triple Sec, lemon juice", 0xFFFFAE19, 0.0),
          new Drink("Aviation", "Gin, lemon juice, maraschino, creme de violette", 0xFFD8BFD8, 0.25)
         )
