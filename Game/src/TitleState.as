@@ -9,12 +9,25 @@ package
     public function TitleState(): void
     {
       var txt:FlxText
-      txt = new FlxText(0, 32, FlxG.width, "are you a wizard??")
-      txt.setFormat(null, 24, 0xFFFFFFFF, "center")
+      txt = new FlxText(0, 20, FlxG.width, "what'll it be");
+      txt.setFormat(null, 24, 0xFFFFFFFF, "center");
+      txt.shadow = 0xFF777777;
       this.add(txt);
       
-      txt = new FlxText(0, FlxG.height - 64, FlxG.width, "now you are.");
+      txt = new FlxText(0, 90, FlxG.width, "a drinking game");
       txt.setFormat(null, 16, 0xFFFFFFFF, "center");
+      this.add(txt);
+      
+      txt = new FlxText(0, 130, FlxG.width, "by Jason Hamilton, Doug Macdonald, and Wesley May");
+      txt.setFormat(null, 16, 0xFFFFFFFF, "center");
+      this.add(txt);
+      
+      txt = new FlxText(0, 200, FlxG.width, "Z - Drink / Use Words");
+      txt.setFormat(null, 8, 0xFFFFFFFF, "center");
+      this.add(txt);
+      
+      txt = new FlxText(0, 210, FlxG.width, "X - Use Violence");
+      txt.setFormat(null, 8, 0xFFFFFFFF, "center");
       this.add(txt);
     }
     
