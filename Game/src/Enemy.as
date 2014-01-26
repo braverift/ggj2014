@@ -18,6 +18,7 @@ package
     private const RECOIL_TIME:Number = 0.2;
     private const RECOIL_SPEED:Number = 200;
     private const MAX_HP:Number = 5;
+    
     private const FRIENDLY:uint = 0;
     private const ANGRY:uint = 1;
     
@@ -28,7 +29,6 @@ package
     private var _recoilTime:Number;
     private var _recoilDirection:uint;
     private var _state:uint;
-    private var _destination:FlxPoint;
     private var _target:FlxSprite;
     private var _dialogue:Array;
     private var _HP:Number;

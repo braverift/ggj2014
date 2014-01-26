@@ -17,6 +17,7 @@ package
     private const ATTACK_TIME:Number = 0.2;
     private const RECOIL_TIME:Number = 0.2;
     private const RECOIL_SPEED:Number = 200;
+    private const MAX_HP:Number = 10;
 
     private var _attackGroup:FlxGroup;
     private var _speechGroup:FlxGroup;
@@ -24,6 +25,7 @@ package
     private var _attackCooldown:Number;
     private var _recoilTime:Number;
     private var _recoilDirection:uint;
+    private var _HP:Number;
     private var _frozen:Boolean;
     
     public function Player(X:Number, Y:Number, attackGroup:FlxGroup, speechGroup:FlxGroup) 
@@ -34,7 +36,8 @@ package
       _speechGroup = speechGroup;
       _attackCooldown = 0;
       _frozen = false;
-
+      _HP = MAX_HP;
+      
       loadGraphic(heroGraphic, true, true, FRAME_WIDTH, FRAME_HEIGHT);
       addAnimation("idle", [0, 1, 2, 1, 0], 10, true);
       addAnimation("idle_aggro", [7, 8, 9, 8, 7], 10, true);
@@ -158,7 +161,11 @@ package
     {
       _recoilDirection = direction;
       _recoilTime = RECOIL_TIME;
-
+      
+      if (--_HP <= 0)
+      {
+        Registry.endScene(Registry.LOSE);
+      }
     }
     
     public function freeze(frozen:Boolean): void
