@@ -13,7 +13,7 @@ package
     public const FRAME_HEIGHT:int = 80;
     
     private const MOVE_SPEED_X:Number = 120;
-    private const MOVE_SPEED_Y:Number = 40;
+    private const MOVE_SPEED_Y:Number = 70;
     private const ATTACK_TIME:Number = 0.2;
     private const RECOIL_TIME:Number = 0.2;
     private const RECOIL_SPEED:Number = 200;

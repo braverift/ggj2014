@@ -20,8 +20,8 @@ package
       FlxG.watch(Registry, "mood");
       FlxG.watch(Registry, "intensity");
       
-      hasGun = true;
-      bullets = 6;
+      hasGun = false;
+      bullets = 0;
     }
 
     /*
@@ -208,5 +208,21 @@ package
         )
 
     */
+
+    public static function GetSceneInfo(scene:Number, variant:Number):CombatScene
+    {
+      if (scene == 0)
+      {
+        var info:CombatScene = new CombatScene(CombatScene.BG_SKYSCRAPER, 30, 50);
+        info.addEnemy(EnemyInfo.NORMAL, 100, 60, 0, new Array(
+          new Dialogue("Have you seen Logan?", SP_PLAYER),
+          new Dialogue("Who?", SP_GEN)));
+        return info;
+      }
+      else
+      {
+        return new CombatScene(CombatScene.BG_BAR, 0, 0);
+      }
+    }
   }
 }

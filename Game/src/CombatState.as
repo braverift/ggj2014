@@ -7,7 +7,8 @@ package
    */
   public class CombatState extends FlxState
   {
-    [Embed(source = "../data/art/bg_fight.png" )] private var background:Class;
+    [Embed(source = "../data/art/bg_bar.png" )] private var bgBar:Class;
+    [Embed(source = "../data/art/bg_skyscraper.png" )] private var bgSkyscraper:Class;
 
     private var _player:Player;
     private var _playerAttackGroup:FlxGroup;
@@ -24,7 +25,7 @@ package
 
     public static const TIME_PER_CHAR:Number = 0.08; // Time per character of text in seconds
     public static const TIME_AT_END:Number = 1.0; // Length of pause after each line in seconds
-    private const HORIZON:Number = 100;
+    private const HORIZON:Number = 140;
     public function CombatState() 
     {
       
@@ -37,34 +38,56 @@ package
       
       _canEscape = true;
       
+      var scene:CombatScene = Registry.GetSceneInfo(0, 0);
+      
+      if (scene._background == CombatScene.BG_SKYSCRAPER)
+      {
+        add(new FlxSprite(0, 0, bgSkyscraper));
+      }
+      else if (scene._background == CombatScene.BG_BAR)
+      {
+        add(new FlxSprite(0, 0, bgBar));
+      }      
+      else
+      {
+        add(new FlxSprite(0, 0, bgBar));
+      }
+
+            
       _playerAttackGroup = new FlxGroup;
       _playerSpeechGroup = new FlxGroup;
-      _player = new Player(150, 150, _playerAttackGroup, _playerSpeechGroup, onShoot);
+      _player = new Player(scene._x, scene._y + 140, _playerAttackGroup, _playerSpeechGroup, onShoot);
       
       _enemies = new FlxGroup;
       _enemyAttackGroup = new FlxGroup;
       _downedEnemyGroup = new FlxGroup;
       
-      
-      _enemies.add(new Enemy(30, 190, _enemyAttackGroup, _downedEnemyGroup));
-      _enemies.add(new Enemy(50, 120, _enemyAttackGroup, _downedEnemyGroup));
-      
-      var talkingEnemy:Enemy = new Enemy(160, 180, _enemyAttackGroup, _downedEnemyGroup);
-      talkingEnemy.addDialogue(new Array(new Dialogue("Hello"), new Dialogue("Hiii.........",Registry.SP_OTHER, 0, 1, true)));
-      _enemies.add(talkingEnemy);
-      
+      for each (var enInfo:EnemyInfo in scene._enemies)
+      {
+        var en:Enemy;
+        if (enInfo.type == EnemyInfo.OTHER)
+        {
+          
+        }
+        else
+        {
+          en = new Enemy(enInfo.x, enInfo.y + 140, _enemyAttackGroup, _downedEnemyGroup);
+        }
+        en.addDialogue(enInfo.dialogue);
+        _enemies.add(en);
+      }
+
       _dialogueText = new FlxText(20, 16, 280);
       _diagTime = 0;
       _queuedDialogue = new Array;
       
       _controlsText = new FlxText(20, FlxG.height - 20, 280, controlsString());
       
-      add(new FlxSprite(0, 0, background));
       add(_downedEnemyGroup);
-      add(_player);
-      add(_playerAttackGroup);
       add(_enemies);
       add(_enemyAttackGroup);
+      add(_player);
+      add(_playerAttackGroup);
       add(_dialogueText);
       add(_controlsText);
     }

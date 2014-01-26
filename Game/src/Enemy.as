@@ -193,7 +193,7 @@ package
         {
           response = new Array;
           response.push(new Dialogue(".....", Registry.SP_PLAYER));
-          response.push(new Dialogue(".............", Registry.SP_OTHER));
+          response.push(new Dialogue(".............", Registry.SP_GEN));
         }
         return response;
       }
