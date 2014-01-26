@@ -140,8 +140,9 @@ package
         bartenderDiag.visible = drinkRefilling;
 
         var consumed:int = (1 - drinkLevel) * DRINK_H;
+        var size:int = Math.max(1, DRINK_H-consumed);
         drinkLevelSprite.y = DRINK_Y + consumed;
-        drinkLevelSprite.makeGraphic(DRINK_W, DRINK_H-consumed, drinkColor);
+        drinkLevelSprite.makeGraphic(DRINK_W, size, drinkColor);
       }
 
       super.update();
