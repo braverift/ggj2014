@@ -167,7 +167,7 @@ package
 
       super.update();
 
-      if (FlxG.keys.justPressed("X")) {
+      if (FlxG.keys.justPressed("X") && !fading && curDiag != null) {
         diagTime = Math.max(diagTime, curDiag.text.length*TIME_PER_CHAR);
       }
       if (FlxG.keys.Z && hasDrink && !drinkRefilling && !fading) {

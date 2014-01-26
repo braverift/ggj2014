@@ -94,8 +94,8 @@ package
     );
 
     public static function getNextCombatState():void {
-      combatScene = barToCombatTransArray[barScene/4][0];
-      combatSceneVariant = barToCombatTransArray[barScene/4][1];
+      combatScene = barToCombatTransArray[Math.floor(barScene/4)][0];
+      combatSceneVariant = barToCombatTransArray[Math.floor(barScene/4)][1];
       FlxG.switchState(new CombatState());
     }
 
