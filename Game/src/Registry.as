@@ -22,7 +22,8 @@ package
     
     public static function initialize(): void
     {
-      mood = intensity = 0;
+      mood = 0;
+      intensity = 0;
       barScene = 0;
       combatScene = 0;
       combatSceneVariant = 0;
@@ -287,24 +288,36 @@ package
         info = new CombatScene(CombatScene.BG_PARTY, 30, 50);
         info.addEnemy(EnemyInfo.WEAK, 100, 60, 0, new Array(
           new Array(
-          new Dialogue("Have you seen Logan?", SP_PLAYER),
+          new Dialogue("Have you seen Logan?", SP_PLAYER, -.1, .1),
+          new Dialogue("Where the hell is Logan?", SP_PLAYER, -1, -.1),
+          new Dialogue("Is Logan here? Six foot two, kinda dopey looking?", SP_PLAYER, .1, 1),
           new Dialogue("Who?", SP_GEN))));
         info.addEnemy(EnemyInfo.WEAK, 130, 20, 0, new Array(
           new Array(
-          new Dialogue("Is Logan here?", SP_PLAYER),
+          new Dialogue("Logan. Where is he.", SP_PLAYER, -.1, .1),
+          new Dialogue("Where the hell is Logan?", SP_PLAYER, -1, -.1),
+          new Dialogue("Is Logan here? Six foot two, kinda dopey looking?", SP_PLAYER, .1, 1),
           new Dialogue("Logan? Never met him.", SP_GEN))));
-        info.addEnemy(EnemyInfo.WEAK, 180, 25, 0, new Array(
+        info.addEnemy(EnemyInfo.WEAK, 180, 25, 2, new Array(
           new Array(
           new Dialogue("No, Logan's not here.", SP_GEN),
-          new Dialogue("But I didn't ask you yet.", SP_PLAYER),
-          new Dialogue("Well, then ask me again.", SP_GEN)),
-          new Array(
-          new Dialogue("...have you seen Logan?", SP_PLAYER),
+          new Dialogue("..I didn't ask you yet.", SP_PLAYER, -.1, .1),
+          new Dialogue("Well, then ask me again.", SP_GEN, -.1, .1),
+          new Dialogue("Have you seen-- wait, what?", SP_PLAYER, .1, 1),
+          new Dialogue("Nevermind.", SP_PLAYER, .1, 1),          
+          new Dialogue("Spill it, punk!", SP_PLAYER, -1, -.1),
+          new Dialogue("Spill-- spill what?", SP_PLAYER, -1, -.1)
+          ), new Array(
+          new Dialogue("You're know something. If you don't point me towards Logan, I'll point you towards my right hook.", SP_PLAYER, -.1, .1),
+          new Dialogue("Well, if you see him, can you tell him to call his sister?", SP_PLAYER, .1, 1),
+          new Dialogue("Tell me where he is, or I'll beat it out of you.", SP_PLAYER, -1, .1),
           new Dialogue("Logan? I've never even heard that name before!", SP_GEN))));
-        info.addEnemy(EnemyInfo.WEAK, 210, 80, 0, new Array(
+        info.addEnemy(EnemyInfo.WEAK, 210, 80, 3, new Array(
           new Array(
           new Dialogue("Have you seen my brother?", SP_PLAYER),
-          new Dialogue("Hey man, I ain't Logan's keeper.", SP_GEN))));
+          new Dialogue("I've seen a lot of things. I've seen a lot of brothers.", SP_GEN, -.1, .1),
+          new Dialogue("Hey man, I ain't Logan's keeper.", SP_GEN, .1, 1),
+          new Dialogue("Get out of here, lady, this doesn't concern you.", SP_GEN, -1, -.1))));
 
         return info;
       }
