@@ -37,7 +37,16 @@ package
 
       outcomes = new Array();
     }
+    
+    public static function isIntense(): Boolean
+    {
+      return mood <= -.25;
+    }
 
+    public static function isWhimisical(): Boolean
+    {
+      return mood >= .25;
+    }
     /*
      * COMBAT TO BAR TRANSITIONS
      *

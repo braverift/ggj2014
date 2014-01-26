@@ -4,14 +4,30 @@ package
   public class CombatState extends FlxState
   {
     [Embed(source = "../data/art/bg_bar.png" )] private var bgBar:Class;
-    [Embed(source = "../data/art/bg_skyscraper.png" )] private var bgSkyscraper:Class;
-    [Embed(source = "../data/art/bg_cave.png" )] private var bgCave:Class;
-    [Embed(source = "../data/art/bg_train.png" )] private var bgTrain:Class;
-    [Embed(source = "../data/art/bg_park.png" )] private var bgPark:Class;
-    [Embed(source = "../data/art/bg_bar_exterior.png" )] private var bgOutsideBar:Class;
-    [Embed(source = "../data/art/bg_party.png" )] private var bgParty:Class;
-    [Embed(source = "../data/art/bg_party.png" )] private var bgWarehouse:Class;
-    [Embed(source = "../data/art/bg_party.png" )] private var bgApartment:Class;
+    [Embed(source = "../data/art/bg_skyscraper_noir.png" )] private var bgSkyscraperNoir:Class;
+    [Embed(source = "../data/art/bg_cave_noir.png" )] private var bgCaveNoir:Class;
+    [Embed(source = "../data/art/bg_train_noir.png" )] private var bgTrainNoir:Class;
+    [Embed(source = "../data/art/bg_park_noir.png" )] private var bgParkNoir:Class;
+    [Embed(source = "../data/art/bg_exterior_noir.png" )] private var bgOutsideBarNoir:Class;
+    [Embed(source = "../data/art/bg_party_noir.png" )] private var bgPartyNoir:Class;
+    [Embed(source = "../data/art/bg_warehouse_noir.png" )] private var bgWarehouseNoir:Class;
+    [Embed(source = "../data/art/bg_apartment_noir.png" )] private var bgApartmentNoir:Class;
+    [Embed(source = "../data/art/bg_skyscraper_whimsical.png" )] private var bgSkyscraperWhimsical:Class;
+    [Embed(source = "../data/art/bg_cave_whimsical.png" )] private var bgCaveWhimsical:Class;
+    [Embed(source = "../data/art/bg_train_whimsical.png" )] private var bgTrainWhimsical:Class;
+    [Embed(source = "../data/art/bg_park_whimsical.png" )] private var bgParkWhimsical:Class;
+    [Embed(source = "../data/art/bg_exterior_whimsical.png" )] private var bgOutsideBarWhimsical:Class;
+    [Embed(source = "../data/art/bg_party_whimsical.png" )] private var bgPartyWhimsical:Class;
+    [Embed(source = "../data/art/bg_warehouse_whimsical.png" )] private var bgWarehouseWhimsical:Class;
+    [Embed(source = "../data/art/bg_apartment_whimsical.png" )] private var bgApartmentWhimsical:Class;
+    [Embed(source = "../data/art/bg_skyscraper_intense.png" )] private var bgSkyscraperIntense:Class;
+    [Embed(source = "../data/art/bg_cave_intense.png" )] private var bgCaveIntense:Class;
+    [Embed(source = "../data/art/bg_train_intense.png" )] private var bgTrainIntense:Class;
+    [Embed(source = "../data/art/bg_park_intense.png" )] private var bgParkIntense:Class;
+    [Embed(source = "../data/art/bg_exterior_intense.png" )] private var bgOutsideBarIntense:Class;
+    [Embed(source = "../data/art/bg_party_intense.png" )] private var bgPartyIntense:Class;
+    [Embed(source = "../data/art/bg_warehouse_intense.png" )] private var bgWarehouseIntense:Class;
+    [Embed(source = "../data/art/bg_apartment_intense.png" )] private var bgApartmentIntense:Class;
 
     private var _player:Player;
     private var _playerAndEnemies:FlxGroup;
@@ -45,46 +61,46 @@ package
       
       var scene:CombatScene = Registry.getSceneInfo(Registry.combatScene, Registry.combatSceneVariant);
       
+      var bg:Class;
       if (scene._background == CombatScene.BG_SKYSCRAPER)
       {
-        add(new FlxSprite(0, 0, bgSkyscraper));
-      }
-      else if (scene._background == CombatScene.BG_BAR)
-      {
-        add(new FlxSprite(0, 0, bgBar));
+        bg = Registry.isIntense() ? bgSkyscraperIntense : (Registry.isWhimisical() ? bgSkyscraperWhimsical : bgSkyscraperNoir);
       }
       else if (scene._background == CombatScene.BG_CAVE)
       {
-        add(new FlxSprite(0, 0, bgCave));
+        bg = Registry.isIntense() ? bgCaveIntense : (Registry.isWhimisical() ? bgCaveWhimsical : bgCaveNoir);
       }
       else if (scene._background == CombatScene.BG_TRAIN)
       {
-        add(new FlxSprite(0, 0, bgTrain));
+        bg = Registry.isIntense() ? bgTrainIntense : (Registry.isWhimisical() ? bgCaveWhimsical : bgCaveNoir);
       }      
       else if (scene._background == CombatScene.BG_PARK)
       {
-        add(new FlxSprite(0, 0, bgPark));
+        bg = Registry.isIntense() ? bgParkIntense : (Registry.isWhimisical() ? bgParkWhimsical : bgParkNoir);
       }
       else if (scene._background == CombatScene.BG_WAREHOUSE)
       {
-        add(new FlxSprite(0, 0, bgWarehouse));
+        bg = Registry.isIntense() ? bgWarehouseIntense : (Registry.isWhimisical() ? bgWarehouseWhimsical : bgWarehouseNoir);
       }
       else if (scene._background == CombatScene.BG_OUTSIDE_BAR)
       {
-        add(new FlxSprite(0, 0, bgOutsideBar));
+        bg = Registry.isIntense() ? bgOutsideBarIntense : (Registry.isWhimisical() ? bgOutsideBarWhimsical : bgOutsideBarNoir);
       }      
       else if (scene._background == CombatScene.BG_PARTY)
       {
-        add(new FlxSprite(0, 0, bgParty));
+        bg = Registry.isIntense() ? bgPartyIntense : (Registry.isWhimisical() ? bgPartyWhimsical : bgPartyNoir);
       }     
       else if (scene._background == CombatScene.BG_APARTMENT)
       {
-        add(new FlxSprite(0, 0, bgApartment));
+        bg = Registry.isIntense() ? bgApartmentIntense : (Registry.isWhimisical() ? bgApartmentWhimsical: bgApartmentNoir);
       }
       else
       {
-        add(new FlxSprite(0, 0, bgBar));
+        bg = bgBar;
       }
+      
+      add(new FlxSprite(0, 0, bg));
+      
 
       _playerAndEnemies = new FlxGroup;
       _playerAttackGroup = new FlxGroup;
