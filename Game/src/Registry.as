@@ -38,7 +38,7 @@ package
       outcomes = new Array();
 
       // DEBUG FOR TESTING
-      //barScene = 28;
+      barScene = 28;
     }
     
     public static function isIntense(): Boolean
@@ -495,10 +495,13 @@ package
           return info;
         } else if (variant == 1) { // Train
           info = new CombatScene(CombatScene.BG_TRAIN, 0, 80);
+          return info;
         } else if (variant == 2) { // Skyscraper
           info = new CombatScene(CombatScene.BG_SKYSCRAPER, 0, 80);
+          return info;
         } else if (variant == 3) { // Cave
           info = new CombatScene(CombatScene.BG_CAVE, 0, 80);
+          return info;
         }
       }
       
