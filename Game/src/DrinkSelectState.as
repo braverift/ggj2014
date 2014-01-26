@@ -7,8 +7,11 @@ package
   
     private static const DRINK_SIZE:Number = 80;
     private static const DRINK_BUFFER:Number = 20;
-    private static const DRINK_TOP:Number = 40; 
+    private static const DRINK_TOP:Number = 50; 
     private static const HIGHLIGHT_WIDTH:Number = 5;
+    private static const NAME_TOP:Number = 150;
+    private static const DESC_TOP:Number = 180;
+    private static const DESC_COLOR:uint = 0xFFEEEEEE;
 
     private static var drinkSprites:Array = new Array(
       new FlxSprite(DRINK_BUFFER, DRINK_TOP),
@@ -36,6 +39,7 @@ package
       titleBox.alignment = "center";
       titleBox.color = Registry.SP_BART;
       titleBox.shadow = Utility.darkerize(Registry.SP_BART);
+      titleBox.size = 16;
       add(titleBox);
 
       var highlightSize:Number = DRINK_SIZE + 2*HIGHLIGHT_WIDTH;
@@ -47,12 +51,16 @@ package
         add(drinkSprites[i]);
       }
 
-      nameBox = new FlxText(0, 140, 320);
+      nameBox = new FlxText(10, NAME_TOP, 300);
       nameBox.alignment = "center";
+      nameBox.size = 16;
       add(nameBox);
 
-      descBox = new FlxText(0, 160, 320);
+      descBox = new FlxText(10, DESC_TOP, 300);
       descBox.alignment = "center";
+      descBox.color = DESC_COLOR;
+      descBox.shadow = Utility.darkerize(DESC_COLOR);
+      descBox.size = 16;
       add(descBox);
     }
     
@@ -72,8 +80,11 @@ package
         FlxG.switchState(new BarState(true, drinks.drinks[curDrink].color));
       }
 
-      nameBox.text = drinks.drinks[curDrink].name;
-      descBox.text = drinks.drinks[curDrink].desc;
+      var drink:Drink = drinks.drinks[curDrink];
+      nameBox.color = drink.color;
+      nameBox.shadow = Utility.darkerize(drink.color);
+      nameBox.text = drink.name;
+      descBox.text = drink.desc;
 
       super.update();
     }
