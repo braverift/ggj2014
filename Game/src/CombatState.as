@@ -250,7 +250,7 @@ package
       if (Registry.hasGun && Registry.bullets > 0)
       {
         var controls:String;
-        controls = "[Z] Use Words   [X] Use Violence (";
+        controls = "[Z] Talk   [X] Gun (";
         for (var i:Number = 0; i < 6; ++i)
         {
           if (i < Registry.bullets)
@@ -266,8 +266,12 @@ package
         
         return controls;
       }
+      else if (Registry.hasGun)
+      {
+        return "[Z] Talk   [X] Pistol Whip";
+      }
       
-      return "[Z] Use Words   [X] Use Violence";
+      return "[Z] Talk   [X] Punch";
     }
   }
 
