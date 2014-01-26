@@ -49,7 +49,7 @@ package
       _enemies.add(new Enemy(50, 120, _enemyAttackGroup, _downedEnemyGroup));
       
       var talkingEnemy:Enemy = new Enemy(160, 180, _enemyAttackGroup, _downedEnemyGroup);
-      talkingEnemy.addDialogue(new Array(new Dialogue("Hello"), new Dialogue("Hiii.........")));
+      talkingEnemy.addDialogue(new Array(new Dialogue("Hello"), new Dialogue("Hiii.........",Registry.SP_OTHER, 0, 1, true)));
       _enemies.add(talkingEnemy);
       
       _dialogueText = new FlxText(20, 180, 280);
@@ -135,6 +135,10 @@ package
         // Auto advance text
         if (_diagTime > curDiag.text.length*TIME_PER_CHAR + TIME_AT_END)
         {
+          if (curDiag.isPlotPoint)
+          {
+            Registry.endScene(Registry.TALK);
+          }
           _queuedDialogue.splice(0, 1);
           _diagTime = 0;
           _dialogueText.text = "";
