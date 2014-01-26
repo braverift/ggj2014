@@ -21,7 +21,7 @@ package
     private static var diagTime:Number; // Time current line of dialogue has been displayed
     private static var bartenderDiag:FlxText;
 
-    private static const DRINK_INTENSITY:Number = 0.02;
+    private static const DRINK_INTENSITY:Number = 1;
     private static const DRINK_DOWN:Number = 0.2;  // Speed at which you consume drink
     private static const DRINK_UP:Number = 0.3;    // Speed at which drink is refilled
     private static const DRINK_X:Number = 20;
