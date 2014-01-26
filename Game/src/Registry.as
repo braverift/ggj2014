@@ -38,17 +38,17 @@ package
       outcomes = new Array();
 
       // DEBUG FOR TESTING
-      barScene = 24;
+      //barScene = 28;
     }
     
     public static function isIntense(): Boolean
     {
-      return mood <= -.25;
+      return mood <= -.1;
     }
 
     public static function isWhimisical(): Boolean
     {
-      return mood >= .25;
+      return mood >= .1;
     }
     /*
      * COMBAT TO BAR TRANSITIONS
@@ -493,6 +493,12 @@ package
           )));
 
           return info;
+        } else if (variant == 1) { // Train
+          info = new CombatScene(CombatScene.BG_TRAIN, 0, 80);
+        } else if (variant == 2) { // Skyscraper
+          info = new CombatScene(CombatScene.BG_SKYSCRAPER, 0, 80);
+        } else if (variant == 3) { // Cave
+          info = new CombatScene(CombatScene.BG_CAVE, 0, 80);
         }
       }
       
