@@ -156,7 +156,7 @@ package
       {
         if (_player.y > FlxG.height + 42 || _player.x < -32 || _player.x > FlxG.width)
         {
-          Registry.EndScene(Registry.WALK);
+          Registry.endScene(Registry.WALK);
         }
       }
       else
