@@ -483,6 +483,18 @@ package
           new Dialogue("Logan's incurred some debts he refuses to pay. But I'll be damned if he thinks he can just hop the next train out of town.", Registry.SP_GIRLFRIEND, -1, -.1, true))));
           return info10;
         }
+        else if (variant == 1)
+        {
+          info = new CombatScene(CombatScene.BG_WAREHOUSE, 0, 80);
+          info.addEnemy(EnemyInfo.WEAK, 200, 60, 0, new Array( new Array( new Dialogue("Stop asking about Logan.", Registry.SP_GEN) )));
+          info.addEnemy(EnemyInfo.NORMAL, 250, 60, 0, new Array( new Array( new Dialogue("Logan's fine. Leave us alone.", Registry.SP_GEN) )));
+          info.addEnemy(EnemyInfo.NORMAL, 150, 60, 0, new Array( new Array( new Dialogue("Get out.", Registry.SP_GEN) )))
+          info.addSilentEnemy(EnemyInfo.WEAK, 100, 20, 2);
+          info.addSilentEnemy(EnemyInfo.WEAK, 130, 20, 3);
+          info.addSilentEnemy(EnemyInfo.WEAK, 160, 20, 4);
+          info.addSilentEnemy(EnemyInfo.WEAK, 190, 20, 5);
+          return info;
+        }
       }
       else if (scene == 2)
       {
