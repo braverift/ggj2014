@@ -537,7 +537,7 @@ package
         {
           info = new CombatScene(CombatScene.BG_PARK, 0, 80);
           
-          info.addEnemy(EnemyInfo.NORMAL, 120, 50, 0, new Array( new Array(
+          info.addEnemy(EnemyInfo.OTHER, 120, 50, 0, new Array( new Array(
           new Dialogue("Tell me what the fuck is going on.", SP_PLAYER, -1, -0.1),
           new Dialogue("Well I'm here. What's going on?", SP_PLAYER, -0.1, 0.1),
           new Dialogue("Hey there. What's happening?", SP_PLAYER, 0.1, 1),
@@ -548,7 +548,7 @@ package
           new Dialogue("I don't have anything to say to you.", SP_OTHER, -1, -0.1)
           )));
 
-          info.addEnemy(EnemyInfo.NORMAL, 180, 50, 0, new Array( new Array(
+          info.addEnemy(EnemyInfo.BRO, 180, 50, 0, new Array( new Array(
           new Dialogue("Logan! Where have you been?", SP_PLAYER, -1, -0.1),
           new Dialogue("...       ", SP_BRO, -1, -0.1),
           new Dialogue("Logan!", SP_PLAYER, -1, -0.1),
@@ -685,7 +685,7 @@ package
           new Dialogue("Hey, what're you guys doing?", SP_PLAYER, 0.1, 1)
           )));
           
-          info.addEnemy(EnemyInfo.NORMAL, 150, 10, 10, new Array( new Array(
+          info.addEnemy(EnemyInfo.NORMAL, 150, 10, 5, new Array( new Array(
           new Dialogue("I swear to god I'll take you all down if you don't start talking", SP_PLAYER, -1, -0.1),
           new Dialogue("Are you in charge here?", SP_PLAYER, -0.1, 0.1),
           new Dialogue("Is this some kind of game?", SP_PLAYER, 0.1, 1),
