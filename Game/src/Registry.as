@@ -151,7 +151,7 @@ package
                      "                             ", SP_GEN),
         new Dialogue("Wanna hear a crazy story?"),
         new Dialogue("Sure.     ", SP_BART),
-        new Dialogue("I was at a party with a bunch of friends."),
+        new Dialogue("I was at a party with a bunch of friends, right?"),
         new Dialogue("My brother was going to meet me there. I was waiting for him to show up.")
       ),
       new Array( // Scene 4 - Talked to OTHER at the party
@@ -176,24 +176,25 @@ package
                      "Probably one of Logan's idiot friends."),
         new Dialogue("But looking at him, I knew he wasn't lying."),
         new Dialogue("Did you call the police?", SP_BART),
-        new Dialogue("No. In retrospect I should have, of course."),
-        new Dialogue("I guess I just wanted to act quickly."),
+        new Dialogue("No. I didn't think there was time."),
+        new Dialogue("I needed to act quickly."),
         new Dialogue("I went down to the warehouse alone.")
       ),
       new Array( // Scene 4c
-        new Dialogue("I was pretty freaked out."),
+        new Dialogue("What a dude, huh?"),
         new Dialogue("Did you call the police?", SP_BART),
-        new Dialogue("No. Maybe Logan had gotten himself mixed up in something."),
-        new Dialogue("I didn't want to make any trouble for him."),
-        new Dialogue("I went down to the warehouse alone.")
+        new Dialogue("The police?"),
+        new Dialogue("It was obviously just one of Logan's friends."),
+        new Dialogue("Logan's kind of a joker."),
+        new Dialogue("It was just his way of telling me where he was. I went down to the warehouse.")
       ),
       new Array( // Scene 8 - Walked away from the party
         new Dialogue("You just left?", SP_BART),
         new Dialogue("Yeah. I was really only there to see Logan."),
         new DrinkSet(
-         new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.1),
+         new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.25),
          new Drink("Bloody Mary", "Vodka, tomato juice, Worcestershire, Tabasco", 0xFFBB0000, 0.0),
-         new Drink("Margarita", "Tequila, Cointreau, lime juice, blended", 0xFF96E643, 0.1)
+         new Drink("Margarita", "Tequila, Cointreau, lime juice, blended", 0xFF96E643, 0.25)
         )
       ),
       new Array( // Scene 8a
@@ -209,9 +210,9 @@ package
         new Dialogue("Huh.", SP_BART),
         new Dialogue("That sure escalated quickly.", SP_BART),
         new DrinkSet(
-         new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.1),
+         new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.25),
          new Drink("Bloody Mary", "Vodka, tomato juice, Worcestershire, Tabasco", 0xFFBB0000, 0.0),
-         new Drink("Margarita", "Tequila, Cointreau, lime juice, blended", 0xFF96E643, 0.1)
+         new Drink("Margarita", "Tequila, Cointreau, lime juice, blended", 0xFF96E643, 0.25)
         )
       ),
       new Array( // Scene 12a
@@ -226,9 +227,9 @@ package
       new Array( // Scene 16 - Lost a fight at the party
         new Dialogue("Sounds like you picked a pretty bad fight.", SP_BART),
         new DrinkSet(
-         new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.1),
+         new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.25),
          new Drink("Bloody Mary", "Vodka, tomato juice, Worcestershire, Tabasco", 0xFFBB0000, 0.0),
-         new Drink("Margarita", "Tequila, Cointreau, lime juice, blended", 0xFF96E643, 0.1)
+         new Drink("Margarita", "Tequila, Cointreau, lime juice, blended", 0xFF96E643, 0.25)
         )
       ),
       new Array( // Scene 16a
@@ -248,9 +249,9 @@ package
       new Array( // Scene 20 - IN WHICH THE BARTENDER HAS HAD ENOUGH
         new Dialogue("Yeah, there's no more game after this point. Have another drink though.", SP_BART),
         new DrinkSet(
-         new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.1),
+         new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.25),
          new Drink("Bloody Mary", "Vodka, tomato juice, Worcestershire, Tabasco", 0xFFBB0000, 0.0),
-         new Drink("Margarita", "Tequila, Cointreau, lime juice, blended", 0xFF96E643, 0.1)
+         new Drink("Margarita", "Tequila, Cointreau, lime juice, blended", 0xFF96E643, 0.25)
         )
       ),
       new Array( // Scene 20a

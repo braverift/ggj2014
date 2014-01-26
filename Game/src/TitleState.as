@@ -38,7 +38,7 @@ package
       super.update();
      
       if (!fading) {
-        if (FlxG.keys.SPACE)
+        if (FlxG.keys.X || FlxG.keys.Z)
         {
           Registry.initialize();
           fading = true;

@@ -83,9 +83,11 @@ package
           curDrink = (curDrink+1) % drinkSprites.length;
         } else if (FlxG.keys.justPressed("LEFT")) {
           curDrink = (curDrink-1+drinkSprites.length) % drinkSprites.length;
-        } else if (FlxG.keys.justPressed("X")) {
-          Registry.barScene += curDrink+1;
+        } else if (FlxG.keys.justPressed("X") || FlxG.keys.justPressed("Z")) {
           Registry.mood += drinks.drinks[curDrink].mood;
+          if (Registry.mood < -0.1) Registry.barScene += 1;
+          else if (Registry.mood < 0.1) Registry.barScene += 2;
+          else Registry.barScene += 3;
           fading = true;
           FlxG.fade(0xFF000000, 0.5, function():void {
             FlxG.switchState(new BarState(true, drinks.drinks[curDrink].color));
