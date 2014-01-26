@@ -575,7 +575,7 @@ package
 
           return info;
         } else if (variant == 1) { // Train
-          info = new CombatScene(CombatScene.BG_TRAIN, 0, 80);
+          info = new CombatScene(CombatScene.BG_TRAIN, 0, 50);
           info.addEnemy(EnemyInfo.OTHER, 150, 50, 0, new Array( new Array(
           new Dialogue("You again!", SP_PLAYER),
           new Dialogue("Ah, the sister. You may call me the Conductor. This is your last stop.", SP_OTHER, -.1, .1),
