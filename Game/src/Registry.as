@@ -6,14 +6,17 @@ package
     public static var mood:Number;      // Current mood, in the range [-1, 1]
     public static var intensity:Number; // Current intensity, in the range [0, 1]
     public static var barScene:uint;    // ID of the current bar scene
-    public static var gameScene:uint;   // ID of the current game scene
+    public static var combatScene:uint; // ID of the current combat scene
     public static var hasGun:Boolean;
     public static var bullets:Number;
+    public static var drinksDrunk:uint;
     
     public static function initialize(): void
     {
       mood = intensity = 0;
       barScene = 0;
+      combatScene = 0;
+      drinksDrunk = 0;
       FlxG.watch(Registry, "mood");
       FlxG.watch(Registry, "intensity");
       
@@ -40,16 +43,16 @@ package
     {
       switch (outcome) {
         case TALK:
-          barScene = combatToBarTransArray[gameScene].talk;
+          barScene = combatToBarTransArray[combatScene].talk;
           break;
         case WALK:
-          barScene = combatToBarTransArray[gameScene].walk;
+          barScene = combatToBarTransArray[combatScene].walk;
           break;
         case WIN:
-          barScene = combatToBarTransArray[gameScene].win;
+          barScene = combatToBarTransArray[combatScene].win;
           break;
         case LOSE:
-          barScene = combatToBarTransArray[gameScene].lose;
+          barScene = combatToBarTransArray[combatScene].lose;
           break;
       }
       FlxG.fade(0xFF000000, 1, function():void {FlxG.switchState(new BarState());});

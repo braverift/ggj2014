@@ -44,8 +44,12 @@ package
     private static const PLAYER_Y:Number = 104;
     private static const BART_X:Number = 145;
     private static const BART_Y:Number = 98;
+    private static const GLASS_X:Number = 178;
+    private static const GLASS_Y:Number = 122;
+    private static const GLASS_B:Number = 6;
     private static var playerSprite:PlayerAtBar;
     private static var bartSprite:Bartender;
+    private static var glassSprites:Array;
 
     public function BarState(hd:Boolean = false, dc:uint = 0):void
     {
@@ -63,6 +67,11 @@ package
       bartSprite = new Bartender(BART_X, BART_Y);
       add(playerSprite);
       add(bartSprite);
+
+      glassSprites = new Array();
+      for (var i:uint=0;i < Registry.drinksDrunk;i++) {
+        addGlass();
+      }
 
       sceneIdx = 0;
       diagBox = new FlxText(DIAG_X, DIAG_Y, DIAG_W);
@@ -131,6 +140,8 @@ package
             drinkRefilling = false;
           }
         } else if (drinkLevel < 0) {
+          Registry.drinksDrunk++;
+          addGlass();
           drinkRefilling = true;
           drinkLevel = 0.0;
           Registry.intensity += DRINK_INTENSITY;
@@ -166,6 +177,27 @@ package
          FlxG.switchState(new DrinkSelectState(sceneArray[sceneIdx])); 
         }
       }
+    }
+
+    private function addGlass():void {
+      var x:Number; 
+      var y:Number;
+      if (glassSprites.length < 23) {
+        x = GLASS_X + GLASS_B*glassSprites.length;
+        y = GLASS_Y;
+      } else if (glassSprites.length < 45) {
+        x = GLASS_X + GLASS_B*(glassSprites.length-23) + 3;
+        y = GLASS_Y - 8;
+      } else {
+        x = GLASS_X + GLASS_B*(glassSprites.length-45) + 6;
+        y = GLASS_Y - 16;
+      }
+      
+      var glass:Glass = new Glass(x, y);
+      glass.alpha = 0.5;
+      glass.color = 0xCCCCCC;
+      add(glass);
+      glassSprites[glassSprites.length] = glass;
     }
   }
 }
