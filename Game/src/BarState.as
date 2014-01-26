@@ -40,6 +40,13 @@ package
 
     private static var fadingIn:Boolean;
 
+    private static const PLAYER_X:Number = 118;
+    private static const PLAYER_Y:Number = 104;
+    private static const BART_X:Number = 145;
+    private static const BART_Y:Number = 98;
+    private static var playerSprite:PlayerAtBar;
+    private static var bartSprite:Bartender;
+
     public function BarState(hd:Boolean = false, dc:uint = 0):void
     {
       hasDrink = hd;
@@ -52,6 +59,11 @@ package
       FlxG.watch(Registry, "intensity");
       add(new FlxSprite(0, 0, background));
     
+      playerSprite = new PlayerAtBar(PLAYER_X, PLAYER_Y);
+      bartSprite = new Bartender(BART_X, BART_Y);
+      add(playerSprite);
+      add(bartSprite);
+
       sceneIdx = 0;
       diagBox = new FlxText(DIAG_X, DIAG_Y, DIAG_W);
       diagBackSprite = new FlxSprite(DIAG_X-DIAG_B, DIAG_Y-DIAG_B);
@@ -124,6 +136,7 @@ package
           Registry.intensity += DRINK_INTENSITY;
         }
 
+        bartSprite.play(drinkRefilling ? "serving" : "idle");
         bartenderDiag.visible = drinkRefilling;
 
         var consumed:int = (1 - drinkLevel) * DRINK_H;
@@ -138,6 +151,9 @@ package
       }
       if (FlxG.keys.Z && hasDrink && !drinkRefilling) {
         drinkLevel -= FlxG.elapsed * DRINK_DOWN;
+        playerSprite.play("drinking");
+      } else {
+        playerSprite.play("idle");
       }
 
       // Auto advance text
