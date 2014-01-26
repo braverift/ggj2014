@@ -127,7 +127,7 @@ package
           }          
           else if (enInfo.type == EnemyInfo.BRO)
           {
-            en = new EnemyGirlfriend(enInfo.x, enInfo.y + 140, _enemyAttackGroup, _downedEnemyGroup);
+            en = new EnemyBro(enInfo.x, enInfo.y + 140, _enemyAttackGroup, _downedEnemyGroup);
           }          
           else if (enInfo.type == EnemyInfo.OTHER)
           {

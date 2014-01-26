@@ -25,6 +25,12 @@ package
       offset.x = 18;
       offset.y = FRAME_HEIGHT - height;
     }
+    
+            
+    public override function makeCorpse(X:Number, Y:Number, color:uint, isBullet:Boolean, facing:uint):EnemyKOed
+    {
+      return new EnemyKOed(X, Y, color, isBullet, facing, EnemyInfo.WEAK);
+    }
   }
 
 }

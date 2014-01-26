@@ -164,7 +164,7 @@ package
       }
       if (_HP <= 0)
       {
-        _downedGroup.add(new EnemyKOed(x - offset.x, y - offset.y, color, isBullet, facing));
+        _downedGroup.add(makeCorpse(x - offset.x, y - offset.y, color, isBullet, facing));
         kill();
       }
     }
@@ -223,6 +223,11 @@ package
     public function freeze(frozen:Boolean): void
     {
       _frozen = frozen;
+    }
+    
+    public function makeCorpse(X:Number, Y:Number, color:uint, isBullet:Boolean, facing:uint):EnemyKOed
+    {
+      return new EnemyKOed(X, Y, color, isBullet, facing, EnemyInfo.NORMAL);
     }
   }
 }
