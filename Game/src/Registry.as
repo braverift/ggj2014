@@ -147,6 +147,11 @@ package
     );
 
     public static function getNextCombatState():void {
+      if (drinksDrunk >= 4 && !hasGun) {
+        hasGun = true;
+        bullets = 6;
+      }
+
       combatScene = barToCombatTransArray[Math.floor(barScene/4)][0];
       combatSceneVariant = barToCombatTransArray[Math.floor(barScene/4)][1];
       FlxG.switchState(new CombatState());
