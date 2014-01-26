@@ -10,6 +10,7 @@ package
     public static const OTHER:uint = 1;
     public static const BRO:uint = 2;
     public static const WEAK:uint = 3;
+    public static const GIRLFRIEND:uint = 4;
     
     public var type:uint;
     public var x:Number;

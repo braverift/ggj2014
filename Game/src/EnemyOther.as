@@ -1,0 +1,30 @@
+package  
+{
+	/**
+   * ...
+   * @author ...
+   */
+  import org.flixel.FlxGroup;
+
+  public class EnemyOther extends Enemy
+  {
+    [Embed(source = "../data/art/char_other.png")] private var otherGraphic:Class;
+
+    public function EnemyOther(X:Number, Y:Number, attackGroup:FlxGroup, downedGroup:FlxGroup) 
+    {
+      super(X, Y, attackGroup, downedGroup);
+      
+      MOVE_SPEED_X = 60;
+      MOVE_SPEED_Y = 20;
+      ATTACK_TIME = 0.5;
+      _HP = 15;
+      
+      loadGraphic(otherGraphic, true, true, FRAME_WIDTH, FRAME_HEIGHT);
+      width = 28;
+      height = 16;
+      offset.x = 18;
+      offset.y = FRAME_HEIGHT - height;
+    }
+  }
+
+}

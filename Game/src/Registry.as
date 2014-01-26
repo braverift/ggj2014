@@ -19,7 +19,7 @@ package
     public static const SP_OTHER:uint = 0xFF859C27;   // Other's speech color
     public static const SP_BRO:uint = 0xFF6666CC;     // Bro's speech color
     public static const SP_GEN:uint = 0xFFCCCCCC;     // Generic character's speech color
-    public static const SP_GIRLFRIEND:uint = 0xFFCCCCCC;     // Girlfriend's speech color
+    public static const SP_GIRLFRIEND:uint = 0xfff8ea00;     // Girlfriend's speech color
     
     public static function initialize(): void
     {
@@ -39,7 +39,7 @@ package
       outcomes = new Array();
 
       // DEBUG FOR TESTING
-      barScene = 28;
+      //barScene = 28;
     }
     
     public static function isIntense(): Boolean
@@ -439,7 +439,7 @@ package
         if (variant == 0)
         {
           var info10:CombatScene = new CombatScene(CombatScene.BG_APARTMENT, 0, 80);
-          info10.addEnemy(EnemyInfo.NORMAL, 260, 50, 0, new Array( new Array(
+          info10.addEnemy(EnemyInfo.GIRLFRIEND, 260, 50, 0, new Array( new Array(
           new Dialogue("What are you doing here?", Registry.SP_GIRLFRIEND, -.1, .1),
           new Dialogue("Um, this isn't your apartment. What are you doing here?", Registry.SP_GIRLFRIEND, .1, 1),
           new Dialogue("What the hell are you doing here?", Registry.SP_GIRLFRIEND, -1, .1),
@@ -448,16 +448,16 @@ package
           new Dialogue("Tell me where my brother is. Try anything funny and my friend outside will make you regret it.", Registry.SP_PLAYER, -.1, .1),
           new Dialogue("Have you seen my brother? He bailed on me last night without any explanation.", Registry.SP_PLAYER, .1, 1),
           new Dialogue("Where's Logan? If this is his blood, it's about to have company.", Registry.SP_PLAYER, -1, -.1),
-          new Dialogue("Relax, I was just on my way out. I've already finished going through Logan's things.", Registry.SP_OTHER, -.1, .1),
-          new Dialogue("I know the feeling. He stood me up for our date yesterday, and I haven't heard from him since.", Registry.SP_OTHER, .1, 1),
-          new Dialogue("If it's any consolation, it's not. Turns out he can dish it out just as well as he can take it.", Registry.SP_OTHER, -1, -.1)
+          new Dialogue("Relax, I was just on my way out. I've already finished going through Logan's things.", Registry.SP_GIRLFRIEND, -.1, .1),
+          new Dialogue("I know the feeling. He stood me up for our date yesterday, and I haven't heard from him since.", Registry.SP_GIRLFRIEND, .1, 1),
+          new Dialogue("If it's any consolation, it's not. Turns out he can dish it out just as well as he can take it.", Registry.SP_GIRLFRIEND, -1, -.1)
           ), new Array(
           new Dialogue("What did you find?", Registry.SP_PLAYER, -.1, .1),
-          new Dialogue("He bought a train ticket. Looks like my Logan decided to skip town.", Registry.SP_OTHER, -.1, .1, true),
+          new Dialogue("He bought a train ticket. Looks like my Logan decided to skip town.", Registry.SP_GIRLFRIEND, -.1, .1, true),
           new Dialogue("Have you found anything here?", Registry.SP_PLAYER, .1, 1),
-          new Dialogue("He bought a train ticket. Looks like my Logan decided to skip town.", Registry.SP_OTHER, .1, 1, true),
+          new Dialogue("I checked his Internet history. He was just looking up directions to the train station.", Registry.SP_GIRLFRIEND, .1, 1, true),
           new Dialogue("What happened?", Registry.SP_PLAYER, -1, -.1),
-          new Dialogue("Logan's incurred some debts he refuses to pay. But I'll be damned if he thinks he can just hop the next train out of town.", Registry.SP_OTHER, -1, -.1, true))));
+          new Dialogue("Logan's incurred some debts he refuses to pay. But I'll be damned if he thinks he can just hop the next train out of town.", Registry.SP_GIRLFRIEND, -1, -.1, true))));
           return info10;
         }
       }

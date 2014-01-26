@@ -121,6 +121,18 @@ package
           {
             en = new EnemyWeak(enInfo.x, enInfo.y + 140, _enemyAttackGroup, _downedEnemyGroup);
           }
+          else if (enInfo.type == EnemyInfo.GIRLFRIEND)
+          {
+            en = new EnemyGirlfriend(enInfo.x, enInfo.y + 140, _enemyAttackGroup, _downedEnemyGroup);
+          }          
+          else if (enInfo.type == EnemyInfo.BRO)
+          {
+            en = new EnemyGirlfriend(enInfo.x, enInfo.y + 140, _enemyAttackGroup, _downedEnemyGroup);
+          }          
+          else if (enInfo.type == EnemyInfo.OTHER)
+          {
+            en = new EnemyOther(enInfo.x, enInfo.y + 140, _enemyAttackGroup, _downedEnemyGroup);
+          }
           else
           {
             en = new Enemy(enInfo.x, enInfo.y + 140, _enemyAttackGroup, _downedEnemyGroup);

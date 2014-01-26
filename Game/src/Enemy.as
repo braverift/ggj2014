@@ -7,7 +7,7 @@ package
    */
   public class Enemy extends FlxSprite
   {
-    [Embed(source = "../data/art/char_enemy.png")] private var enemyGraphic:Class;
+    [Embed(source = "../data/art/char_enemy_armor.png")] private var enemyGraphic:Class;
 
     public const FRAME_WIDTH:int = 64;
     public const FRAME_HEIGHT:int = 80;
