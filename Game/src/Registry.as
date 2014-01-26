@@ -229,6 +229,10 @@ package
           new Array(
           new Dialogue("...have you seen Logan?", SP_PLAYER),
           new Dialogue("Logan? I've never even heard that name before!", SP_GEN))));
+        info.addEnemy(EnemyInfo.NORMAL, 210, 80, 0, new Array(
+          new Array(
+          new Dialogue("Have you seen my brother?", SP_PLAYER),
+          new Dialogue("Hey man, I ain't Logan's keeper.", SP_GEN))));
 
         return info;
       }

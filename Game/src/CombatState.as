@@ -21,6 +21,7 @@ package
     private var _downedEnemyGroup:FlxGroup;
     private var _queuedDialogue:Array;
     private var _dialogueText:FlxText;
+    private var _diagBackSprite:FlxSprite;
     private var _diagTime:Number;
     private var _currentDialogueString:String;
     private var _canEscape:Boolean;
@@ -36,8 +37,8 @@ package
     
     override public function create(): void
     {
-      FlxG.debug = true;
-      FlxG.visualDebug = true;
+      FlxG.debug = false;
+      FlxG.visualDebug = false;
       
       _canEscape = true;
       
@@ -93,6 +94,9 @@ package
       }
 
       _dialogueText = new FlxText(20, 16, 280);
+      _diagBackSprite = new FlxSprite(18, 16);
+      _diagBackSprite.makeGraphic(264, 38, 0x55000000);
+      _diagBackSprite.visible = false;
       _diagTime = 0;
       _queuedDialogue = new Array;
       
@@ -103,6 +107,7 @@ package
       add(_enemyAttackGroup);
       add(_player);
       add(_playerAttackGroup);
+      add(_diagBackSprite);
       add(_dialogueText);
       add(_controlsText);
     }
@@ -172,6 +177,7 @@ package
     {
       if (_queuedDialogue.length > 0)
       {
+        _diagBackSprite.visible = true;
         _diagTime += FlxG.elapsed;
         var charsToShow:Number = _diagTime / TIME_PER_CHAR;
         var curDiag:Dialogue = _queuedDialogue[0]
@@ -189,6 +195,7 @@ package
           _queuedDialogue.splice(0, 1);
           _diagTime = 0;
           _dialogueText.text = "";
+          _diagBackSprite.visible = false;
           if (_queuedDialogue.length == 0)
           {
             freezeAll(false);
