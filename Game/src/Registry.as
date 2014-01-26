@@ -7,6 +7,7 @@ package
     public static var intensity:Number; // Current intensity, in the range [0, 1]
     public static var barScene:uint;    // ID of the current bar scene
     public static var combatScene:uint; // ID of the current combat scene
+    public static var combatSceneVariant:uint; // ID of the current combat scene
     public static var hasGun:Boolean;
     public static var bullets:Number;
     public static var drinksDrunk:uint;
@@ -16,6 +17,7 @@ package
       mood = intensity = 0;
       barScene = 0;
       combatScene = 0;
+      combatSceneVariant = 0;
       drinksDrunk = 0;
       FlxG.watch(Registry, "mood");
       FlxG.watch(Registry, "intensity");
