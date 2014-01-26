@@ -144,7 +144,7 @@ package
         play("punch");
       }
       else {
-        play("idle");
+        play(_state == ANGRY ? "idle_aggro" : "idle");
       }
     }
     
