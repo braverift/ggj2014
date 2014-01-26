@@ -55,31 +55,35 @@ package
      
       FlxG.log(outcomes);
       if (outcomes.length == 1) {
-        if (outcomes[0] == TALK) barScene = 4;
-        if (outcomes[0] == WALK) barScene = 8;
-        if (outcomes[0] == WIN) barScene = 12;
-        if (outcomes[0] == LOSE) barScene = 16;
+        if (outcomes[0] == TALK) barScene = 4; // Warehouse A
+        if (outcomes[0] == WALK) barScene = 8; // Apartment A
+        if (outcomes[0] == WIN) barScene = 12; // Apartment B
+        if (outcomes[0] == LOSE) barScene = 16; // Warehouse B
       }
 
       if (outcomes.length == 2) {
-        if (outcomes[0] == TALK && outcomes[1] == TALK) barScene = 20;
-        if (outcomes[0] == TALK && outcomes[1] == WALK) barScene = 20;
-        if (outcomes[0] == TALK && outcomes[1] == WIN) barScene = 20;
-        if (outcomes[0] == TALK && outcomes[1] == LOSE) barScene = 20;
-        if (outcomes[0] == WALK && outcomes[1] == TALK) barScene = 20;
-        if (outcomes[0] == WALK && outcomes[1] == WALK) barScene = 20;
-        if (outcomes[0] == WALK && outcomes[1] == WIN) barScene = 20;
-        if (outcomes[0] == WALK && outcomes[1] == LOSE) barScene = 20;
-        if (outcomes[0] == WIN && outcomes[1] == TALK) barScene = 20;
-        if (outcomes[0] == WIN && outcomes[1] == WALK) barScene = 20;
-        if (outcomes[0] == WIN && outcomes[1] == WIN) barScene = 20;
-        if (outcomes[0] == WIN && outcomes[1] == LOSE) barScene = 20;
-        if (outcomes[0] == LOSE && outcomes[1] == TALK) barScene = 20;
-        if (outcomes[0] == LOSE && outcomes[1] == WALK) barScene = 20;
-        if (outcomes[0] == LOSE && outcomes[1] == WIN) barScene = 20;
-        if (outcomes[0] == LOSE && outcomes[1] == LOSE) barScene = 20;
+        if (outcomes[0] == TALK && outcomes[1] == TALK) barScene = 32;  // Skyscraper B
+        if (outcomes[0] == TALK && outcomes[1] == WALK) barScene = 24;  // Park B
+        if (outcomes[0] == TALK && outcomes[1] == WIN) barScene = 28;   // Train B
+        if (outcomes[0] == TALK && outcomes[1] == LOSE) barScene = 36;  // Cave B
+        if (outcomes[0] == WALK && outcomes[1] == TALK) barScene = 28;  // Train A
+        if (outcomes[0] == WALK && outcomes[1] == WALK) barScene = 24;  // Park A
+        if (outcomes[0] == WALK && outcomes[1] == WIN) barScene = 32;   // Skyscraper A
+        if (outcomes[0] == WALK && outcomes[1] == LOSE) barScene = 36;  // Cave A
+        if (outcomes[0] == WIN && outcomes[1] == TALK) barScene = 24;   // Park C
+        if (outcomes[0] == WIN && outcomes[1] == WALK) barScene = 28;   // Train C
+        if (outcomes[0] == WIN && outcomes[1] == WIN) barScene = 32;    // Skyscraper C
+        if (outcomes[0] == WIN && outcomes[1] == LOSE) barScene = 36;   // Cave C
+        if (outcomes[0] == LOSE && outcomes[1] == TALK) barScene = 24;  // Park D
+        if (outcomes[0] == LOSE && outcomes[1] == WALK) barScene = 36;  // Cave D
+        if (outcomes[0] == LOSE && outcomes[1] == WIN) barScene = 32;   // Skyscraper D
+        if (outcomes[0] == LOSE && outcomes[1] == LOSE) barScene = 28;  // Train D
       }
       
+      if (outcomes.length > 2) {
+        barScene = 20;
+      }
+
       fading = true;
       FlxG.fade(0xFF000000, 1, function():void {
         fading = false;
@@ -95,11 +99,15 @@ package
      */
     public static const barToCombatTransArray:Array = new Array(
       new Array(0, 0), // Party
-      new Array(1, 0), // Warehouse (Party TALK)
-      new Array(1, 1), // Apartment (Party WALK)
-      new Array(1, 1), // Apartment (Party WIN)
-      new Array(1, 0), // Warehouse (Party LOSE)
-      new Array(2, 0)  // ALL CONFRONTATIONS ARE THE SAME 'CAUSE I'M LAZY :)
+      new Array(1, 1), // Warehouse (Party TALK)
+      new Array(1, 0), // Apartment (Party WALK)
+      new Array(1, 0), // Apartment (Party WIN)
+      new Array(1, 1), // Warehouse (Party LOSE)
+      new Array(9, 0), // DEAD FILLER STATE
+      new Array(2, 0), // Park
+      new Array(2, 1), // Train
+      new Array(2, 2), // Skyscraper
+      new Array(2, 3)  // Cave
     );
 
     public static function getNextCombatState():void {
@@ -249,19 +257,87 @@ package
       new Array( // Scene 20 - IN WHICH THE BARTENDER HAS HAD ENOUGH
         new Dialogue("Yeah, there's no more game after this point. Have another drink though.", SP_BART),
         new DrinkSet(
-         new Drink("Whiskey, Neat", "Enjoy the heat", 0xFFB46A2F, -0.25),
-         new Drink("Bloody Mary", "Vodka, tomato juice, Worcestershire, Tabasco", 0xFFBB0000, 0.0),
-         new Drink("Margarita", "Tequila, Cointreau, lime juice, blended", 0xFF96E643, 0.25)
+         new Drink("Absinthe", "No ambiguity", 0xFF3DFB07, -0.25),
+         new Drink("Gin and Tonic", "Gin, tonic water, twist of lime", 0xFFFFDDEEEE, 0.0),
+         new Drink("Bellini", "Sparkling wine, peach puree", 0xFFFF9955, 0.25)
         )
       ),
       new Array( // Scene 20a
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("On the house.", SP_BART)
       ),
       new Array( // Scene 20b
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("On the house.", SP_BART)
       ),
       new Array( // Scene 20c
-        new Dialogue("Sure thing. Here you go.", SP_BART)
+        new Dialogue("On the house.", SP_BART)
+      ),
+      new Array( // Scene 24 - Before the Park
+        new Dialogue("I GUESS YOU WENT TO THE PARK NEXT", SP_BART),
+        new DrinkSet(
+         new Drink("Everclear", "No ambiguity", 0x77FFFFFF, -0.25),
+         new Drink("Sidecar", "Cognac, Triple Sec, lemon juice", 0xFFFFAE19, 0.0),
+         new Drink("Aviation", "Gin, lemon juice, maraschino, creme de violette", 0xFFD8BFD8, 0.25)
+        )
+      ),
+      new Array( // Scene 24a
+        new Dialogue("YUP")
+      ),
+      new Array( // Scene 24b
+        new Dialogue("YUP")
+      ),
+      new Array( // Scene 24c
+        new Dialogue("YUP")
+      ),
+      new Array( // Scene 28 - Before the Train
+        new Dialogue("I GUESS YOU RODE A TRAIN NEXT", SP_BART),
+        new DrinkSet(
+         new Drink("Everclear", "No ambiguity", 0x77FFFFFF, -0.25),
+         new Drink("Sidecar", "Cognac, Triple Sec, lemon juice", 0xFFFFAE19, 0.0),
+         new Drink("Aviation", "Gin, lemon juice, maraschino, creme de violette", 0xFFD8BFD8, 0.25)
+        )
+      ),
+      new Array( // Scene 28a
+        new Dialogue("YUP")
+      ),
+      new Array( // Scene 28b
+        new Dialogue("YUP")
+      ),
+      new Array( // Scene 28c
+        new Dialogue("YUP")
+      ),
+      new Array( // Scene 32 - Before the Skyscraper
+        new Dialogue("I GUESS YOU SCALED A SKYSCRAPER NEXT", SP_BART),
+        new DrinkSet(
+         new Drink("Everclear", "No ambiguity", 0x77FFFFFF, -0.25),
+         new Drink("Sidecar", "Cognac, Triple Sec, lemon juice", 0xFFFFAE19, 0.0),
+         new Drink("Aviation", "Gin, lemon juice, maraschino, creme de violette", 0xFFD8BFD8, 0.25)
+        )
+      ),
+      new Array( // Scene 32a
+        new Dialogue("YUP")
+      ),
+      new Array( // Scene 32b
+        new Dialogue("YUP")
+      ),
+      new Array( // Scene 32c
+        new Dialogue("YUP")
+      ),
+      new Array( // Scene 36 - Before the Cave
+        new Dialogue("I GUESS YOU EXPLORED A CAVE NEXT", SP_BART),
+        new DrinkSet(
+         new Drink("Everclear", "No ambiguity", 0x77FFFFFF, -0.25),
+         new Drink("Sidecar", "Cognac, Triple Sec, lemon juice", 0xFFFFAE19, 0.0),
+         new Drink("Aviation", "Gin, lemon juice, maraschino, creme de violette", 0xFFD8BFD8, 0.25)
+        )
+      ),
+      new Array( // Scene 36a
+        new Dialogue("YUP")
+      ),
+      new Array( // Scene 36b
+        new Dialogue("YUP")
+      ),
+      new Array( // Scene 36c
+        new Dialogue("YUP")
       )
     );
   
@@ -350,6 +426,23 @@ package
           new Dialogue("What did you find?", Registry.SP_PLAYER),
           new Dialogue("He bought a train ticket. Looks like my Logan decided to skip town.", Registry.SP_OTHER, -1, 1, true))));
           return info10;
+        }
+      }
+      else if (scene == 2)
+      {
+        if (variant == 0) // Park
+        {
+          info = new CombatScene(CombatScene.BG_PARK, 0, 80);
+          info.addEnemy(EnemyInfo.NORMAL, 260, 50, 0, new Array( new Array(
+          new Dialogue("What the hell are you doing here?", Registry.SP_OTHER),
+          new Dialogue("I could ask you the same question.", Registry.SP_PLAYER)
+          ), new Array(
+          new Dialogue("Get the hell out or I'm calling the cops.", Registry.SP_PLAYER),
+          new Dialogue("Relax, I was just on my way out. I've already finished going through Logan's things.", Registry.SP_OTHER)
+          ), new Array(
+          new Dialogue("What did you find?", Registry.SP_PLAYER),
+          new Dialogue("He bought a train ticket. Looks like my Logan decided to skip town.", Registry.SP_OTHER, -1, 1, true))));
+          return info;
         }
       }
       

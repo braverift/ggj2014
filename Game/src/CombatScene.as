@@ -1,9 +1,5 @@
 package  
 {
-	/**
-   * ...
-   * @author ...
-   */
   public class CombatScene 
   {
     public static const BG_BAR:Number = 0;
@@ -29,7 +25,7 @@ package
       _y = yStart;
     }
     
-    public function addSilentEnemy(type:uint, x:Number, y:Number, minIntensity:Number = 0 ): void
+    public function addSilentEnemy(type:uint, x:Number, y:Number, minIntensity:Number = 0): void
     {
       _enemies.push(new EnemyInfo(type, x, y, minIntensity));
     }
